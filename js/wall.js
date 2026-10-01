@@ -110,22 +110,26 @@
     const pad = small ? 8 : 20;
     const title = { x: box.left - f.left - pad, y: box.top - f.top - pad, w: box.width + pad * 2, h: box.height + pad * 2 };
     const r = rand(11);
-    // Jittered grid: split the wall into cells, drop the ones under the title, give each card one cell
-    const cell = small ? 104 : 168;
-    const cols = Math.max(2, Math.round(W / cell)), rows = Math.max(2, Math.round(H / cell));
-    const cw0 = W / cols, ch0 = H / rows;
-    const cells = [];
-    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
-      const c = { x: x * cw0, y: y * ch0, w: cw0, h: ch0 };
-      const cx = c.x + c.w / 2, cy = c.y + c.h / 2;
-      if (cx > title.x && cx < title.x + title.w && cy > title.y && cy < title.y + title.h) continue;
-      cells.push(c);
+    // Jittered grid: pick the smallest cell size whose free cells (not under the title) do not
+    // outnumber the cards, so the wall is always full whatever the screen size
+    let cells = [];
+    for (let cell = small ? 90 : 130; cell < 400; cell += 6) {
+      const cols = Math.max(2, Math.round(W / cell)), rows = Math.max(2, Math.round(H / cell));
+      const cw0 = W / cols, ch0 = H / rows;
+      cells = [];
+      for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+        const c = { x: x * cw0, y: y * ch0, w: cw0, h: ch0 };
+        const cx = c.x + c.w / 2, cy = c.y + c.h / 2;
+        if (cx > title.x && cx < title.x + title.w && cy > title.y && cy < title.y + title.h) continue;
+        cells.push(c);
+      }
+      if (cells.length <= cards.length) break;
     }
     for (let i = cells.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [cells[i], cells[j]] = [cells[j], cells[i]]; }
     const placed = [];
     cards.forEach((c, i) => {
       c.el.style.display = '';
-      c.el.style.setProperty('--w', small ? `${5.6 + (i % 3) * 0.5}rem` : `${8.6 + ((i * 37) % 22) / 10}rem`);
+      c.el.style.setProperty('--w', small ? `${7 + (i % 3) * 0.5}rem` : `${13 + ((i * 37) % 22) / 10}rem`);
       const slot = cells[i];
       if (slot) {
         // Fit the card to its cell so neighbours never bury each other
