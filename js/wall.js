@@ -8,38 +8,42 @@
   // AI works: made for this page with Gemini and Veo from one prompt each; the two short texts were written by Claude.
   const works = [
     { who: 'human', kind: 'img', label: 'Print', src: 'hokusai.jpg', alt: 'The Great Wave off Kanagawa', how: 'Hokusai, woodblock print, about 1831' },
-    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_rain.jpg', alt: 'A woodblock-style print of a bridge in heavy rain', how: 'Gemini, one prompt, about 10 seconds' },
+    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_rain.jpg', alt: 'A woodblock-style print of travellers on a snowy mountain road', how: 'Gemini, one prompt, about 10 seconds' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'vangogh.jpg', alt: 'The Starry Night', how: 'Van Gogh, oil on canvas, 1889' },
     { who: 'ai', kind: 'text', text: '“Patience” is the thing with roots – / That holds the ground below –', how: 'Claude, asked to write like Dickinson' },
     { who: 'human', kind: 'film', alt: 'The Horse in Motion', how: 'Muybridge, twelve cameras, 1878' },
-    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_portrait.jpg', alt: 'A Dutch-style portrait of a woman in a turban', how: 'Gemini, one prompt, about 10 seconds' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_portrait.jpg', alt: 'A Dutch-style painting of a young man writing a letter', how: 'Gemini, one prompt, about 10 seconds' },
     { who: 'human', kind: 'text', text: '“Hope” is the thing with feathers – / That perches in the soul –', how: 'Emily Dickinson, poem, about 1861' },
-    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_wave.jpg', alt: 'A woodblock-style print of a great wave', how: 'Gemini, one prompt, about 10 seconds' },
+    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_wave.jpg', alt: 'A woodblock-style print of a fishing village in a storm', how: 'Gemini, one prompt, about 10 seconds' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'vermeer.jpg', alt: 'Girl with a Pearl Earring', how: 'Vermeer, oil on canvas, about 1665' },
     { who: 'ai', kind: 'video', src: 'ai_horse.mp4', alt: 'A galloping horse in the style of 1870s photography', how: 'Veo, one prompt, about a minute' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'monet.jpg', alt: 'Impression, Sunrise', how: 'Monet, oil on canvas, 1872' },
-    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_night.jpg', alt: 'A swirling night sky over a village', how: 'Gemini, one prompt, about 10 seconds' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_night.jpg', alt: 'A lighthouse on a rocky coast under a swirling night sky', how: 'Gemini, one prompt, about 10 seconds' },
     { who: 'human', kind: 'img', label: 'Print', src: 'hiroshige.jpg', alt: 'Sudden Shower over Shin-Ohashi Bridge', how: 'Hiroshige, woodblock print, 1857' },
     { who: 'ai', kind: 'text', text: 'I wander through the city, and the city wanders through me,', how: 'Claude, asked to write like Whitman' },
     { who: 'human', kind: 'text', text: 'I celebrate myself, and sing myself, / And what I assume you shall assume,', how: 'Walt Whitman, poem, 1855' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_harbor.jpg', alt: 'An impressionist harbor at sunrise', how: 'Gemini, one prompt, about 10 seconds' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'klimt.jpg', alt: 'The Kiss', how: 'Klimt, oil and gold leaf, 1908' },
-    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_park.jpg', alt: 'A pointillist park by a river', how: '' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_park.jpg', alt: 'A pointillist beach on a summer day', how: '' },
     { who: 'human', kind: 'text', text: 'Tyger Tyger, burning bright, / In the forests of the night;', how: 'William Blake, poem, 1794' },
-    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_redmount.jpg', alt: 'A woodblock-style print of a red mountain', how: '' },
+    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_redmount.jpg', alt: 'A woodblock-style print of a pagoda by a lake at sunset', how: '' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'botticelli.jpg', alt: 'The Birth of Venus', how: 'Botticelli, tempera on canvas, about 1485' },
     { who: 'ai', kind: 'text', text: 'Shall I compare thee to an autumn rain? / Thou art more patient, and more plain:', how: '' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'rembrandt.jpg', alt: 'Self-Portrait', how: 'Rembrandt, oil on canvas, 1659' },
-    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_gold.jpg', alt: 'A golden embrace in a flowered meadow', how: '' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_gold.jpg', alt: 'A woman reading in a golden ornamented garden', how: '' },
     { who: 'human', kind: 'img', label: 'Print', src: 'redfuji.jpg', alt: 'Fine Wind, Clear Morning', how: 'Hokusai, woodblock print, about 1831' },
-    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_shell.jpg', alt: 'A goddess on a shell at sea', how: '' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_shell.jpg', alt: 'A young woman picking oranges while angels play music', how: '' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'seurat.jpg', alt: 'A Sunday on La Grande Jatte', how: 'Seurat, oil on canvas, 1884' },
-    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_oldman.jpg', alt: 'A self-portrait of an older man in a beret', how: '' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_oldman.jpg', alt: 'A portrait of an elderly woman with a lace collar', how: '' },
     { who: 'human', kind: 'text', text: 'Shall I compare thee to a summer\u2019s day? / Thou art more lovely and more temperate:', how: 'Shakespeare, sonnet, 1609' },
     { who: 'ai', kind: 'text', text: 'Fox, O fox, running bright / Through the hedges of the night;', how: '' },
+    { who: 'human', kind: 'sound', src: 'satie.mp3', art: 'satie_wave.jpg', alt: 'Gymnopedie No. 1', how: 'Satie, Gymnopedie No. 1, 1888, played by Robin Alciatore' },
+    { who: 'ai', kind: 'sound', src: 'ai_rag.mp3', art: 'ai_rag_wave.jpg', alt: 'A ragtime piano piece', how: '' },
+    { who: 'human', kind: 'sound', src: 'joplin.mp3', art: 'joplin_wave.jpg', alt: 'Maple Leaf Rag', how: 'Scott Joplin, Maple Leaf Rag, his own 1916 piano roll' },
+    { who: 'ai', kind: 'sound', src: 'ai_waltz.mp3', art: 'ai_waltz_wave.jpg', alt: 'A slow piano waltz', how: '' },
   ];
   const base = field.dataset.wall || 'assets/works/';
-  const label = { img: 'Image', text: 'Poem', film: 'Video', video: 'Video' };
+  const label = { img: 'Image', text: 'Poem', film: 'Video', video: 'Video', sound: 'Music' };
   const cards = [];
 
   works.forEach((wk, i) => {
@@ -53,6 +57,20 @@
       media = document.createElement('span'); media.className = 'work__text'; media.textContent = wk.text;
     } else if (wk.kind === 'film') {
       media = document.createElement('span'); media.className = 'work__film'; media.setAttribute('role', 'img'); media.setAttribute('aria-label', wk.alt);
+    } else if (wk.kind === 'sound') {
+      media = document.createElement('span'); media.className = 'work__sound';
+      media.innerHTML = `<img src="${base + wk.art}" alt="" draggable="false"><span class="work__play" aria-hidden="true"></span>`;
+      const audio = new Audio(base + wk.src); audio.preload = 'none';
+      media.dataset.sound = '1';
+      el.addEventListener('click', (e) => {
+        e.stopImmediatePropagation();
+        const playing = !audio.paused;
+        document.querySelectorAll('.work.is-playing').forEach((w) => { w._audio.pause(); w.classList.remove('is-playing'); });
+        if (!playing) { audio.currentTime = 0; audio.play(); el.classList.add('is-playing'); }
+      });
+      audio.addEventListener('ended', () => el.classList.remove('is-playing'));
+      el._audio = audio;
+      el.setAttribute('role', 'button'); el.setAttribute('tabindex', '0'); el.setAttribute('aria-label', `Play ${wk.alt}`);
     } else {
       media = document.createElement('video');
       Object.assign(media, { src: base + wk.src, muted: true, loop: true, autoplay: true, playsInline: true });
@@ -68,7 +86,7 @@
     cards.push(card);
 
     el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') flip(card); });
-    el.addEventListener('click', () => flip(card));
+    if (wk.kind !== 'sound') el.addEventListener('click', () => flip(card));
   });
 
   function flip(c) {

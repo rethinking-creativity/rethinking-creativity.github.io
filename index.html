@@ -37,7 +37,7 @@
       <div class="wall-field" data-wall="assets/works/" aria-label="A wall of works, some made by people and some by AI"></div>
       <div class="wall-title">
         <div class="wall-title__box">
-          <h1 aria-label="Rethinking Human Creativity in the Generative AI Era">Rethinking <del data-del>Creativity</del> <ins data-ins>Human Creativity</ins><br>in the Generative AI Era</h1>
+          <h1 aria-label="Rethinking Human Creativity in the Generative AI Era">Rethinking <del data-del>Creativity</del> <ins data-ins>Human Creativity</ins><span class="title-spark" aria-hidden="true">&#10022;</span><br>in the Generative AI Era</h1>
           <p>Generative AI is changing not only how people create, but also what it means to support human creativity. Join us to rethink which parts of human creativity matter most, and how tools should support them.</p>
         </div>
       </div>
@@ -66,10 +66,10 @@
       <h2>Guiding questions</h2>
       <div class="qdeck" data-deck>
         <div class="qdeck__stack" role="button" tabindex="0" aria-label="Next question">
-          <article class="dcard"><p class="dcard__label">Creative contribution</p><p class="dcard__q">Can creativity be shared between humans and AI?</p><p class="dcard__note">When both a person and a generative model shape an artifact, what makes the human contribution meaningfully creative?</p></article>
-          <article class="dcard"><p class="dcard__label">Delegation</p><p class="dcard__q">Which parts of creating do people want to keep for themselves?</p><p class="dcard__note">Handing work to AI may free people to focus on ideas, or it may take away the parts that make creating meaningful to them.</p></article>
-          <article class="dcard"><p class="dcard__label">Creative growth</p><p class="dcard__q">What does it mean to grow as a creator when more of the creative process can be delegated?</p><p class="dcard__note">When AI reduces the need for execution, does it help people develop creative skill and judgment, or substitute for their development?</p></article>
-          <article class="dcard"><p class="dcard__label">Evaluation</p><p class="dcard__q">How do we know whether a tool supports human creativity?</p><p class="dcard__note">Beyond the quality of the artifact, what evidence shows changes in the person, such as agency, judgment, confidence, or skill?</p></article>
+          <article class="dcard"><p class="dcard__label">Creative contribution</p><p class="dcard__q">Can creativity be shared between humans and AI?</p></article>
+          <article class="dcard"><p class="dcard__label">Delegation</p><p class="dcard__q">Which parts of creating do people want to keep for themselves?</p></article>
+          <article class="dcard"><p class="dcard__label">Creative growth</p><p class="dcard__q">What does it mean to grow as a creator when more of the creative process can be delegated?</p></article>
+          <article class="dcard"><p class="dcard__label">Evaluation</p><p class="dcard__q">How do we know whether a tool supports human creativity?</p></article>
         </div>
         <ul class="qdeck__dots"><li><button type="button" aria-label="Show Creative contribution"></button></li><li><button type="button" aria-label="Show Delegation"></button></li><li><button type="button" aria-label="Show Creative growth"></button></li><li><button type="button" aria-label="Show Evaluation"></button></li></ul>
       </div>
@@ -132,9 +132,9 @@
         researchers and creative practitioners. There is nothing to prepare.
       </p>
       <ul class="stickers">
-        <li><span class="stickers__icon" aria-hidden="true">&#128196;</span><strong>Researchers</strong><span>working on creativity support tools, human-AI co-creation, or generative AI</span></li>
-        <li><span class="stickers__icon" aria-hidden="true">&#127912;</span><strong>Creative practitioners</strong><span>in writing, visual art, filmmaking, music, and other fields</span></li>
-        <li><span class="stickers__icon" aria-hidden="true">&#127891;</span><strong>Students and newcomers</strong><span>new to the topic and full of questions</span></li>
+        <li><img class="stickers__art" src="assets/who/who_researcher.jpg" alt="" width="420" height="420" loading="lazy"><strong>Researchers</strong><span>working on creativity support tools, human-AI co-creation, or generative AI</span></li>
+        <li><img class="stickers__art" src="assets/who/who_practitioner.jpg" alt="" width="420" height="420" loading="lazy"><strong>Creative practitioners</strong><span>in writing, visual art, filmmaking, music, and other fields</span></li>
+        <li><img class="stickers__art" src="assets/who/who_student.jpg" alt="" width="420" height="420" loading="lazy"><strong>Students and newcomers</strong><span>new to the topic and full of questions</span></li>
       </ul>
       <p class="cta">
         <a class="cta__button" href="https://docs.google.com/forms/d/e/1FAIpQLSe-EEupFXLVR2j8U4AWJkHxAdvXh6w0cxjcToDmo3Vs2oZkhg/viewform">Contribute your work</a>
@@ -146,7 +146,7 @@
       <h2>Organizers</h2>
       <ul class="people">
         <li>
-          <img class="avatar" src="assets/people/hye-young.jpg" alt="" width="96" height="96" loading="lazy">
+          <button class="person" type="button" aria-label="Show Hye-Young Jo as an illustration"><span class="person__inner"><img class="person__face" src="assets/people/hye-young.jpg" alt="Hye-Young Jo" width="240" height="240" loading="lazy"><img class="person__face person__toon" src="assets/people/toon/hye-young.jpg" alt="" width="240" height="240" loading="lazy"></span></button>
           <div>
             <h3><a href="https://hyeyoungjo.com/">Hye-Young Jo</a></h3>
             <p class="people__affil">University of Colorado Boulder</p>
@@ -154,7 +154,7 @@
           </div>
         </li>
         <li>
-          <img class="avatar" src="assets/people/elise.jpg" alt="" width="96" height="96" loading="lazy">
+          <button class="person" type="button" aria-label="Show Chenxinran Elise Shen as an illustration"><span class="person__inner"><img class="person__face" src="assets/people/elise.jpg" alt="Chenxinran Elise Shen" width="240" height="240" loading="lazy"><img class="person__face person__toon" src="assets/people/toon/elise.jpg" alt="" width="240" height="240" loading="lazy"></span></button>
           <div>
             <h3><a href="https://elisexinranshen.github.io/">Chenxinran Elise Shen</a></h3>
             <p class="people__affil">University of Toronto</p>
@@ -162,7 +162,7 @@
           </div>
         </li>
         <li>
-          <img class="avatar" src="assets/people/erzhen.jpg" alt="" width="96" height="96" loading="lazy">
+          <button class="person" type="button" aria-label="Show Erzhen Hu as an illustration"><span class="person__inner"><img class="person__face" src="assets/people/erzhen.jpg" alt="Erzhen Hu" width="240" height="240" loading="lazy"><img class="person__face person__toon" src="assets/people/toon/erzhen.jpg" alt="" width="240" height="240" loading="lazy"></span></button>
           <div>
             <h3><a href="https://erzhenh.com/">Erzhen Hu</a></h3>
             <p class="people__affil">University of Virginia</p>
@@ -170,7 +170,7 @@
           </div>
         </li>
         <li>
-          <img class="avatar" src="assets/people/david.jpg" alt="" width="96" height="96" loading="lazy">
+          <button class="person" type="button" aria-label="Show David Ledo as an illustration"><span class="person__inner"><img class="person__face" src="assets/people/david.jpg" alt="David Ledo" width="240" height="240" loading="lazy"><img class="person__face person__toon" src="assets/people/toon/david.jpg" alt="" width="240" height="240" loading="lazy"></span></button>
           <div>
             <h3><a href="https://www.davidledo.com/">David Ledo</a></h3>
             <p class="people__affil">Autodesk Research</p>
@@ -178,7 +178,7 @@
           </div>
         </li>
         <li>
-          <img class="avatar" src="assets/people/nic.jpg" alt="" width="96" height="96" loading="lazy">
+          <button class="person" type="button" aria-label="Show Nicolai Marquardt as an illustration"><span class="person__inner"><img class="person__face" src="assets/people/nic.jpg" alt="Nicolai Marquardt" width="240" height="240" loading="lazy"><img class="person__face person__toon" src="assets/people/toon/nic.jpg" alt="" width="240" height="240" loading="lazy"></span></button>
           <div>
             <h3><a href="https://www.nicmarquardt.com/">Nicolai Marquardt</a></h3>
             <p class="people__affil">Microsoft Research</p>
@@ -186,7 +186,7 @@
           </div>
         </li>
         <li>
-          <img class="avatar" src="assets/people/jun.jpg" alt="" width="96" height="96" loading="lazy">
+          <button class="person" type="button" aria-label="Show Jun Kato as an illustration"><span class="person__inner"><img class="person__face" src="assets/people/jun.jpg" alt="Jun Kato" width="240" height="240" loading="lazy"><img class="person__face person__toon" src="assets/people/toon/jun.jpg" alt="" width="240" height="240" loading="lazy"></span></button>
           <div>
             <h3><a href="https://junkato.jp/">Jun Kato</a></h3>
             <p class="people__affil">AIST</p>
@@ -194,7 +194,7 @@
           </div>
         </li>
         <li>
-          <img class="avatar" src="assets/people/juho.jpg" alt="" width="96" height="96" loading="lazy">
+          <button class="person" type="button" aria-label="Show Juho Kim as an illustration"><span class="person__inner"><img class="person__face" src="assets/people/juho.jpg" alt="Juho Kim" width="240" height="240" loading="lazy"><img class="person__face person__toon" src="assets/people/toon/juho.jpg" alt="" width="240" height="240" loading="lazy"></span></button>
           <div>
             <h3><a href="https://juhokim.com/">Juho Kim</a></h3>
             <p class="people__affil">KAIST and SkillBench</p>
@@ -202,7 +202,7 @@
           </div>
         </li>
         <li>
-          <img class="avatar" src="assets/people/takeo.jpg" alt="" width="96" height="96" loading="lazy">
+          <button class="person" type="button" aria-label="Show Takeo Igarashi as an illustration"><span class="person__inner"><img class="person__face" src="assets/people/takeo.jpg" alt="Takeo Igarashi" width="240" height="240" loading="lazy"><img class="person__face person__toon" src="assets/people/toon/takeo.jpg" alt="" width="240" height="240" loading="lazy"></span></button>
           <div>
             <h3><a href="https://www-ui.is.s.u-tokyo.ac.jp/~takeo/">Takeo Igarashi</a></h3>
             <p class="people__affil">The University of Tokyo</p>
@@ -210,7 +210,7 @@
           </div>
         </li>
         <li>
-          <img class="avatar" src="assets/people/ryo.jpg" alt="" width="96" height="96" loading="lazy">
+          <button class="person" type="button" aria-label="Show Ryo Suzuki as an illustration"><span class="person__inner"><img class="person__face" src="assets/people/ryo.jpg" alt="Ryo Suzuki" width="240" height="240" loading="lazy"><img class="person__face person__toon" src="assets/people/toon/ryo.jpg" alt="" width="240" height="240" loading="lazy"></span></button>
           <div>
             <h3><a href="https://ryosuzuki.org/">Ryo Suzuki</a></h3>
             <p class="people__affil">University of Colorado Boulder</p>

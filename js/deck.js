@@ -89,3 +89,6 @@
   dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
   layout();
 })();
+
+// Organizer cards: tap to flip on touch screens (hover handles mouse)
+document.querySelectorAll('.person').forEach((b) => b.addEventListener('click', () => b.classList.toggle('is-flipped')));

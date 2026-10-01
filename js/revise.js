@@ -4,7 +4,7 @@
   const del = document.querySelector('[data-del]');
   if (!ins || !del) return;
   const full = ins.textContent;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { const sp = document.querySelector('.title-spark'); if (sp) sp.classList.add('is-on'); return; }
   ins.textContent = '';
   del.style.textDecorationColor = 'transparent';
   setTimeout(() => {
@@ -17,7 +17,7 @@
     ins.after(caret);
     const tick = setInterval(() => {
       ins.textContent = full.slice(0, ++i);
-      if (i >= full.length) clearInterval(tick);
+      if (i >= full.length) { clearInterval(tick); const sp = document.querySelector('.title-spark'); if (sp) sp.classList.add('is-on'); }
     }, 70);
   }, 900);
 })();
