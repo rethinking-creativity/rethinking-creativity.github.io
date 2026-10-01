@@ -367,3 +367,10 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
 @media (prefers-reduced-motion: reduce) {
   .stickers li:hover, .stickers li:hover .stickers__art, .contribute__frame:hover .contribute__art { transform: none; }
 }
+
+/* Contribute: the show-off illustration sits directly on the page */
+.contribute__art { max-width: 24rem; border-radius: 0; transition: transform 0.6s cubic-bezier(.2, .8, .2, 1); transform-origin: 50% 90%; }
+.contribute__art:hover { transform: rotate(-2deg) scale(1.04); }
+.contribute__button { box-shadow: 0 10px 24px -12px rgba(91, 47, 214, 0.6); }
+.contribute__button:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -12px rgba(91, 47, 214, 0.7); }
+@media (prefers-reduced-motion: reduce) { .contribute__art:hover { transform: none; } }
