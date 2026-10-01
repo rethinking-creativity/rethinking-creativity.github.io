@@ -1,0 +1,61 @@
+/* 3. Riso: two-colour risograph zine. Fluorescent pink and riso blue overprint with multiply; slight misregistration on the headline. Type: Archivo (expanded display, normal body). */
+:root {
+  --paper: #f3f3ef;
+  --ink: #1d3fbb;
+  --pink: #ff4fa3;
+  --mix: #6b2f9e;
+  --soft: #4a5687;
+  --focus: #ff4fa3;
+  --max: 58rem;
+}
+
+body { background: var(--paper); color: var(--ink); font-family: "Archivo", system-ui, sans-serif; font-size: 1.05rem; }
+a { color: var(--ink); text-decoration-color: var(--pink); text-decoration-thickness: 3px; text-underline-offset: 0.2em; }
+
+/* Halftone dots on the paper */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: radial-gradient(rgba(255, 79, 163, 0.18) 1px, transparent 1.4px) 0 0 / 7px 7px; pointer-events: none; }
+
+.site-header { background: var(--paper); border-bottom: 3px solid var(--ink); }
+.nav__brand { color: var(--ink); font-weight: 800; font-stretch: 125%; }
+.nav__links a { color: var(--ink); font-weight: 600; }
+.nav__links a:hover { background: var(--pink); color: var(--paper); }
+
+.riso-hero { padding-block: 4rem 4rem; border-bottom: 3px solid var(--ink); }
+.riso-title { position: relative; margin: 0 0 1.75rem; font-size: clamp(2.4rem, 6.6vw, 4.8rem); font-weight: 900; font-stretch: 125%; line-height: 0.92; letter-spacing: -0.02em; text-transform: none; }
+.riso-title span { display: block; }
+.riso-title .layer { color: var(--ink); mix-blend-mode: multiply; }
+.riso-title .layer--pink { position: absolute; inset: 0; color: var(--pink); transform: translate(5px, 4px); }
+.riso-hero__lede { max-width: 34rem; margin: 0 0 1.5rem; font-size: 1.2rem; color: var(--soft); }
+.riso-hero__facts { display: inline-block; margin: 0; padding: 0.6rem 0.9rem; background: var(--pink); color: var(--paper); font-weight: 700; mix-blend-mode: multiply; }
+
+.section { border-bottom: 3px solid var(--ink); }
+.section h2 { font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 900; font-stretch: 125%; line-height: 1; }
+.h2__note { color: var(--pink); font-weight: 700; }
+.section__intro { color: var(--soft); }
+h3 { font-size: 1.15rem; font-weight: 800; line-height: 1.25; }
+
+.questions li { padding: 1.2rem; background: var(--paper); border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--pink); }
+.questions li::before { content: attr(data-label); display: block; margin-bottom: 0.4rem; color: var(--pink); font-weight: 800; }
+.questions p { color: var(--soft); }
+
+.timeline li { border-top: 3px dotted var(--ink); }
+.timeline__time { font-weight: 900; font-stretch: 125%; font-size: 1.4rem; color: var(--pink); mix-blend-mode: multiply; }
+.timeline p { color: var(--soft); }
+
+.callout { padding: 1.2rem; border: 3px solid var(--ink); }
+.callout--pink { background: rgba(255, 79, 163, 0.18); }
+.callout--mint { background: rgba(29, 63, 187, 0.08); }
+
+.stickers li { padding: 1rem 1.1rem; border: 3px solid var(--ink); }
+.stickers strong { font-size: 1.15rem; font-weight: 800; }
+.stickers span:last-child { color: var(--soft); }
+
+.cta__button { padding: 0.8rem 1.3rem; background: var(--ink); color: var(--paper); font-weight: 800; box-shadow: 5px 5px 0 var(--pink); }
+.cta__button:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--pink); }
+.cta span { color: var(--soft); }
+
+.avatar { width: 3rem; height: 3rem; border-radius: 50%; background: var(--pink); color: var(--paper); font-weight: 800; mix-blend-mode: multiply; }
+.people h3 a { color: var(--ink); }
+.people p { color: var(--soft); font-size: 0.93rem; }
+
+.site-footer { color: var(--soft); }

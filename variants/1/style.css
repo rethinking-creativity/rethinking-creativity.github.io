@@ -1,0 +1,87 @@
+/* 1. Flip: white card stock, deep ink, CHI navy for the AI side, CHI coral for the human side. Type: Bricolage Grotesque. */
+:root {
+  --paper: #ffffff;
+  --ink: #1b1f3b;
+  --soft: #5a5f78;
+  --rule: #dfe1ea;
+  --navy: #294270;
+  --coral: #e2574c;
+  --card: #f4f5f9;
+  --focus: #294270;
+  --max: 56rem;
+}
+
+body { background: var(--paper); color: var(--ink); font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 1.05rem; }
+a { color: var(--navy); }
+
+.site-header { background: rgba(255, 255, 255, 0.92); border-bottom: 1px solid var(--rule); }
+.nav__brand { font-weight: 700; color: var(--ink); }
+.nav__links a { color: var(--soft); font-size: 0.95rem; }
+.nav__links a:hover { color: var(--ink); }
+
+/* Hero: the first activity, playable */
+.flip-hero { padding-block: 4rem 4.5rem; border-bottom: 1px solid var(--rule); }
+.flip-hero h1 { max-width: 15ch; margin: 0 0 1rem; font-size: clamp(2.4rem, 6.5vw, 4.4rem); font-weight: 800; font-variation-settings: "wdth" 85; line-height: 0.98; letter-spacing: -0.02em; }
+.flip-hero__lede { max-width: 36rem; margin: 0 0 2.5rem; color: var(--soft); font-size: 1.15rem; }
+
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; max-width: 32rem; }
+.pair__prompt { grid-column: 1 / -1; margin: 0 0 0.25rem; font-weight: 700; font-size: 1.2rem; }
+
+.flip { perspective: 1200px; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.flip__inner { position: relative; display: block; aspect-ratio: 4 / 5; transition: transform 0.7s cubic-bezier(.2, .7, .2, 1); transform-style: preserve-3d; }
+.flip[aria-pressed="true"] .flip__inner, .pair.is-revealed .flip__inner { transform: rotateY(180deg); }
+.flip__face { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 1.1rem; border-radius: 14px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flip__front { background: var(--card); border: 2px solid var(--ink); }
+.flip__front:hover { background: #eceef5; }
+.flip__back { transform: rotateY(180deg); color: #fff; }
+.flip--a .flip__back { background: var(--navy); }
+.flip--b .flip__back { background: var(--coral); }
+.flip__name { font-weight: 800; font-size: 1.3rem; }
+.flip__art { flex: 1; margin-block: 0.8rem; border-radius: 8px; }
+.flip--a .flip__art { background: repeating-linear-gradient(135deg, #c9cee0 0 10px, #e3e6ef 10px 20px); }
+.flip--b .flip__art { background: radial-gradient(circle at 30% 35%, #f3c9c4 0 22%, transparent 23%), radial-gradient(circle at 68% 62%, #c9cee0 0 28%, transparent 29%), #e9ebf2; }
+.flip__hint { color: var(--soft); font-size: 0.9rem; }
+.flip__back p { margin: 0; font-size: 1.02rem; line-height: 1.45; }
+.flip__back strong { display: block; margin-bottom: 0.4rem; font-size: 1.35rem; }
+.pair__after { grid-column: 1 / -1; min-height: 1.6em; margin: 0.5rem 0 0; color: var(--soft); }
+
+.flip-hero__facts { margin: 2.5rem 0 0; color: var(--soft); }
+.flip-hero__facts strong { color: var(--ink); }
+
+/* Sections */
+.section { border-bottom: 1px solid var(--rule); }
+.section h2 { font-size: 2rem; font-weight: 800; letter-spacing: -0.01em; }
+.h2__note, .section__intro { color: var(--soft); }
+h3 { font-weight: 700; font-size: 1.12rem; line-height: 1.3; }
+
+.questions li { padding: 1.25rem; border: 2px solid var(--ink); border-radius: 14px; }
+.questions li::before { content: attr(data-label); display: block; margin-bottom: 0.4rem; color: var(--navy); font-weight: 700; }
+.questions p { color: var(--soft); }
+
+.timeline li { border-top: 1px solid var(--rule); }
+.timeline__time { font-weight: 800; font-size: 1.3rem; }
+.timeline p { color: var(--soft); }
+
+.callout { padding: 1.25rem; border-radius: 14px; background: var(--card); }
+.callout p { color: var(--soft); }
+
+.stickers li { padding: 1.1rem 1.2rem; border-radius: 14px; background: var(--card); }
+.stickers strong { font-size: 1.1rem; }
+.stickers span:last-child { color: var(--soft); }
+
+.cta__button { padding: 0.8rem 1.4rem; border-radius: 999px; background: var(--ink); color: #fff; font-weight: 700; }
+.cta__button:hover { background: var(--navy); }
+.cta span { color: var(--soft); }
+
+.avatar { width: 2.8rem; height: 2.8rem; border-radius: 10px; border: 2px solid var(--ink); font-weight: 700; font-size: 0.9rem; }
+.people h3 a { color: var(--ink); }
+.people p { color: var(--soft); font-size: 0.93rem; }
+.people .people__affil { color: var(--ink); }
+
+.site-footer { color: var(--soft); }
+
+@media (max-width: 36rem) {
+  .pair { gap: 0.75rem; }
+  .flip__name { font-size: 1.05rem; }
+  .flip__back p { font-size: 0.9rem; }
+}

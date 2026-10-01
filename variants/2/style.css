@@ -1,0 +1,70 @@
+/* 2. Tracked changes: a manuscript under revision. Newsreader throughout; deletions in red, insertions in green, margin comments in a side column. */
+:root {
+  --paper: #ffffff;
+  --ink: #23201c;
+  --soft: #6a645b;
+  --rule: #e4e0d8;
+  --del: #b42318;
+  --ins: #1d6b4f;
+  --note: #fff4c4;
+  --focus: #1d6b4f;
+  --max: 62rem;
+}
+
+body { background: var(--paper); color: var(--ink); font-family: "Newsreader", Georgia, serif; font-size: 1.15rem; line-height: 1.65; }
+a { color: var(--ins); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+
+.site-header { background: rgba(255, 255, 255, 0.94); border-bottom: 1px solid var(--rule); }
+.nav__brand { color: var(--ink); font-style: italic; }
+.nav__links a { color: var(--soft); font-size: 1rem; }
+.nav__links a:hover { color: var(--ink); }
+
+/* Manuscript grid: text column plus a margin for comments and section names */
+.ms { display: grid; grid-template-columns: minmax(0, 1fr) 15rem; gap: 2.5rem; }
+
+.rev-hero { padding-block: 4.5rem 3.5rem; }
+.rev-hero h1 { margin: 0 0 1.5rem; font-size: clamp(2.3rem, 6vw, 4.2rem); font-weight: 500; line-height: 1.08; letter-spacing: -0.01em; }
+.rev-hero del { color: var(--del); text-decoration-thickness: 3px; }
+.rev-hero ins { color: var(--ins); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 0.12em; }
+.rev-hero .caret { display: inline-block; width: 3px; height: 0.9em; margin-left: 2px; background: var(--ins); vertical-align: -0.05em; animation: blink 1s steps(1) 6; }
+@keyframes blink { 50% { opacity: 0; } }
+.rev-hero__lede { max-width: 36rem; margin: 0 0 1.5rem; }
+.rev-hero__facts { margin: 0; color: var(--soft); font-size: 1rem; }
+
+.comment { align-self: start; margin-top: 0.4rem; padding: 0.8rem 0.9rem; border-left: 3px solid #e3b400; background: var(--note); font-size: 0.95rem; line-height: 1.45; }
+.comment b { display: block; font-size: 0.85rem; color: var(--soft); font-weight: 600; }
+
+/* Sections sit in the text column; the heading moves into the margin on wide screens */
+.section { border-top: 1px solid var(--rule); }
+.section h2 { font-size: 1.7rem; font-weight: 600; font-style: italic; }
+.h2__note, .section__intro { color: var(--soft); }
+h3 { font-size: 1.15rem; font-weight: 600; line-height: 1.35; }
+
+.questions li { padding-top: 0.9rem; border-top: 2px solid var(--ink); }
+.questions li::before { content: attr(data-label); display: block; margin-bottom: 0.35rem; color: var(--ins); font-style: italic; }
+.questions p { color: var(--soft); }
+
+.timeline li { border-top: 1px solid var(--rule); }
+.timeline__time { color: var(--ins); font-style: italic; }
+.timeline p { color: var(--soft); }
+
+.callout { padding: 1rem 1.1rem; border-left: 3px solid #e3b400; background: var(--note); }
+
+.stickers li { padding-top: 0.9rem; border-top: 2px solid var(--ink); }
+.stickers strong { font-size: 1.15rem; }
+.stickers span:last-child { color: var(--soft); }
+
+.cta__button { padding: 0.65rem 1.2rem; border: 2px solid var(--ins); color: var(--ins); font-weight: 600; }
+.cta__button:hover { background: var(--ins); color: #fff; }
+.cta span { color: var(--soft); }
+
+.avatar { width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--note); font-size: 0.85rem; font-weight: 600; }
+.people h3 a { color: var(--ink); }
+.people p { color: var(--soft); font-size: 1rem; }
+
+.site-footer { border-top: 1px solid var(--rule); color: var(--soft); }
+
+@media (max-width: 52rem) {
+  .ms { grid-template-columns: 1fr; gap: 1rem; }
+  .comment { max-width: 28rem; }
+}
