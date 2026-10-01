@@ -6,12 +6,10 @@
   const stack = deck.querySelector('.qdeck__stack');
   const cards = [...stack.querySelectorAll('.dcard')];
   const dots = [...deck.querySelectorAll('.qdeck__dots button')];
-  const soundToggle = deck.querySelector('[data-sound]');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let order = cards.map((_, i) => i);
   let busy = false;
   let audio = null;
-  let soundOn = true;
 
   function layout() {
     order.forEach((cardIndex, pos) => {
@@ -25,7 +23,6 @@
 
   // A short paper flick: filtered noise burst with a quick downward sweep, plus a soft tap.
   function flickSound() {
-    if (!soundOn) return;
     try {
       audio = audio || new (window.AudioContext || window.webkitAudioContext)();
       const t = audio.currentTime;
@@ -90,12 +87,5 @@
     if (e.key === 'ArrowLeft') { e.preventDefault(); next(-1); }
   });
   dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
-  if (soundToggle) {
-    soundToggle.addEventListener('click', () => {
-      soundOn = !soundOn;
-      soundToggle.setAttribute('aria-pressed', String(soundOn));
-      soundToggle.textContent = soundOn ? 'Sound on' : 'Sound off';
-    });
-  }
   layout();
 })();

@@ -10,7 +10,7 @@
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Instrument+Serif&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,7 +20,7 @@
         <a class="nav__logo" href="https://chi2027.acm.org/" aria-label="CHI 2027 website">
           <img src="assets/chi2027-logo.svg" alt="CHI 2027, May 10-14, Pittsburgh" width="118" height="48">
         </a>
-        <a class="nav__brand" href="#top">Rethinking Creativity</a>
+        <a class="nav__brand" href="#top" aria-label="Rethinking Human Creativity">Rethinking <del>Creativity</del> Human Creativity</a>
       </div>
       <ul class="nav__links">
         <li><a href="#questions">Questions</a></li>
@@ -33,28 +33,13 @@
   </header>
 
   <main id="top">
-    <section class="hero">
-      <div class="hero__blobs" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-      <div class="hero__inner container">
-        <span class="spark spark--a" aria-hidden="true">&#10022;</span>
-        <span class="spark spark--b" aria-hidden="true">&#10022;</span>
-        <span class="spark spark--c" aria-hidden="true">&#10023;</span>
-        <p class="hero__eyebrow">A meet-up proposed for CHI 2027</p>
-        <h1>Rethinking <em>Human Creativity</em><br>in the Generative AI Era</h1>
-        <p class="hero__lede">
-          Generative AI is changing not only how people create, but also what it means to support
-          human creativity. Join us to rethink which parts of human creativity matter most, and how tools should support them.
-        </p>
-        <ul class="hero__chips">
-          <li>Pittsburgh, PA</li>
-          <li>May 10&ndash;14, 2027</li>
-          <li>90 minutes</li>
-          <li>No preparation needed</li>
-        </ul>
-        <p class="hero__status">
-          This meet-up has been proposed to CHI 2027 and is under review. If it is accepted, the
-          session time will be posted here.
-        </p>
+    <section class="wall-hero">
+      <div class="wall-field" data-wall="assets/works/" aria-label="A wall of works, some made by people and some by AI"></div>
+      <div class="wall-title">
+        <div class="wall-title__box">
+          <h1 aria-label="Rethinking Human Creativity in the Generative AI Era">Rethinking <del data-del>Creativity</del> <ins data-ins>Human Creativity</ins><br>in the Generative AI Era</h1>
+          <p>Generative AI is changing not only how people create, but also what it means to support human creativity. Join us to rethink which parts of human creativity matter most, and how tools should support them.</p>
+        </div>
       </div>
     </section>
 
@@ -79,32 +64,19 @@
 
     <section class="section container" id="questions">
       <h2>Guiding questions</h2>
-      <p class="section__intro">
-        One question sits above them all: <strong>where should creativity support shift its focus?</strong>
-        Four small groups ask it from four sides. Pick the one you are most interested in.
-      </p>
-      <ol class="questions">
-        <li data-label="Creative contribution">
-          <h3>Can creativity be shared between humans and AI?</h3>
-          <p>When both a person and a generative model shape an artifact, what makes the human contribution meaningfully creative?</p>
-        </li>
-        <li data-label="Delegation">
-          <h3>Which parts of creating do people want to keep for themselves?</h3>
-          <p>Handing work to AI may free people to focus on ideas, or it may take away the parts that make creating meaningful to them.</p>
-        </li>
-        <li data-label="Creative growth">
-          <h3>What does it mean to grow as a creator when more of the creative process can be delegated?</h3>
-          <p>When AI reduces the need for execution, does it help people develop creative skill and judgment, or substitute for their development?</p>
-        </li>
-        <li data-label="Evaluation">
-          <h3>How do we know whether a tool supports human creativity?</h3>
-          <p>Beyond the quality of the artifact, what evidence shows changes in the person, such as agency, judgment, confidence, or skill?</p>
-        </li>
-      </ol>
+      <div class="qdeck" data-deck>
+        <div class="qdeck__stack" role="button" tabindex="0" aria-label="Next question">
+          <article class="dcard"><p class="dcard__label">Creative contribution</p><p class="dcard__q">Can creativity be shared between humans and AI?</p><p class="dcard__note">When both a person and a generative model shape an artifact, what makes the human contribution meaningfully creative?</p></article>
+          <article class="dcard"><p class="dcard__label">Delegation</p><p class="dcard__q">Which parts of creating do people want to keep for themselves?</p><p class="dcard__note">Handing work to AI may free people to focus on ideas, or it may take away the parts that make creating meaningful to them.</p></article>
+          <article class="dcard"><p class="dcard__label">Creative growth</p><p class="dcard__q">What does it mean to grow as a creator when more of the creative process can be delegated?</p><p class="dcard__note">When AI reduces the need for execution, does it help people develop creative skill and judgment, or substitute for their development?</p></article>
+          <article class="dcard"><p class="dcard__label">Evaluation</p><p class="dcard__q">How do we know whether a tool supports human creativity?</p><p class="dcard__note">Beyond the quality of the artifact, what evidence shows changes in the person, such as agency, judgment, confidence, or skill?</p></article>
+        </div>
+        <ul class="qdeck__dots"><li><button type="button" aria-label="Show Creative contribution"></button></li><li><button type="button" aria-label="Show Delegation"></button></li><li><button type="button" aria-label="Show Creative growth"></button></li><li><button type="button" aria-label="Show Evaluation"></button></li></ul>
+      </div>
     </section>
 
     <section class="section container" id="format">
-      <h2>Format <span class="h2__note">90 minutes, no slides</span></h2>
+      <h2>Format <span class="h2__note">90 minutes</span></h2>
       <p class="section__intro">
         Two main activities, each followed by a sharing session. First you look at creative works in
         a small group by medium. Then you regroup around the question you are most interested in.
@@ -271,5 +243,8 @@
       <p class="site-footer__fine">Proposed for the 2027 CHI Conference on Human Factors in Computing Systems.</p>
     </div>
   </footer>
+  <script src="js/revise.js" defer></script>
+  <script src="js/wall.js" defer></script>
+  <script src="js/deck.js" defer></script>
 </body>
 </html>
