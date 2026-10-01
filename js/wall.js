@@ -44,7 +44,7 @@
       Object.assign(media, { src: base + wk.src, muted: true, loop: true, autoplay: true, playsInline: true });
       media.setAttribute('aria-label', wk.alt);
     }
-    el.innerHTML = `<span class="work__inner"><span class="work__face"></span><span class="work__face work__back"><span class="work__who">${wk.who === 'ai' ? 'AI' : 'Human'}</span><span class="work__how">${wk.how}</span></span></span>`;
+    el.innerHTML = `<span class="work__inner"><span class="work__face"></span><span class="work__face work__back"><span class="work__who">${wk.who === 'ai' ? 'AI' : 'Human'}</span>${wk.who === 'human' ? `<span class="work__how">${wk.how}</span>` : ''}</span></span>`;
     const face = el.querySelector('.work__face');
     face.appendChild(media);
     const cap = document.createElement('span'); cap.className = 'work__cap'; cap.textContent = label[wk.kind];

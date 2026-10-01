@@ -183,7 +183,7 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
 .cta__button { padding: 0.75rem 1.3rem; border-radius: 999px; background: var(--ink); color: #fff; font-weight: 600; }
 .cta span { color: var(--soft); }
 
-.avatar { width: 2.7rem; height: 2.7rem; border-radius: 50%; background: var(--wash); font-weight: 600; font-size: 0.85rem; }
+.avatar { width: 3.6rem; height: 3.6rem; border-radius: 50%; object-fit: cover; background: var(--lilac); box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--lilac); }
 .people h3 a { color: var(--ink); }
 .people p { color: var(--soft); font-size: 0.92rem; }
 
@@ -206,9 +206,10 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
 .callout--pink { background: var(--pink); border-color: transparent; }
 .callout--mint { background: var(--mint); border-color: transparent; }
 .timeline__time { color: var(--violet); }
-.avatar { background: linear-gradient(135deg, var(--pink), var(--lilac)); color: var(--violet-deep); }
-.people li:nth-child(3n+2) .avatar { background: linear-gradient(135deg, var(--lemon), var(--peach)); }
-.people li:nth-child(3n+3) .avatar { background: linear-gradient(135deg, var(--mint), var(--sky)); }
+.people li:nth-child(4n+1) .avatar { box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--pink); }
+.people li:nth-child(4n+2) .avatar { box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--lemon); }
+.people li:nth-child(4n+3) .avatar { box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--mint); }
+.people li:nth-child(4n+4) .avatar { box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--sky); }
 .site-footer { margin-top: 2rem; background: linear-gradient(120deg, var(--pink), var(--lilac) 45%, var(--sky)); color: var(--ink); text-align: center; }
 .nav__links { scrollbar-width: none; }
 .nav__links::-webkit-scrollbar { display: none; }
