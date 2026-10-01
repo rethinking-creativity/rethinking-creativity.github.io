@@ -126,19 +126,30 @@
     cards.forEach((c, i) => {
       c.el.style.display = '';
       c.el.style.setProperty('--w', small ? `${5.6 + (i % 3) * 0.5}rem` : `${8.6 + ((i * 37) % 22) / 10}rem`);
-      const cw = c.el.offsetWidth, ch = c.el.offsetHeight;
       const slot = cells[i];
+      if (slot) {
+        // Fit the card to its cell so neighbours never bury each other
+        let cw0 = c.el.offsetWidth, ch0 = c.el.offsetHeight;
+        const k = Math.min(1, (slot.w * 1.05) / cw0, (slot.h * 1.1) / ch0);
+        if (k < 1) c.el.style.setProperty('--w', `${(cw0 * k) / 16}rem`);
+      }
+      const cw = c.el.offsetWidth, ch = c.el.offsetHeight;
       if (!slot) { c.el.style.display = 'none'; return; }
-      // Centre the card in its cell, then nudge it a little in a random direction
-      let x = slot.x + (slot.w - cw) / 2 + (r() - 0.5) * slot.w * 0.5;
-      let y = slot.y + (slot.h - ch) / 2 + (r() - 0.5) * slot.h * 0.5;
-      x = Math.max(-cw * 0.15, Math.min(W - cw * 0.85, x));
-      y = Math.max(-ch * 0.1, Math.min(H - ch * 0.85, y));
-      const rect = { x, y, w: cw, h: ch };
-      // Skip a card that would sit on the title or bury a neighbour
-      let bad = overlap(rect, title) > cw * ch * 0.05;
-      for (const p of placed) if (overlap(rect, p) / Math.min(cw * ch, p.w * p.h) > 0.18) bad = true;
-      if (bad) { c.el.style.display = 'none'; return; }
+      // Try a few nudges inside the cell; fall back to the centre of the cell so no cell is left empty
+      let rect = null;
+      for (let k = 0; k < 8 && !rect; k++) {
+        const j = k < 7 ? 0.5 : 0;
+        let x = slot.x + (slot.w - cw) / 2 + (r() - 0.5) * slot.w * j;
+        let y = slot.y + (slot.h - ch) / 2 + (r() - 0.5) * slot.h * j;
+        x = Math.max(-cw * 0.15, Math.min(W - cw * 0.85, x));
+        y = Math.max(-ch * 0.1, Math.min(H - ch * 0.85, y));
+        const cand = { x, y, w: cw, h: ch };
+        let bad = overlap(cand, title) > cw * ch * 0.05;
+        for (const p of placed) if (overlap(cand, p) / Math.min(cw * ch, p.w * p.h) > 0.18) bad = true;
+        if (!bad || k === 7) rect = cand;
+      }
+      if (overlap(rect, title) > cw * ch * 0.05) { c.el.style.display = 'none'; return; }
+      const x = rect.x, y = rect.y;
       placed.push(rect);
       c.el.style.left = `${x}px`; c.el.style.top = `${y}px`;
       c.el.style.transform = `rotate(${((r() - 0.5) * 10).toFixed(1)}deg)`;
