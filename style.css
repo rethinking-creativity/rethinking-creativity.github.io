@@ -465,3 +465,5 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
   .stickers li, .stickers__art, .contribute__art { transition: none; }
   .stickers li:hover, .stickers li:hover .stickers__art, .contribute__art:hover { transform: none; box-shadow: none; }
 }
+/* Card backs: centred text */
+.work__back, .spot__back { align-items: center; justify-content: center; text-align: center; }
