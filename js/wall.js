@@ -7,39 +7,39 @@
   // Human works: public-domain pieces from Wikimedia Commons.
   // AI works: made for this page with Gemini and Veo from one prompt each; the two short texts were written by Claude.
   const works = [
-    { who: 'human', kind: 'img', label: 'Print', src: 'hokusai.jpg', alt: 'The Great Wave off Kanagawa', how: 'Hokusai, woodblock print, about 1831' },
-    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_rain.jpg', alt: 'A woodblock-style print of travellers on a snowy mountain road', how: 'Gemini, one prompt, about 10 seconds' },
-    { who: 'human', kind: 'img', label: 'Painting', src: 'vangogh.jpg', alt: 'The Starry Night', how: 'Van Gogh, oil on canvas, 1889' },
+    { who: 'human', kind: 'img', label: 'Print', src: 'hokusai.jpg', alt: 'The Great Wave off Kanagawa', how: 'Hokusai, c. 1831' },
+    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_rain.jpg', alt: 'A woodblock-style print of travellers on a snowy mountain road', how: 'Gemini, c. 10 seconds' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'vangogh.jpg', alt: 'The Starry Night', how: 'Van Gogh, 1889' },
     { who: 'ai', kind: 'text', text: '“Patience” is the thing with roots – / That holds the ground below –', how: 'Claude, asked to write like Dickinson' },
-    { who: 'human', kind: 'film', alt: 'The Horse in Motion', how: 'Muybridge, twelve cameras, 1878' },
-    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_portrait.jpg', alt: 'A Dutch-style painting of a young man writing a letter', how: 'Gemini, one prompt, about 10 seconds' },
-    { who: 'human', kind: 'text', text: '“Hope” is the thing with feathers – / That perches in the soul –', how: 'Emily Dickinson, poem, about 1861' },
-    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_wave.jpg', alt: 'A woodblock-style print of a fishing village in a storm', how: 'Gemini, one prompt, about 10 seconds' },
-    { who: 'human', kind: 'img', label: 'Painting', src: 'vermeer.jpg', alt: 'Girl with a Pearl Earring', how: 'Vermeer, oil on canvas, about 1665' },
-    { who: 'ai', kind: 'video', src: 'ai_horse.mp4', alt: 'A galloping horse in the style of 1870s photography', how: 'Veo, one prompt, about a minute' },
-    { who: 'human', kind: 'img', label: 'Painting', src: 'monet.jpg', alt: 'Impression, Sunrise', how: 'Monet, oil on canvas, 1872' },
-    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_night.jpg', alt: 'A lighthouse on a rocky coast under a swirling night sky', how: 'Gemini, one prompt, about 10 seconds' },
-    { who: 'human', kind: 'img', label: 'Print', src: 'hiroshige.jpg', alt: 'Sudden Shower over Shin-Ohashi Bridge', how: 'Hiroshige, woodblock print, 1857' },
+    { who: 'human', kind: 'film', alt: 'The Horse in Motion', how: 'Muybridge, 1878' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_portrait.jpg', alt: 'A Dutch-style painting of a young man writing a letter', how: 'Gemini, c. 10 seconds' },
+    { who: 'human', kind: 'text', text: '“Hope” is the thing with feathers – / That perches in the soul –', how: 'Emily Dickinson, c. 1861' },
+    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_wave.jpg', alt: 'A woodblock-style print of a fishing village in a storm', how: 'Gemini, c. 10 seconds' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'vermeer.jpg', alt: 'Girl with a Pearl Earring', how: 'Vermeer, c. 1665' },
+    { who: 'ai', kind: 'video', src: 'ai_horse.mp4', alt: 'A galloping horse in the style of 1870s photography', how: 'Veo, c. a minute' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'monet.jpg', alt: 'Impression, Sunrise', how: 'Monet, 1872' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_night.jpg', alt: 'A lighthouse on a rocky coast under a swirling night sky', how: 'Gemini, c. 10 seconds' },
+    { who: 'human', kind: 'img', label: 'Print', src: 'hiroshige.jpg', alt: 'Sudden Shower over Shin-Ohashi Bridge', how: 'Hiroshige, 1857' },
     { who: 'ai', kind: 'text', text: 'I wander through the city, and the city wanders through me,', how: 'Claude, asked to write like Whitman' },
-    { who: 'human', kind: 'text', text: 'I celebrate myself, and sing myself, / And what I assume you shall assume,', how: 'Walt Whitman, poem, 1855' },
-    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_harbor.jpg', alt: 'An impressionist harbor at sunrise', how: 'Gemini, one prompt, about 10 seconds' },
-    { who: 'human', kind: 'img', label: 'Painting', src: 'klimt.jpg', alt: 'The Kiss', how: 'Klimt, oil and gold leaf, 1908' },
+    { who: 'human', kind: 'text', text: 'I celebrate myself, and sing myself, / And what I assume you shall assume,', how: 'Walt Whitman, 1855' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_harbor.jpg', alt: 'An impressionist harbor at sunrise', how: 'Gemini, c. 10 seconds' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'klimt.jpg', alt: 'The Kiss', how: 'Klimt, 1908' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_park.jpg', alt: 'A pointillist beach on a summer day', how: '' },
-    { who: 'human', kind: 'text', text: 'Tyger Tyger, burning bright, / In the forests of the night;', how: 'William Blake, poem, 1794' },
+    { who: 'human', kind: 'text', text: 'Tyger Tyger, burning bright, / In the forests of the night;', how: 'William Blake, 1794' },
     { who: 'ai', kind: 'img', label: 'Print', src: 'ai_redmount.jpg', alt: 'A woodblock-style print of a pagoda by a lake at sunset', how: '' },
-    { who: 'human', kind: 'img', label: 'Painting', src: 'botticelli.jpg', alt: 'The Birth of Venus', how: 'Botticelli, tempera on canvas, about 1485' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'botticelli.jpg', alt: 'The Birth of Venus', how: 'Botticelli, c. 1485' },
     { who: 'ai', kind: 'text', text: 'Shall I compare thee to an autumn rain? / Thou art more patient, and more plain:', how: '' },
-    { who: 'human', kind: 'img', label: 'Painting', src: 'rembrandt.jpg', alt: 'Self-Portrait', how: 'Rembrandt, oil on canvas, 1659' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'rembrandt.jpg', alt: 'Self-Portrait', how: 'Rembrandt, 1659' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_gold.jpg', alt: 'A woman reading in a golden ornamented garden', how: '' },
-    { who: 'human', kind: 'img', label: 'Print', src: 'redfuji.jpg', alt: 'Fine Wind, Clear Morning', how: 'Hokusai, woodblock print, about 1831' },
+    { who: 'human', kind: 'img', label: 'Print', src: 'redfuji.jpg', alt: 'Fine Wind, Clear Morning', how: 'Hokusai, c. 1831' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_shell.jpg', alt: 'A young woman picking oranges while angels play music', how: '' },
-    { who: 'human', kind: 'img', label: 'Painting', src: 'seurat.jpg', alt: 'A Sunday on La Grande Jatte', how: 'Seurat, oil on canvas, 1884' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'seurat.jpg', alt: 'A Sunday on La Grande Jatte', how: 'Seurat, 1884' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_oldman.jpg', alt: 'A portrait of an elderly woman with a lace collar', how: '' },
-    { who: 'human', kind: 'text', text: 'Shall I compare thee to a summer\u2019s day? / Thou art more lovely and more temperate:', how: 'Shakespeare, sonnet, 1609' },
+    { who: 'human', kind: 'text', text: 'Shall I compare thee to a summer\u2019s day? / Thou art more lovely and more temperate:', how: 'Shakespeare, 1609' },
     { who: 'ai', kind: 'text', text: 'Fox, O fox, running bright / Through the hedges of the night;', how: '' },
-    { who: 'human', kind: 'sound', src: 'satie.mp3', art: 'satie_wave.jpg', alt: 'Gymnopedie No. 1', how: 'Satie, piano, 1888' },
+    { who: 'human', kind: 'sound', src: 'satie.mp3', art: 'satie_wave.jpg', alt: 'Gymnopedie No. 1', how: 'Satie, 1888' },
     { who: 'ai', kind: 'sound', src: 'ai_rag.mp3', art: 'ai_rag_wave.jpg', alt: 'A ragtime piano piece', how: '' },
-    { who: 'human', kind: 'sound', src: 'joplin.mp3', art: 'joplin_wave.jpg', alt: 'Maple Leaf Rag', how: 'Scott Joplin, piano roll, 1916' },
+    { who: 'human', kind: 'sound', src: 'joplin.mp3', art: 'joplin_wave.jpg', alt: 'Maple Leaf Rag', how: 'Scott Joplin, 1916' },
     { who: 'ai', kind: 'sound', src: 'ai_waltz.mp3', art: 'ai_waltz_wave.jpg', alt: 'A slow piano waltz', how: '' },
   ];
   const base = field.dataset.wall || 'assets/works/';
@@ -116,7 +116,7 @@
     const placed = [];
     cards.forEach((c, i) => {
       c.el.style.display = '';
-      c.el.style.setProperty('--w', small ? `${5.4 + (i % 3) * 0.5}rem` : `${7.4 + ((i * 37) % 20) / 10}rem`);
+      c.el.style.setProperty('--w', small ? `${6.4 + (i % 3) * 0.5}rem` : `${9.4 + ((i * 37) % 22) / 10}rem`);
       const cw = c.el.offsetWidth, ch = c.el.offsetHeight;
       const area = cw * ch;
       let best = null, bestWorst = Infinity, bestSum = Infinity;
