@@ -61,6 +61,11 @@ a:hover { color: var(--violet-deep); }
   min-height: 3.75rem;
 }
 
+.nav__left { display: flex; align-items: center; gap: 0.9rem; min-width: 0; }
+
+.nav__logo { display: block; flex: none; line-height: 0; }
+.nav__logo img { display: block; height: 3rem; width: auto; }
+
 .nav__brand {
   font-family: var(--font-head);
   font-weight: 600;
@@ -70,7 +75,7 @@ a:hover { color: var(--violet-deep); }
   white-space: nowrap;
 }
 
-.nav__brand::before { content: "\2726  "; color: #ff8fb8; }
+.nav__brand::before { content: "\2726  "; color: #f16667; }
 
 .nav__links {
   display: flex;
@@ -206,9 +211,10 @@ h1 em {
   pointer-events: none;
 }
 
-.spark--a { top: -1.5rem; left: 6%;  color: #ffb020; transform: rotate(12deg); }
-.spark--b { top: 3.5rem;  right: 5%; color: #ff7fb0; font-size: 2.6rem; }
-.spark--c { bottom: 5rem; left: 2%;  color: #5bb8ff; font-size: 1.6rem; }
+/* Sparkles pick up the three colours of the CHI 2027 logo */
+.spark--a { top: -1.5rem; left: 6%;  color: #f4b32b; transform: rotate(12deg); }
+.spark--b { top: 3.5rem;  right: 5%; color: #f16667; font-size: 2.6rem; }
+.spark--c { bottom: 5rem; left: 2%;  color: #294270; font-size: 1.6rem; }
 
 /* Sections */
 .section { padding-block: 3rem; }
@@ -379,7 +385,7 @@ h3 { margin: 0 0 0.35rem; font-family: var(--font-head); font-weight: 600; font-
   padding-left: 1.6rem;
 }
 
-.reading li::before { content: "\2726"; position: absolute; left: 0; color: #ffb020; }
+.reading li::before { content: "\2726"; position: absolute; left: 0; color: #f4b32b; }
 
 /* Footer */
 .site-footer {
