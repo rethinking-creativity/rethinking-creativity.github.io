@@ -262,7 +262,7 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
 
 /* Sound cards: a waveform of the actual recording; tap to play */
 .work__sound { position: relative; display: block; cursor: pointer; }
-.work__sound img { display: block; width: 100%; aspect-ratio: 2.4; object-fit: cover; border-radius: 4px; }
+.work__sound img { display: block; width: 100%; aspect-ratio: 1.6; object-fit: cover; border-radius: 4px; }
 .work__play { position: absolute; left: 50%; top: 50%; width: 2.4rem; height: 2.4rem; margin: -1.2rem 0 0 -1.2rem; border-radius: 50%; background: rgba(255, 255, 255, 0.92); box-shadow: 0 4px 12px rgba(42, 33, 64, 0.25); }
 .work__play::before { content: ""; position: absolute; left: 0.95rem; top: 0.7rem; border-style: solid; border-width: 0.5rem 0 0.5rem 0.75rem; border-color: transparent transparent transparent var(--violet); }
 .work.is-playing .work__play::before { left: 0.8rem; top: 0.75rem; width: 0.8rem; height: 0.9rem; border: 0; background: linear-gradient(90deg, var(--violet) 0 35%, transparent 35% 65%, var(--violet) 65%); }
