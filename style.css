@@ -467,3 +467,17 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
 }
 /* Card backs: centred text */
 .work__back, .spot__back { align-items: center; justify-content: center; text-align: center; }
+/* Keep "Human Creativity" together; on phones it gets its own line */
+.wall-title .grad { white-space: nowrap; }
+@media (max-width: 40rem) {
+  .wall-title h1 .grad { display: inline-block; }
+  .wall-title h1 .grad::before { content: ""; display: block; }
+}
+/* Header on phones: logo keeps its space, links scroll beside it */
+@media (max-width: 40rem) {
+  .nav__left { flex: none; }
+  .nav__links { min-width: 0; overflow-x: auto; }
+  .nav__logo img { height: 2.2rem; }
+}
+.br-phone { display: none; }
+@media (max-width: 40rem) { .br-phone { display: inline; } .wall-title h1 .grad::before { content: none; } }
