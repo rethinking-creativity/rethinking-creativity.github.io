@@ -17,7 +17,7 @@
     ins.after(caret);
     const tick = setInterval(() => {
       ins.textContent = full.slice(0, ++i);
-      if (i >= full.length) { clearInterval(tick); const sp = document.querySelector('.title-spark'); if (sp) sp.classList.add('is-on'); }
+      if (i >= full.length) { clearInterval(tick); const sp = document.querySelector('.title-spark'); if (sp) sp.classList.add('is-on'); setTimeout(() => caret.remove(), 600); }
     }, 70);
   }, 900);
 })();
