@@ -2,7 +2,7 @@
 
 Website for a meet-up proposed to CHI 2027 (Pittsburgh, PA, May 10–14, 2027).
 
-Live site: https://hyeyoungjo.github.io/rethinking-creativity/
+Live site: https://rethinking-creativity.github.io/
 
 ## Structure
 
