@@ -288,7 +288,8 @@ h3 { margin: 0 0 0.35rem; font-family: var(--font-head); font-weight: 600; font-
 .questions li:nth-child(4) { background: var(--sky); }
 
 .questions li::before {
-  content: "Q" counter(q);
+  content: "Q" counter(q) "  \00B7  " attr(data-label);
+  white-space: pre;
   position: absolute;
   left: 1.3rem;
   top: 1.1rem;
