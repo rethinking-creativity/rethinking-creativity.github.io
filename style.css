@@ -259,7 +259,7 @@ h3 { margin: 0 0 0.35rem; font-family: var(--font-head); font-weight: 600; font-
 .prose p { max-width: 44rem; margin: 0 0 1rem; }
 .prose p:last-child { margin-bottom: 0; }
 
-.section__intro { margin: -0.5rem 0 1.25rem; color: var(--muted); }
+.section__intro { max-width: 44rem; margin: -0.5rem 0 1.5rem; color: var(--muted); }
 
 /* Questions: one pastel card each */
 .questions {
@@ -331,6 +331,57 @@ h3 { margin: 0 0 0.35rem; font-family: var(--font-head); font-weight: 600; font-
 .timeline li:nth-child(5n+5) .timeline__time { background: var(--sky);   color: #1d4ed8; }
 
 .timeline p { margin: 0; color: var(--muted); }
+
+/* Who should come: sticker-like cards */
+.stickers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stickers li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 1.2rem 0.9rem 1.1rem;
+  border-radius: var(--radius);
+  background: #ffffff;
+  border: 2px solid var(--line);
+  box-shadow: 0 6px 0 var(--line);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.stickers li:nth-child(odd)  { transform: rotate(-1.2deg); }
+.stickers li:nth-child(even) { transform: rotate(1deg); }
+.stickers li:hover { transform: rotate(0) translateY(-3px); }
+
+.stickers__icon {
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 0.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.stickers li:nth-child(8n+1) .stickers__icon { background: var(--pink); }
+.stickers li:nth-child(8n+2) .stickers__icon { background: var(--sky); }
+.stickers li:nth-child(8n+3) .stickers__icon { background: var(--lemon); }
+.stickers li:nth-child(8n+4) .stickers__icon { background: var(--lilac); }
+.stickers li:nth-child(8n+5) .stickers__icon { background: var(--peach); }
+.stickers li:nth-child(8n+6) .stickers__icon { background: var(--mint); }
+.stickers li:nth-child(8n+7) .stickers__icon { background: var(--sky); }
+.stickers li:nth-child(8n+8) .stickers__icon { background: var(--lemon); }
+
+.stickers strong { font-family: var(--font-head); font-weight: 600; font-size: 1.05rem; }
+.stickers span:last-child { font-size: 0.9rem; color: var(--muted); line-height: 1.4; }
 
 /* People */
 .people {
@@ -408,5 +459,5 @@ h3 { margin: 0 0 0.35rem; font-family: var(--font-head); font-weight: 600; font-
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .questions li { transition: none; }
+  .questions li, .stickers li { transition: none; }
 }
