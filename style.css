@@ -324,13 +324,28 @@ h3 { margin: 0 0 0.35rem; font-family: var(--font-head); font-weight: 600; font-
   white-space: nowrap;
 }
 
-.timeline li:nth-child(5n+1) .timeline__time { background: var(--pink);  color: #be185d; }
-.timeline li:nth-child(5n+2) .timeline__time { background: var(--peach); color: #c2410c; }
-.timeline li:nth-child(5n+3) .timeline__time { background: var(--lemon); color: #92610a; }
-.timeline li:nth-child(5n+4) .timeline__time { background: var(--mint);  color: #0f766e; }
-.timeline li:nth-child(5n+5) .timeline__time { background: var(--sky);   color: #1d4ed8; }
+.timeline li:nth-child(6n+1) .timeline__time { background: var(--pink);  color: #be185d; }
+.timeline li:nth-child(6n+2) .timeline__time { background: var(--peach); color: #c2410c; }
+.timeline li:nth-child(6n+3) .timeline__time { background: var(--lemon); color: #92610a; }
+.timeline li:nth-child(6n+4) .timeline__time { background: var(--mint);  color: #0f766e; }
+.timeline li:nth-child(6n+5) .timeline__time { background: var(--sky);   color: #1d4ed8; }
+.timeline li:nth-child(6n+6) .timeline__time { background: var(--lilac); color: var(--violet-deep); }
 
 .timeline p { margin: 0; color: var(--muted); }
+
+/* Callouts under the timeline */
+.callouts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.callout { padding: 1.3rem 1.4rem; border-radius: var(--radius); }
+.callout--pink { background: var(--pink); }
+.callout--mint { background: var(--mint); }
+.callout h3 { font-size: 1.2rem; }
+.callout p { margin: 0; color: #4a4263; }
 
 /* Who should come: sticker-like cards */
 .stickers {
