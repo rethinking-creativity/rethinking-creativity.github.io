@@ -376,3 +376,8 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
 @media (prefers-reduced-motion: reduce) { .contribute__art:hover { transform: none; } }
 /* Upper-body crop fades out at the bottom instead of ending in a hard line */
 .contribute__art { -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); }
+
+/* Reading list grouped by the meet-up's argument */
+.reading-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 1.75rem 2.5rem; }
+.reading-groups h3 { margin: 0 0 0.6rem; color: var(--violet); font-size: 1rem; }
+.reading-groups .reading li { font-size: 0.95rem; }
