@@ -460,3 +460,8 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
 @media (max-width: 40rem) { .contribute__art { max-height: 13rem; object-fit: contain; } }
 /* Who should come: always three cards in one row, at any width */
 .stickers { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+/* No hover zoom or tilt on touch screens */
+@media (hover: none), (max-width: 40rem) {
+  .stickers li, .stickers__art, .contribute__art { transition: none; }
+  .stickers li:hover, .stickers li:hover .stickers__art, .contribute__art:hover { transform: none; box-shadow: none; }
+}
