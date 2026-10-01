@@ -333,6 +333,8 @@ h3 { margin: 0 0 0.35rem; font-family: var(--font-head); font-weight: 600; font-
 .timeline li:nth-child(6n+6) .timeline__time { background: var(--lilac); color: var(--violet-deep); }
 
 .timeline p { margin: 0; color: var(--muted); }
+.timeline p + .timeline__note { margin-top: 0.4rem; font-size: 0.9em; }
+.timeline__note a { color: var(--violet); }
 
 /* Callouts under the timeline */
 .callouts {
