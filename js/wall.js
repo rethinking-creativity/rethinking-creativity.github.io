@@ -7,22 +7,22 @@
   // Human works: public-domain pieces from Wikimedia Commons.
   // AI works: made for this page with Gemini and Veo from one prompt each; the two short texts were written by Claude.
   const works = [
-    { who: 'human', kind: 'img', src: 'hokusai.jpg', alt: 'The Great Wave off Kanagawa', how: 'Hokusai, woodblock print, about 1831' },
-    { who: 'ai', kind: 'img', src: 'ai_rain.jpg', alt: 'A woodblock-style print of a bridge in heavy rain', how: 'Gemini, one prompt, about 10 seconds' },
-    { who: 'human', kind: 'img', src: 'vangogh.jpg', alt: 'The Starry Night', how: 'Van Gogh, oil on canvas, 1889' },
+    { who: 'human', kind: 'img', label: 'Print', src: 'hokusai.jpg', alt: 'The Great Wave off Kanagawa', how: 'Hokusai, woodblock print, about 1831' },
+    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_rain.jpg', alt: 'A woodblock-style print of a bridge in heavy rain', how: 'Gemini, one prompt, about 10 seconds' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'vangogh.jpg', alt: 'The Starry Night', how: 'Van Gogh, oil on canvas, 1889' },
     { who: 'ai', kind: 'text', text: '“Patience” is the thing with roots – / That holds the ground below –', how: 'Claude, asked to write like Dickinson' },
     { who: 'human', kind: 'film', alt: 'The Horse in Motion', how: 'Muybridge, twelve cameras, 1878' },
-    { who: 'ai', kind: 'img', src: 'ai_portrait.jpg', alt: 'A Dutch-style portrait of a woman in a turban', how: 'Gemini, one prompt, about 10 seconds' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_portrait.jpg', alt: 'A Dutch-style portrait of a woman in a turban', how: 'Gemini, one prompt, about 10 seconds' },
     { who: 'human', kind: 'text', text: '“Hope” is the thing with feathers – / That perches in the soul –', how: 'Emily Dickinson, poem, about 1861' },
-    { who: 'ai', kind: 'img', src: 'ai_wave.jpg', alt: 'A woodblock-style print of a great wave', how: 'Gemini, one prompt, about 10 seconds' },
-    { who: 'human', kind: 'img', src: 'vermeer.jpg', alt: 'Girl with a Pearl Earring', how: 'Vermeer, oil on canvas, about 1665' },
+    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_wave.jpg', alt: 'A woodblock-style print of a great wave', how: 'Gemini, one prompt, about 10 seconds' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'vermeer.jpg', alt: 'Girl with a Pearl Earring', how: 'Vermeer, oil on canvas, about 1665' },
     { who: 'ai', kind: 'video', src: 'ai_horse.mp4', alt: 'A galloping horse in the style of 1870s photography', how: 'Veo, one prompt, about a minute' },
-    { who: 'human', kind: 'img', src: 'monet.jpg', alt: 'Impression, Sunrise', how: 'Monet, oil on canvas, 1872' },
-    { who: 'ai', kind: 'img', src: 'ai_night.jpg', alt: 'A swirling night sky over a village', how: 'Gemini, one prompt, about 10 seconds' },
-    { who: 'human', kind: 'img', src: 'hiroshige.jpg', alt: 'Sudden Shower over Shin-Ohashi Bridge', how: 'Hiroshige, woodblock print, 1857' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'monet.jpg', alt: 'Impression, Sunrise', how: 'Monet, oil on canvas, 1872' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_night.jpg', alt: 'A swirling night sky over a village', how: 'Gemini, one prompt, about 10 seconds' },
+    { who: 'human', kind: 'img', label: 'Print', src: 'hiroshige.jpg', alt: 'Sudden Shower over Shin-Ohashi Bridge', how: 'Hiroshige, woodblock print, 1857' },
     { who: 'ai', kind: 'text', text: 'I wander through the city, and the city wanders through me,', how: 'Claude, asked to write like Whitman' },
     { who: 'human', kind: 'text', text: 'I celebrate myself, and sing myself, / And what I assume you shall assume,', how: 'Walt Whitman, poem, 1855' },
-    { who: 'ai', kind: 'img', src: 'ai_harbor.jpg', alt: 'An impressionist harbor at sunrise', how: 'Gemini, one prompt, about 10 seconds' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_harbor.jpg', alt: 'An impressionist harbor at sunrise', how: 'Gemini, one prompt, about 10 seconds' },
   ];
   const base = field.dataset.wall || 'assets/works/';
   const label = { img: 'Image', text: 'Poem', film: 'Video', video: 'Video' };
@@ -47,7 +47,7 @@
     el.innerHTML = `<span class="work__inner"><span class="work__face"></span><span class="work__face work__back"><span class="work__who">${wk.who === 'ai' ? 'AI' : 'Human'}</span>${wk.who === 'human' ? `<span class="work__how">${wk.how}</span>` : ''}</span></span>`;
     const face = el.querySelector('.work__face');
     face.appendChild(media);
-    const cap = document.createElement('span'); cap.className = 'work__cap'; cap.textContent = label[wk.kind];
+    const cap = document.createElement('span'); cap.className = 'work__cap'; cap.textContent = wk.label || label[wk.kind];
     face.appendChild(cap);
     field.appendChild(el);
     const card = { el, timer: 0 };
