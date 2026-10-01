@@ -347,3 +347,8 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
   .schedule li { flex: none; flex-direction: row; justify-content: space-between; }
 }
 .site-footer__stay { max-width: 40rem; margin: 0 auto 0.9rem !important; font-weight: 400; color: var(--soft); }
+
+/* Inserted "Human": keep the title on two lines and the sparkle beside the word */
+.wall-title__box { width: min(52rem, 94vw); }
+.wall-title h1 { font-size: clamp(1.8rem, 4.4vw, 3.2rem); }
+.title-spark { vertical-align: 1.1em; margin-left: 0.05em; margin-right: 0.1em; }
