@@ -322,3 +322,13 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
   .contribute { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
   .contribute__art { max-width: 16rem; }
 }
+
+/* "Human Creativity" in the same violet-to-pink gradient as the Human cards */
+.grad, .wall-title ins, .title-spark {
+  background: linear-gradient(100deg, #5b2fd6 0%, #8b5cf6 45%, #e79ad0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.title-spark { background: linear-gradient(140deg, #8b5cf6, #e79ad0); -webkit-background-clip: text; background-clip: text; }
