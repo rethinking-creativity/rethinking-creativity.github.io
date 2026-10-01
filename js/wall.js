@@ -23,6 +23,20 @@
     { who: 'ai', kind: 'text', text: 'I wander through the city, and the city wanders through me,', how: 'Claude, asked to write like Whitman' },
     { who: 'human', kind: 'text', text: 'I celebrate myself, and sing myself, / And what I assume you shall assume,', how: 'Walt Whitman, poem, 1855' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_harbor.jpg', alt: 'An impressionist harbor at sunrise', how: 'Gemini, one prompt, about 10 seconds' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'klimt.jpg', alt: 'The Kiss', how: 'Klimt, oil and gold leaf, 1908' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_park.jpg', alt: 'A pointillist park by a river', how: '' },
+    { who: 'human', kind: 'text', text: 'Tyger Tyger, burning bright, / In the forests of the night;', how: 'William Blake, poem, 1794' },
+    { who: 'ai', kind: 'img', label: 'Print', src: 'ai_redmount.jpg', alt: 'A woodblock-style print of a red mountain', how: '' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'botticelli.jpg', alt: 'The Birth of Venus', how: 'Botticelli, tempera on canvas, about 1485' },
+    { who: 'ai', kind: 'text', text: 'Shall I compare thee to an autumn rain? / Thou art more patient, and more plain:', how: '' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'rembrandt.jpg', alt: 'Self-Portrait', how: 'Rembrandt, oil on canvas, 1659' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_gold.jpg', alt: 'A golden embrace in a flowered meadow', how: '' },
+    { who: 'human', kind: 'img', label: 'Print', src: 'redfuji.jpg', alt: 'Fine Wind, Clear Morning', how: 'Hokusai, woodblock print, about 1831' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_shell.jpg', alt: 'A goddess on a shell at sea', how: '' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'seurat.jpg', alt: 'A Sunday on La Grande Jatte', how: 'Seurat, oil on canvas, 1884' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_oldman.jpg', alt: 'A self-portrait of an older man in a beret', how: '' },
+    { who: 'human', kind: 'text', text: 'Shall I compare thee to a summer\u2019s day? / Thou art more lovely and more temperate:', how: 'Shakespeare, sonnet, 1609' },
+    { who: 'ai', kind: 'text', text: 'Fox, O fox, running bright / Through the hedges of the night;', how: '' },
   ];
   const base = field.dataset.wall || 'assets/works/';
   const label = { img: 'Image', text: 'Poem', film: 'Video', video: 'Video' };
@@ -34,7 +48,7 @@
     el.style.setProperty('--w', `${8.4 + ((i * 37) % 30) / 10}rem`);
     let media;
     if (wk.kind === 'img') {
-      media = new Image(); media.src = base + wk.src; media.alt = wk.alt; media.loading = 'lazy'; media.draggable = false;
+      media = new Image(); media.src = base + wk.src; media.alt = wk.alt; media.draggable = false;
     } else if (wk.kind === 'text') {
       media = document.createElement('span'); media.className = 'work__text'; media.textContent = wk.text;
     } else if (wk.kind === 'film') {
@@ -63,20 +77,56 @@
     c.timer = setTimeout(() => c.el.classList.remove('is-flipped'), 1600);
   }
 
-  // Scatter around the edges, leaving the centre for the title
+  // Place cards around the title. Each card tries many spots and takes the one that
+  // overlaps least; a card that cannot find a spot with little overlap is hidden (small screens).
+  function rand(seed) { let t = seed >>> 0; return () => { t = (t + 0x6D2B79F5) >>> 0; let r = Math.imul(t ^ (t >>> 15), 1 | t); r ^= r + Math.imul(r ^ (r >>> 7), 61 | r); return ((r ^ (r >>> 14)) >>> 0) / 4294967296; }; }
+  function overlap(a, b) {
+    const w = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
+    const h = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+    return w > 0 && h > 0 ? w * h : 0;
+  }
   function scatter() {
     const W = field.clientWidth, H = field.clientHeight;
-    const n = cards.length;
+    const small = W < 640;
+    const box = document.querySelector('.wall-title__box').getBoundingClientRect();
+    const f = field.getBoundingClientRect();
+    const pad = small ? 8 : 18;
+    // Reserve the title's final size (it is still typing when this runs)
+    const tw = Math.max(box.width, Math.min(W * (small ? 0.94 : 0.62), 880)) + pad * 2;
+    const th = box.height + pad * 2;
+    const title = { x: W / 2 - tw / 2, y: (box.top - f.top) + box.height / 2 - th / 2, w: tw, h: th };
+    const r = rand(7);
+    const placed = [];
     cards.forEach((c, i) => {
-      const a = (i / n) * Math.PI * 2 + 0.3;
-      const rx = W * (0.37 + ((i * 13) % 7) / 70), ry = H * (0.35 + ((i * 7) % 5) / 50);
+      c.el.style.display = '';
+      c.el.style.setProperty('--w', small ? `${5.4 + (i % 3) * 0.5}rem` : `${7.4 + ((i * 37) % 20) / 10}rem`);
       const cw = c.el.offsetWidth, ch = c.el.offsetHeight;
-      const x = Math.max(-cw * 0.25, Math.min(W - cw * 0.75, W / 2 + Math.cos(a) * rx - cw / 2));
-      const y = Math.max(-ch * 0.2, Math.min(H - ch * 0.8, H / 2 + Math.sin(a) * ry - ch / 2));
-      c.el.style.left = `${x}px`; c.el.style.top = `${y}px`;
-      c.el.style.transform = `rotate(${(((i * 53) % 13) - 6)}deg)`;
+      const area = cw * ch;
+      let best = null, bestWorst = Infinity, bestSum = Infinity;
+      for (let k = 0; k < 260; k++) {
+        const cand = { x: r() * (W - cw * 0.75) - cw * 0.12, y: r() * (H - ch * 0.8) - ch * 0.08, w: cw, h: ch };
+        if (overlap(cand, title) > 0) continue;
+        // Worst pairwise overlap, as a share of the smaller card
+        let worst = 0, sum = 0;
+        for (const p of placed) {
+          const o = overlap(cand, p);
+          if (!o) continue;
+          sum += o;
+          worst = Math.max(worst, o / Math.min(area, p.w * p.h));
+        }
+        if (worst < bestWorst || (worst === bestWorst && sum < bestSum)) { bestWorst = worst; bestSum = sum; best = cand; }
+        if (worst === 0) break;
+      }
+      // Keep only cards that overlap their neighbours by a small corner at most
+      const ok = best && bestWorst <= 0.1;
+      if (!ok) { c.el.style.display = 'none'; return; }
+      placed.push(best);
+      c.el.style.left = `${best.x}px`; c.el.style.top = `${best.y}px`;
+      c.el.style.transform = `rotate(${(((i * 53) % 11) - 5)}deg)`;
     });
   }
+  // Lay out again once every image has its real size
+  Promise.all([...field.querySelectorAll('img')].map((im) => (im.complete ? Promise.resolve() : im.decode().catch(() => {})))).then(scatter);
   window.addEventListener('load', scatter);
   window.addEventListener('resize', scatter);
   scatter();

@@ -213,3 +213,26 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
 .site-footer { margin-top: 2rem; background: linear-gradient(120deg, var(--pink), var(--lilac) 45%, var(--sky)); color: var(--ink); text-align: center; }
 .nav__links { scrollbar-width: none; }
 .nav__links::-webkit-scrollbar { display: none; }
+
+/* Header spans the full width instead of the text column */
+.site-header .nav { max-width: none; padding-inline: clamp(1rem, 3vw, 2.5rem); }
+
+/* Phones */
+@media (max-width: 40rem) {
+  .wall-hero { height: 100svh; min-height: 38rem; max-height: 48rem; }
+  .wall-title { padding: 0.75rem; }
+  .wall-title__box { padding: 1.1rem 1.1rem 1.2rem; border-radius: 18px; }
+  .wall-title h1 { font-size: clamp(1.7rem, 8vw, 2.2rem); margin-bottom: 0.6rem; }
+  .wall-title p { font-size: 0.92rem; line-height: 1.5; }
+  .work__face { padding: 0.35rem; }
+  .work__text { padding: 0.45rem; font-size: 0.72rem; }
+  .work__cap { font-size: 0.62rem; margin-top: 0.25rem; }
+  .work__who { font-size: 1.15rem; }
+  .work__how { font-size: 0.6rem; }
+  .section { padding-block: 2.5rem; }
+  .section h2 { font-size: 1.6rem; }
+  .qdeck__stack { width: min(19rem, 86vw); }
+  .dcard { padding: 1.2rem; }
+  .dcard__q { font-size: 1.25rem; }
+  .cta { flex-direction: column; align-items: flex-start; }
+}
