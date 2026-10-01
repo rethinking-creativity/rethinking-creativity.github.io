@@ -83,12 +83,13 @@
     const card = { el, timer: 0 };
     cards.push(card);
 
-    el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { clearTimeout(card.timer); el.classList.add('is-flipped'); } });
+    el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { clearTimeout(card.timer); if (!el.classList.contains('is-flipped') && window.flipSound) window.flipSound(); el.classList.add('is-flipped'); } });
     el.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { clearTimeout(card.timer); card.timer = setTimeout(() => el.classList.remove('is-flipped'), 250); } });
     if (wk.kind !== 'sound') el.addEventListener('click', () => flip(card));
   });
 
   function flip(c) {
+    if (!c.el.classList.contains('is-flipped') && window.flipSound) window.flipSound();
     c.el.classList.add('is-flipped');
     clearTimeout(c.timer);
     c.timer = setTimeout(() => c.el.classList.remove('is-flipped'), 1600);

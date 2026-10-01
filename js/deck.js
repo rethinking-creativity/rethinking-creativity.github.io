@@ -98,6 +98,10 @@
 })();
 
 // Organizer cards: tap to flip on touch screens (hover handles mouse)
+document.querySelectorAll('.person, .spot__card').forEach((b) => {
+  b.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && window.flipSound) window.flipSound(); });
+  b.addEventListener('click', () => { if (window.flipSound) window.flipSound(); });
+});
 document.querySelectorAll('.person').forEach((b) => b.addEventListener('click', () => b.classList.toggle('is-flipped')));
 
 // Agenda, first activity: tap to turn a card over on touch screens
