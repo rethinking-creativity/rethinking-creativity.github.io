@@ -107,41 +107,44 @@
     const small = W < 640;
     const box = document.querySelector('.wall-title__box').getBoundingClientRect();
     const f = field.getBoundingClientRect();
-    const pad = small ? 8 : 18;
-    // Reserve the title's final size (it is still typing when this runs)
-    const tw = Math.max(box.width, Math.min(W * (small ? 0.94 : 0.62), 880)) + pad * 2;
-    const th = box.height + pad * 2;
-    const title = { x: W / 2 - tw / 2, y: (box.top - f.top) + box.height / 2 - th / 2, w: tw, h: th };
-    const r = rand(7);
+    const pad = small ? 8 : 20;
+    const title = { x: box.left - f.left - pad, y: box.top - f.top - pad, w: box.width + pad * 2, h: box.height + pad * 2 };
+    const r = rand(11);
+    // Jittered grid: split the wall into cells, drop the ones under the title, give each card one cell
+    const cell = small ? 104 : 168;
+    const cols = Math.max(2, Math.round(W / cell)), rows = Math.max(2, Math.round(H / cell));
+    const cw0 = W / cols, ch0 = H / rows;
+    const cells = [];
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      const c = { x: x * cw0, y: y * ch0, w: cw0, h: ch0 };
+      const cx = c.x + c.w / 2, cy = c.y + c.h / 2;
+      if (cx > title.x && cx < title.x + title.w && cy > title.y && cy < title.y + title.h) continue;
+      cells.push(c);
+    }
+    for (let i = cells.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [cells[i], cells[j]] = [cells[j], cells[i]]; }
     const placed = [];
     cards.forEach((c, i) => {
       c.el.style.display = '';
-      c.el.style.setProperty('--w', small ? `${6.4 + (i % 3) * 0.5}rem` : `${9.4 + ((i * 37) % 22) / 10}rem`);
+      c.el.style.setProperty('--w', small ? `${5.6 + (i % 3) * 0.5}rem` : `${8.6 + ((i * 37) % 22) / 10}rem`);
       const cw = c.el.offsetWidth, ch = c.el.offsetHeight;
-      const area = cw * ch;
-      let best = null, bestWorst = Infinity, bestSum = Infinity;
-      for (let k = 0; k < 260; k++) {
-        const cand = { x: r() * (W - cw * 0.75) - cw * 0.12, y: r() * (H - ch * 0.8) - ch * 0.08, w: cw, h: ch };
-        if (overlap(cand, title) > 0) continue;
-        // Worst pairwise overlap, as a share of the smaller card
-        let worst = 0, sum = 0;
-        for (const p of placed) {
-          const o = overlap(cand, p);
-          if (!o) continue;
-          sum += o;
-          worst = Math.max(worst, o / Math.min(area, p.w * p.h));
-        }
-        if (worst < bestWorst || (worst === bestWorst && sum < bestSum)) { bestWorst = worst; bestSum = sum; best = cand; }
-        if (worst === 0) break;
-      }
-      // Keep only cards that overlap their neighbours by a small corner at most
-      const ok = best && bestWorst <= 0.1;
-      if (!ok) { c.el.style.display = 'none'; return; }
-      placed.push(best);
-      c.el.style.left = `${best.x}px`; c.el.style.top = `${best.y}px`;
-      c.el.style.transform = `rotate(${(((i * 53) % 11) - 5)}deg)`;
+      const slot = cells[i];
+      if (!slot) { c.el.style.display = 'none'; return; }
+      // Centre the card in its cell, then nudge it a little in a random direction
+      let x = slot.x + (slot.w - cw) / 2 + (r() - 0.5) * slot.w * 0.5;
+      let y = slot.y + (slot.h - ch) / 2 + (r() - 0.5) * slot.h * 0.5;
+      x = Math.max(-cw * 0.15, Math.min(W - cw * 0.85, x));
+      y = Math.max(-ch * 0.1, Math.min(H - ch * 0.85, y));
+      const rect = { x, y, w: cw, h: ch };
+      // Skip a card that would sit on the title or bury a neighbour
+      let bad = overlap(rect, title) > cw * ch * 0.05;
+      for (const p of placed) if (overlap(rect, p) / Math.min(cw * ch, p.w * p.h) > 0.18) bad = true;
+      if (bad) { c.el.style.display = 'none'; return; }
+      placed.push(rect);
+      c.el.style.left = `${x}px`; c.el.style.top = `${y}px`;
+      c.el.style.transform = `rotate(${((r() - 0.5) * 10).toFixed(1)}deg)`;
     });
   }
+
   // Lay out again once every image has its real size
   Promise.all([...field.querySelectorAll('img')].map((im) => (im.complete ? Promise.resolve() : im.decode().catch(() => {})))).then(scatter);
   window.addEventListener('load', scatter);
