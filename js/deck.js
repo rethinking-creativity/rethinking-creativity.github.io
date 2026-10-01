@@ -11,6 +11,13 @@
   let busy = false;
   let audio = null;
 
+  // Split each question into words so the top card can reveal them one by one
+  cards.forEach((c) => {
+    const q = c.querySelector('.dcard__q');
+    if (!q) return;
+    q.innerHTML = q.textContent.split(' ').map((w, i) => `<span class="w" style="--i:${i}">${w}</span>`).join(' ');
+  });
+
   function layout() {
     order.forEach((cardIndex, pos) => {
       const c = cards[cardIndex];
@@ -92,3 +99,6 @@
 
 // Organizer cards: tap to flip on touch screens (hover handles mouse)
 document.querySelectorAll('.person').forEach((b) => b.addEventListener('click', () => b.classList.toggle('is-flipped')));
+
+// Agenda, first activity: tap to turn a card over on touch screens
+document.querySelectorAll('.spot__card').forEach((b) => b.addEventListener('click', () => b.classList.toggle('is-flipped')));
