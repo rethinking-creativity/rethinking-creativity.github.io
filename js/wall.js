@@ -85,7 +85,8 @@
     const card = { el, timer: 0 };
     cards.push(card);
 
-    el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') flip(card); });
+    el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { clearTimeout(card.timer); el.classList.add('is-flipped'); } });
+    el.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { clearTimeout(card.timer); card.timer = setTimeout(() => el.classList.remove('is-flipped'), 250); } });
     if (wk.kind !== 'sound') el.addEventListener('click', () => flip(card));
   });
 
