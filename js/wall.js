@@ -92,7 +92,7 @@
     if (!c.el.classList.contains('is-flipped') && window.flipSound) window.flipSound();
     c.el.classList.add('is-flipped');
     clearTimeout(c.timer);
-    c.timer = setTimeout(() => c.el.classList.remove('is-flipped'), 1600);
+    c.timer = setTimeout(() => c.el.classList.remove('is-flipped'), 900);
   }
 
   // Place cards around the title. Each card tries many spots and takes the one that
