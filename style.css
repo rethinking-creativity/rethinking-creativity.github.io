@@ -401,6 +401,21 @@ h3 { margin: 0 0 0.35rem; font-family: var(--font-head); font-weight: 600; font-
 .stickers strong { font-family: var(--font-head); font-weight: 600; font-size: 1.05rem; }
 .stickers span:last-child { font-size: 0.9rem; color: var(--muted); line-height: 1.4; }
 
+/* Call to action under Who should come */
+.cta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem 1.1rem; margin: 1.8rem 0 0; color: var(--muted); }
+.cta__button {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  background: var(--violet);
+  color: #ffffff;
+  font-family: var(--font-head);
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 0 var(--violet-deep);
+}
+.cta__button:hover { background: var(--violet-deep); color: #ffffff; }
+
 /* People */
 .people {
   display: flex;
