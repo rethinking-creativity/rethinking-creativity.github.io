@@ -458,3 +458,5 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
   .contribute__button { padding: 0.6rem 1rem; font-size: 0.85rem; }
 }
 @media (max-width: 40rem) { .contribute__art { max-height: 13rem; object-fit: contain; } }
+/* Who should come: always three cards in one row, at any width */
+.stickers { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
