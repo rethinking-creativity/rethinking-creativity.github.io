@@ -1,0 +1,24 @@
+/* C. Dark: near-black page, amber accent from the CHI 2027 logo, geometric sans */
+:root {
+  --bg: #111317;
+  --fg: #ececf0;
+  --muted: #a3a7b3;
+  --line: #262a33;
+  --line-strong: #3a3f4b;
+  --accent: #f4b32b;
+  --accent-strong: #ffd27a;
+  --card: #181b21;
+  --card-tint: #1e222a;
+  --header-bg: rgba(17, 19, 23, 0.85);
+  --max: 54rem;
+  --radius: 12px;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --h1-size: 3.8rem;
+  --h1-weight: 600;
+  --h1-em-style: normal;
+  --hero-align: left;
+}
+
+/* The CHI logo is dark on transparent, so give it a light backing */
+.nav__logo img { padding: 0.2rem 0.35rem; border-radius: 6px; background: #ffffff; }

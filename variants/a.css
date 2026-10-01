@@ -1,0 +1,21 @@
+/* A. Academic: white page, navy accent from the CHI 2027 logo, serif headings */
+:root {
+  --bg: #ffffff;
+  --fg: #1c2433;
+  --muted: #5b6474;
+  --line: #e6e8ec;
+  --line-strong: #c4c9d2;
+  --accent: #294270;
+  --accent-strong: #1a2c4d;
+  --card: #ffffff;
+  --card-tint: #f3f5f9;
+  --header-bg: rgba(255, 255, 255, 0.9);
+  --max: 52rem;
+  --radius: 6px;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "Source Serif 4", Georgia, serif;
+  --h1-size: 3.3rem;
+  --h1-weight: 600;
+  --h1-em-style: italic;
+  --hero-align: left;
+}
