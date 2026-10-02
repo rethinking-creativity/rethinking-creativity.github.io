@@ -561,3 +561,8 @@ img.work__ghost, video.work__ghost { height: auto; }
     radial-gradient(120% 70% at 85% 110%, rgba(255, 255, 255, 0.22), transparent 60%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.25); }
 .work__back .work__who, .work__back .work__how { position: relative; z-index: 1; }
+/* Blur at a quarter of the previous strength; the play button is blurred with the waveform */
+.work__ghost { filter: grayscale(1) brightness(1.8) blur(1.5px); }
+.work__text.work__ghost { filter: blur(0.75px); }
+.work__sound--back img { filter: blur(1.25px); }
+.work__sound--back .work__play { filter: blur(1.25px); }
