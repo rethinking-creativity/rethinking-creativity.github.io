@@ -606,8 +606,9 @@ img.work__ghost, video.work__ghost { height: auto; }
 .nav__toggle { display: none; }
 @media (max-width: 40rem) {
   .site-header .nav { position: relative; }
-  .nav__brand { display: inline; font-size: 0.95rem; }
-  .nav__toggle { display: grid; gap: 4px; place-content: center; width: 2.5rem; height: 2.5rem; margin-left: auto; padding: 0; border: 0; border-radius: 10px; background: none; cursor: pointer; }
+  /* The hero repeats the title right below, so the phone header keeps only the CHI logo */
+  .nav__brand { display: none; }
+  .nav__toggle { flex: none; display: grid; gap: 4px; place-content: center; width: 2.5rem; height: 2.5rem; margin-left: auto; padding: 0; border: 0; border-radius: 10px; background: none; cursor: pointer; }
   .nav__toggle span { display: block; width: 1.25rem; height: 2px; border-radius: 2px; background: var(--ink); transition: transform 0.25s, opacity 0.2s; }
   .nav.is-open .nav__toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   .nav.is-open .nav__toggle span:nth-child(2) { opacity: 0; }
