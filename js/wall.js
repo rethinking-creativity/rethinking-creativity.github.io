@@ -227,7 +227,23 @@
   }
 
   // Lay out again once every image has its real size
-  Promise.all([...field.querySelectorAll('img')].map((im) => (im.complete ? Promise.resolve() : im.decode().catch(() => {})))).then(scatter);
+  // Lay out once, after images and fonts are ready, then bring the cards in one by one
+  const ready = Promise.all([
+    ...[...field.querySelectorAll('img')].map((im) => (im.complete ? Promise.resolve() : im.decode().catch(() => {}))),
+    document.fonts ? document.fonts.ready : Promise.resolve(),
+  ]);
+  const reveal = () => {
+    scatter();
+    const W = field.clientWidth / 2, H = field.clientHeight / 2;
+    const shown = cards.filter((c) => c.el.style.display !== 'none');
+    shown.sort((a, b) => Math.hypot(a.el.offsetLeft - W, a.el.offsetTop - H) - Math.hypot(b.el.offsetLeft - W, b.el.offsetTop - H));
+    shown.forEach((c, i) => { c.el.style.transitionDelay = `${i * 45}ms`; });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      field.classList.add('is-ready');
+      setTimeout(() => shown.forEach((c) => { c.el.style.transitionDelay = ''; }), shown.length * 45 + 700);
+    }));
+  };
+  Promise.race([ready, new Promise((r) => setTimeout(r, 2500))]).then(reveal);
   window.__wallMetrics = () => {
     const vis = [...field.querySelectorAll('.work')].filter((e) => e.style.display !== 'none');
     const R = vis.map((e) => ({ r: e.getBoundingClientRect(), g: e.dataset.group }));
@@ -241,8 +257,6 @@
     }
     return { n: R.length, worst: +worst.toFixed(2), mean: +(sum / R.length).toFixed(3), sameAdj };
   };
-  window.addEventListener('load', scatter);
   if (new URLSearchParams(location.search).has('metrics')) window.addEventListener('load', () => setTimeout(() => { document.body.dataset.metrics = JSON.stringify(window.__wallMetrics()); }, 300));
-  window.addEventListener('resize', scatter);
-  scatter();
+  let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(scatter, 150); });
 })();
