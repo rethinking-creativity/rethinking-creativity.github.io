@@ -617,3 +617,4 @@ img.work__ghost, video.work__ghost { height: auto; }
 /* Header always stays above page content (deck cards use z-index up to 10) */
 .site-header { z-index: 100; }
 .qdeck__stack { isolation: isolate; }
+.site-footer .container { max-width: none; }
