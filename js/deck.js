@@ -102,7 +102,15 @@ document.querySelectorAll('.person, .spot__card').forEach((b) => {
   b.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && window.flipSound) window.flipSound(); });
   b.addEventListener('click', () => { if (window.flipSound) window.flipSound(); });
 });
-document.querySelectorAll('.person').forEach((b) => b.addEventListener('click', () => b.classList.toggle('is-flipped')));
+document.querySelectorAll('.person').forEach((b) => {
+  let t = 0;
+  b.addEventListener('pointerup', (e) => {
+    if (e.pointerType === 'mouse') return;
+    b.classList.add('is-flipped');
+    clearTimeout(t);
+    t = setTimeout(() => b.classList.remove('is-flipped'), 1200);
+  });
+});
 
 // Agenda, first activity: tap to turn a card over on touch screens
 document.querySelectorAll('.spot__card').forEach((b) => b.addEventListener('click', () => b.classList.toggle('is-flipped')));

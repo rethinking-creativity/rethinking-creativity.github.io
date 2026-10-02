@@ -593,3 +593,7 @@ img.work__ghost, video.work__ghost { height: auto; }
   .spot__card:hover .spot__inner, .spot__card:focus-visible .spot__inner { transform: none; }
   .spot__card.is-flipped .spot__inner { transform: rotateY(180deg); }
 }
+@media (hover: none) {
+  .person:hover .person__inner, .person:focus-visible .person__inner { transform: none; }
+  .person.is-flipped .person__inner { transform: rotateY(180deg); }
+}
