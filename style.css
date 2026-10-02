@@ -545,3 +545,7 @@ img.work__ghost, video.work__ghost { height: auto; }
 .work.is-raised .work__inner { transform: translateY(-6px) scale(1.06); }
 .work.is-raised.is-flipped .work__inner { transform: translateY(-6px) scale(1.06) rotateY(180deg); }
 .work.is-raised .work__face { box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 24px 44px -16px rgba(42, 33, 64, 0.5); }
+/* Slight blur on the faint copy of the front shown on the back */
+.work__ghost { filter: grayscale(1) brightness(1.9) contrast(0.9) blur(1.5px); }
+.work__text.work__ghost { filter: blur(1.2px); }
+.work__sound--back img { filter: blur(1.5px); }
