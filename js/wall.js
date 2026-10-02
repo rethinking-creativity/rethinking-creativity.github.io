@@ -47,7 +47,10 @@
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_miin.jpg', alt: 'A Joseon-style portrait of a woman in hanbok holding a fan', how: '' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'shinyunbok.jpg', alt: 'Miindo, Portrait of a Beauty', how: 'Shin Yun-bok, early 1800s' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_jinkyeong.jpg', alt: 'A Joseon-style ink landscape of misty peaks', how: '' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'chaekgado.jpg', alt: 'Chaekgado, a Korean bookshelf painting', how: 'Joseon folk painting, 1800s' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_chaekgado.jpg', alt: 'A chaekgado-style bookshelf painting', how: '' },
   ];
+  for (let i = works.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [works[i], works[j]] = [works[j], works[i]]; }
   const base = field.dataset.wall || 'assets/works/';
   const label = { img: 'Image', text: 'Poem', film: 'Video', video: 'Video', sound: 'Music' };
   const cards = [];
