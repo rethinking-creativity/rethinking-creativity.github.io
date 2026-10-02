@@ -125,3 +125,15 @@ document.querySelectorAll('.spot__card').forEach((b) => {
     t = setTimeout(() => b.classList.remove('is-flipped'), 1200);
   });
 });
+
+// Phone menu: hamburger opens the section links; picking a link or tapping outside closes it
+(function () {
+  const btn = document.querySelector('.nav__toggle');
+  const nav = document.querySelector('.site-header .nav');
+  if (!btn || !nav) return;
+  const set = (open) => { nav.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', String(open)); btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); };
+  btn.addEventListener('click', (e) => { e.stopPropagation(); set(!nav.classList.contains('is-open')); });
+  nav.querySelectorAll('.nav__links a').forEach((a) => a.addEventListener('click', () => set(false)));
+  document.addEventListener('click', (e) => { if (!nav.contains(e.target)) set(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+})();
