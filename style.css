@@ -614,3 +614,6 @@ img.work__ghost, video.work__ghost { height: auto; }
   .nav__links a { padding: 0.65rem 0.8rem; border-radius: 9px; font-size: 1rem; color: var(--ink); }
   .nav__links a:active { background: var(--wash); }
 }
+/* Header always stays above page content (deck cards use z-index up to 10) */
+.site-header { z-index: 100; }
+.qdeck__stack { isolation: isolate; }
