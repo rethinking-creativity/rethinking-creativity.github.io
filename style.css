@@ -494,3 +494,12 @@ html, body { overflow-x: clip; }
 .site-footer__stay { max-width: none; }
 /* Question art sits straight on the card, no box or tint */
 .dcard__art { mix-blend-mode: normal; border-radius: 0; background: none; }
+/* Poems: full stanzas, set a little smaller so they fit the card */
+.work__text { font-size: 0.82rem; line-height: 1.28; }
+/* Overlapping cards: the one under the pointer comes to the front */
+.work { transition: z-index 0s; }
+.work:hover, .work.is-flipped, .work.is-playing { z-index: 6 !important; }
+.work__inner { transition: transform 0.6s cubic-bezier(.3, .8, .25, 1), box-shadow 0.3s; }
+.work:hover .work__face { box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 22px 40px -16px rgba(42, 33, 64, 0.45); }
+/* Poem line breaks */
+.work__text { white-space: pre-line; }

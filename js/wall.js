@@ -10,33 +10,33 @@
     { who: 'human', kind: 'img', label: 'Print', src: 'hokusai.jpg', alt: 'The Great Wave off Kanagawa', how: 'Hokusai, c. 1831' },
     { who: 'ai', kind: 'img', label: 'Print', src: 'ai_rain.jpg', alt: 'A woodblock-style print of travellers on a snowy mountain road', how: 'Gemini, c. 10 seconds' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'vangogh.jpg', alt: 'The Starry Night', how: 'Van Gogh, 1889' },
-    { who: 'ai', kind: 'text', text: '“Patience” is the thing with roots – / That holds the ground below –', how: 'Claude, asked to write like Dickinson' },
+    { who: 'ai', kind: 'text', text: '“Patience” is the thing with roots – / That holds the ground below – / It does not ask the rain to come – / But waits, and lets it go –', how: 'Claude, asked to write like Dickinson' },
     { who: 'human', kind: 'film', alt: 'The Horse in Motion', how: 'Muybridge, 1878' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_portrait.jpg', alt: 'A Dutch-style painting of a young man writing a letter', how: 'Gemini, c. 10 seconds' },
-    { who: 'human', kind: 'text', text: '“Hope” is the thing with feathers – / That perches in the soul –', how: 'Emily Dickinson, c. 1861' },
+    { who: 'human', kind: 'text', text: '“Hope” is the thing with feathers – / That perches in the soul – / And sings the tune without the words – / And never stops – at all –', how: 'Emily Dickinson, c. 1861' },
     { who: 'ai', kind: 'img', label: 'Print', src: 'ai_wave.jpg', alt: 'A woodblock-style print of a fishing village in a storm', how: 'Gemini, c. 10 seconds' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'vermeer.jpg', alt: 'Girl with a Pearl Earring', how: 'Vermeer, c. 1665' },
     { who: 'ai', kind: 'video', src: 'ai_horse.mp4', alt: 'A galloping horse in the style of 1870s photography', how: 'Veo, c. a minute' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'monet.jpg', alt: 'Impression, Sunrise', how: 'Monet, 1872' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_night.jpg', alt: 'A lighthouse on a rocky coast under a swirling night sky', how: 'Gemini, c. 10 seconds' },
     { who: 'human', kind: 'img', label: 'Print', src: 'hiroshige.jpg', alt: 'Sudden Shower over Shin-Ohashi Bridge', how: 'Hiroshige, 1857' },
-    { who: 'ai', kind: 'text', text: 'I wander through the city, and the city wanders through me,', how: 'Claude, asked to write like Whitman' },
-    { who: 'human', kind: 'text', text: 'I celebrate myself, and sing myself, / And what I assume you shall assume,', how: 'Walt Whitman, 1855' },
+    { who: 'ai', kind: 'text', text: 'I wander through the city, and the city wanders through me, / And every window I pass is a face I have not met.', how: 'Claude, asked to write like Whitman' },
+    { who: 'human', kind: 'text', text: 'I celebrate myself, and sing myself, / And what I assume you shall assume, / For every atom belonging to me as good belongs to you.', how: 'Walt Whitman, 1855' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_harbor.jpg', alt: 'An impressionist harbor at sunrise', how: 'Gemini, c. 10 seconds' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'klimt.jpg', alt: 'The Kiss', how: 'Klimt, 1908' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_park.jpg', alt: 'A pointillist beach on a summer day', how: '' },
-    { who: 'human', kind: 'text', text: 'Tyger Tyger, burning bright, / In the forests of the night;', how: 'William Blake, 1794' },
+    { who: 'human', kind: 'text', text: 'Tyger Tyger, burning bright, / In the forests of the night; / What immortal hand or eye, / Could frame thy fearful symmetry?', how: 'William Blake, 1794' },
     { who: 'ai', kind: 'img', label: 'Print', src: 'ai_redmount.jpg', alt: 'A woodblock-style print of a pagoda by a lake at sunset', how: '' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'botticelli.jpg', alt: 'The Birth of Venus', how: 'Botticelli, c. 1485' },
-    { who: 'ai', kind: 'text', text: 'Shall I compare thee to an autumn rain? / Thou art more patient, and more plain:', how: '' },
+    { who: 'ai', kind: 'text', text: 'Shall I compare thee to an autumn rain? / Thou art more patient, and more plain. / So long as clouds can gather, roofs can ring, / So long lives this, and quiet things it brings.', how: '' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'rembrandt.jpg', alt: 'Self-Portrait', how: 'Rembrandt, 1659' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_gold.jpg', alt: 'A woman reading in a golden ornamented garden', how: '' },
     { who: 'human', kind: 'img', label: 'Print', src: 'redfuji.jpg', alt: 'Fine Wind, Clear Morning', how: 'Hokusai, c. 1831' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_shell.jpg', alt: 'A young woman picking oranges while angels play music', how: '' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'seurat.jpg', alt: 'A Sunday on La Grande Jatte', how: 'Seurat, 1884' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_oldman.jpg', alt: 'A portrait of an elderly woman with a lace collar', how: '' },
-    { who: 'human', kind: 'text', text: 'Shall I compare thee to a summer\u2019s day? / Thou art more lovely and more temperate:', how: 'Shakespeare, 1609' },
-    { who: 'ai', kind: 'text', text: 'Fox, O fox, running bright / Through the hedges of the night;', how: '' },
+    { who: 'human', kind: 'text', text: 'Shall I compare thee to a summer\u2019s day? / Thou art more lovely and more temperate. / So long as men can breathe or eyes can see, / So long lives this, and this gives life to thee.', how: 'Shakespeare, 1609' },
+    { who: 'ai', kind: 'text', text: 'Fox, O fox, running bright / Through the hedges of the night; / What quiet field or hidden den / Could hold you still till morning then?', how: '' },
     { who: 'human', kind: 'sound', src: 'satie.mp3', art: 'satie_wave.jpg', alt: 'Gymnopedie No. 1', how: 'Satie, 1888' },
     { who: 'ai', kind: 'sound', src: 'ai_rag.mp3', art: 'ai_rag_wave.jpg', alt: 'A ragtime piano piece', how: '' },
     { who: 'human', kind: 'sound', src: 'joplin.mp3', art: 'joplin_wave.jpg', alt: 'Maple Leaf Rag', how: 'Scott Joplin, 1916' },
@@ -45,10 +45,13 @@
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_pungsok.jpg', alt: 'A Joseon-style genre painting of a riverside market', how: '' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'kimhongdo.jpg', alt: 'Seodang, a village schoolroom', how: 'Kim Hong-do, c. 1780' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_miin.jpg', alt: 'A Joseon-style portrait of a woman in hanbok holding a fan', how: '' },
-    { who: 'human', kind: 'img', label: 'Painting', src: 'shinyunbok.jpg', alt: 'Miindo, Portrait of a Beauty', how: 'Shin Yun-bok, early 1800s' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_jinkyeong.jpg', alt: 'A Joseon-style ink landscape of misty peaks', how: '' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'chaekgado.jpg', alt: 'Chaekgado, a Korean bookshelf painting', how: 'Joseon folk painting, 1800s' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_chaekgado.jpg', alt: 'A chaekgado-style bookshelf painting', how: '' },
+    { who: 'human', kind: 'sound', src: 'bach.mp3', art: 'bach_wave.jpg', alt: 'Prelude in C major, BWV 846', how: 'Bach, played by Kimiko Ishizaka' },
+    { who: 'ai', kind: 'sound', src: 'ai_prelude.mp3', art: 'ai_prelude_wave.jpg', alt: 'A Baroque-style piano prelude', how: '' },
+    { who: 'human', kind: 'sound', src: 'chopin.mp3', art: 'chopin_wave.jpg', alt: 'Nocturne in E-flat major, Op. 9 No. 2', how: 'Chopin, 1832' },
+    { who: 'ai', kind: 'sound', src: 'ai_nocturne.mp3', art: 'ai_nocturne_wave.jpg', alt: 'A romantic-style piano nocturne', how: '' },
   ];
   for (let i = works.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [works[i], works[j]] = [works[j], works[i]]; }
   const base = field.dataset.wall || 'assets/works/';
@@ -63,7 +66,7 @@
     if (wk.kind === 'img') {
       media = new Image(); media.src = base + wk.src; media.alt = wk.alt; media.draggable = false;
     } else if (wk.kind === 'text') {
-      media = document.createElement('span'); media.className = 'work__text'; media.textContent = wk.text;
+      media = document.createElement('span'); media.className = 'work__text'; media.textContent = wk.text.split(' / ').join('\n');
     } else if (wk.kind === 'film') {
       media = document.createElement('span'); media.className = 'work__film'; media.setAttribute('role', 'img'); media.setAttribute('aria-label', wk.alt);
     } else if (wk.kind === 'sound') {
@@ -74,10 +77,16 @@
       el.addEventListener('click', (e) => {
         e.stopImmediatePropagation();
         const playing = !audio.paused;
-        document.querySelectorAll('.work.is-playing').forEach((w) => { w._audio.pause(); w.classList.remove('is-playing'); });
-        if (!playing) { audio.currentTime = 0; audio.play(); el.classList.add('is-playing'); }
+        document.querySelectorAll('.work.is-playing').forEach((w) => { w._audio.pause(); });
+        if (!playing) {
+          audio.currentTime = 0; audio.play(); el.classList.add('is-playing');
+          clearTimeout(el._reveal);
+          el._reveal = setTimeout(() => { if (!audio.paused) { if (window.flipSound) window.flipSound(); el.classList.add('is-flipped'); } }, 6000);
+        }
       });
-      audio.addEventListener('ended', () => el.classList.remove('is-playing'));
+      const stop = () => { clearTimeout(el._reveal); el.classList.remove('is-playing'); setTimeout(() => el.classList.remove('is-flipped'), 1200); };
+      audio.addEventListener('ended', stop);
+      audio.addEventListener('pause', stop);
       el._audio = audio;
       el.setAttribute('role', 'button'); el.setAttribute('tabindex', '0'); el.setAttribute('aria-label', `Play ${wk.alt}`);
     } else {
@@ -92,8 +101,8 @@
     const card = { el, timer: 0 };
     cards.push(card);
 
-    el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { clearTimeout(card.timer); if (!el.classList.contains('is-flipped') && window.flipSound) window.flipSound(); el.classList.add('is-flipped'); } });
-    el.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { clearTimeout(card.timer); card.timer = setTimeout(() => el.classList.remove('is-flipped'), 250); } });
+    el.addEventListener('pointerenter', (e) => { if (wk.kind !== 'sound' && e.pointerType === 'mouse') { clearTimeout(card.timer); if (!el.classList.contains('is-flipped') && window.flipSound) window.flipSound(); el.classList.add('is-flipped'); } });
+    el.addEventListener('pointerleave', (e) => { if (wk.kind !== 'sound' && e.pointerType === 'mouse') { clearTimeout(card.timer); card.timer = setTimeout(() => el.classList.remove('is-flipped'), 250); } });
     if (wk.kind !== 'sound') el.addEventListener('click', () => flip(card));
   });
 
@@ -119,7 +128,7 @@
     const f = field.getBoundingClientRect();
     const pad = small ? 8 : 20;
     const title = { x: box.left - f.left - pad, y: box.top - f.top - pad, w: box.width + pad * 2, h: box.height + pad * 2 };
-    const r = rand(11);
+    const r = rand(Math.floor(Math.random() * 1e9));
     // Jittered grid: pick the smallest cell size whose free cells (not under the title) do not
     // outnumber the cards, so the wall is always full whatever the screen size
     let cells = [];
@@ -144,7 +153,7 @@
       if (slot) {
         // Fit the card to its cell so neighbours never bury each other
         let cw0 = c.el.offsetWidth, ch0 = c.el.offsetHeight;
-        const k = Math.min(1, (slot.w * 1.05) / cw0, (slot.h * 1.1) / ch0);
+        const k = Math.min(1, (slot.w * (1.15 + r() * 0.35)) / cw0, (slot.h * (1.2 + r() * 0.35)) / ch0);
         if (k < 1) c.el.style.setProperty('--w', `${(cw0 * k) / 16}rem`);
       }
       const cw = c.el.offsetWidth, ch = c.el.offsetHeight;
@@ -152,21 +161,21 @@
       // Try a few nudges inside the cell; fall back to the centre of the cell so no cell is left empty
       let rect = null;
       for (let k = 0; k < 8 && !rect; k++) {
-        const j = k < 7 ? 0.5 : 0;
+        const j = k < 7 ? 0.95 : 0;
         let x = slot.x + (slot.w - cw) / 2 + (r() - 0.5) * slot.w * j;
         let y = slot.y + (slot.h - ch) / 2 + (r() - 0.5) * slot.h * j;
         x = Math.max(-cw * 0.15, Math.min(W - cw * 0.85, x));
         y = Math.max(-ch * 0.1, Math.min(H - ch * 0.85, y));
         const cand = { x, y, w: cw, h: ch };
         let bad = overlap(cand, title) > cw * ch * 0.05;
-        for (const p of placed) if (overlap(cand, p) / Math.min(cw * ch, p.w * p.h) > 0.18) bad = true;
+        for (const p of placed) if (overlap(cand, p) / Math.min(cw * ch, p.w * p.h) > 0.38) bad = true;
         if (!bad || k === 7) rect = cand;
       }
       if (overlap(rect, title) > cw * ch * 0.05) { c.el.style.display = 'none'; return; }
       const x = rect.x, y = rect.y;
       placed.push(rect);
       c.el.style.left = `${x}px`; c.el.style.top = `${y}px`;
-      c.el.style.transform = `rotate(${((r() - 0.5) * 10).toFixed(1)}deg)`;
+      c.el.style.transform = `rotate(${((r() - 0.5) * 16).toFixed(1)}deg)`;
     });
   }
 
