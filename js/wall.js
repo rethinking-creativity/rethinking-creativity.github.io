@@ -73,7 +73,7 @@
     el.style.setProperty('--w', `${8.4 + ((i * 37) % 30) / 10}rem`);
     let media;
     if (wk.kind === 'img') {
-      media = new Image(); media.src = base + wk.src; media.alt = wk.alt; media.draggable = false;
+      media = new Image(); if (wk.w) { media.width = wk.w; media.height = wk.h; } media.src = base + wk.src; media.alt = wk.alt; media.draggable = false;
     } else if (wk.kind === 'text') {
       media = document.createElement('span'); media.className = 'work__text'; media.textContent = wk.text.split(' / ').join('\n');
     } else if (wk.kind === 'film') {
@@ -96,7 +96,7 @@
       el._audio = audio;
       el.setAttribute('role', 'button'); el.setAttribute('tabindex', '0'); el.setAttribute('aria-label', `Play ${wk.alt}`);
     } else {
-      media = document.createElement('video');
+      media = document.createElement('video'); if (wk.w) { media.width = wk.w; media.height = wk.h; }
       Object.assign(media, { src: base + wk.src, muted: true, loop: true, autoplay: true, playsInline: true });
       media.setAttribute('aria-label', wk.alt);
     }
@@ -237,13 +237,13 @@
     const W = field.clientWidth / 2, H = field.clientHeight / 2;
     const shown = cards.filter((c) => c.el.style.display !== 'none');
     shown.sort((a, b) => Math.hypot(a.el.offsetLeft - W, a.el.offsetTop - H) - Math.hypot(b.el.offsetLeft - W, b.el.offsetTop - H));
-    shown.forEach((c, i) => { c.el.style.transitionDelay = `${i * 45}ms`; });
+    shown.forEach((c, i) => { c.el.style.transitionDelay = `${i * 18}ms`; });
     requestAnimationFrame(() => requestAnimationFrame(() => {
       field.classList.add('is-ready');
-      setTimeout(() => shown.forEach((c) => { c.el.style.transitionDelay = ''; }), shown.length * 45 + 700);
+      setTimeout(() => shown.forEach((c) => { c.el.style.transitionDelay = ''; }), shown.length * 18 + 500);
     }));
   };
-  Promise.race([ready, new Promise((r) => setTimeout(r, 2500))]).then(reveal);
+  (document.fonts ? Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 300))]) : Promise.resolve()).then(reveal);
   window.__wallMetrics = () => {
     const vis = [...field.querySelectorAll('.work')].filter((e) => e.style.display !== 'none');
     const R = vis.map((e) => ({ r: e.getBoundingClientRect(), g: e.dataset.group }));

@@ -584,3 +584,5 @@ img.work__ghost, video.work__ghost { height: auto; }
 /* Seen from behind: the faint copy of the front is mirrored left to right */
 .work__ghost { transform: scaleX(-1); }
 .work__sound--back { transform: scaleX(-1); }
+.wall-field .work { transition: opacity 0.35s ease, translate 0.45s cubic-bezier(.2, .8, .2, 1), scale 0.45s cubic-bezier(.2, .8, .2, 1); }
+.work img, .work video { height: auto; }
