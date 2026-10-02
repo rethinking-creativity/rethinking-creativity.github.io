@@ -520,3 +520,10 @@ html, body { overflow-x: clip; }
   background: radial-gradient(rgba(42, 33, 64, 0.05) 1px, transparent 1.2px) 0 0 / 6px 6px; }
 .wall-field { z-index: 1; }
 .wall-title h1 { text-shadow: none; }
+
+/* Music card back: play button in its front position, as a faint overlay like the waveform */
+.work__sound--back .work__play { left: 50%; top: 50%; right: auto; bottom: auto; width: 2.4rem; height: 2.4rem; margin: -1.2rem 0 0 -1.2rem;
+  background: rgba(255, 255, 255, 0.28); box-shadow: none; }
+.work__sound--back .work__play::before { left: 0.95rem; top: 0.7rem; border-width: 0.5rem 0 0.5rem 0.75rem; border-color: transparent transparent transparent rgba(255, 255, 255, 0.7); }
+.work.is-playing .work__sound--back .work__play::before { left: 0.8rem; top: 0.75rem; width: 0.8rem; height: 0.9rem; border: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.7) 0 35%, transparent 35% 65%, rgba(255,255,255,0.7) 65%); }
