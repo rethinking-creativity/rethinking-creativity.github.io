@@ -1,3 +1,7 @@
+/* Fonts: self-hosted Latin subsets (SIL OFL), preloaded in index.html so the hero text does not reflow on load */
+@font-face { font-family: "Geist"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("assets/fonts/geist-latin.woff2") format("woff2"); }
+@font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: swap; src: url("assets/fonts/instrument-serif-latin.woff2") format("woff2"); }
+
 /* Layout */
 /* Layout shared by the five experimental variants. Colour and type live in each variant file. */
 *, *::before, *::after { box-sizing: border-box; }
