@@ -106,3 +106,14 @@ document.querySelectorAll('.person').forEach((b) => b.addEventListener('click', 
 
 // Agenda, first activity: tap to turn a card over on touch screens
 document.querySelectorAll('.spot__card').forEach((b) => b.addEventListener('click', () => b.classList.toggle('is-flipped')));
+
+// Activities pair on touch screens: tap to turn over, then turn back on its own
+document.querySelectorAll('.spot__card').forEach((b) => {
+  let t = 0;
+  b.addEventListener('pointerup', (e) => {
+    if (e.pointerType === 'mouse') return;
+    b.classList.add('is-flipped');
+    clearTimeout(t);
+    t = setTimeout(() => b.classList.remove('is-flipped'), 1200);
+  });
+});

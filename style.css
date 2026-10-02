@@ -588,3 +588,8 @@ img.work__ghost, video.work__ghost { height: auto; }
 .work img, .work video { height: auto; }
 /* Audience cards: shorter, landscape illustrations */
 .stickers__art { height: auto !important; aspect-ratio: 4 / 3 !important; object-fit: cover; object-position: center 60%; }
+/* Touch screens: no sticky hover flip on the Activities pair, tap controls it */
+@media (hover: none) {
+  .spot__card:hover .spot__inner, .spot__card:focus-visible .spot__inner { transform: none; }
+  .spot__card.is-flipped .spot__inner { transform: rotateY(180deg); }
+}
