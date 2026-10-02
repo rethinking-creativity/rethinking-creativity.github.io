@@ -486,3 +486,8 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
 /* Never let anything push the page sideways */
 html, body { overflow-x: clip; }
 .contribute__art { -webkit-mask-image: none; mask-image: none; }
+/* Compact footer */
+.site-footer { margin-top: 1rem; padding-block: 1.1rem 1.3rem; font-size: 0.85rem; }
+.site-footer p { margin: 0 0 0.2rem; }
+.site-footer__stay { margin: 0 auto 0.35rem !important; font-size: 0.85rem; }
+.site-footer__fine { font-size: 0.78rem; }
