@@ -81,7 +81,7 @@
         if (!playing) {
           audio.currentTime = 0; audio.play(); el.classList.add('is-playing');
           clearTimeout(el._reveal);
-          el._reveal = setTimeout(() => { if (!audio.paused) { if (window.flipSound) window.flipSound(); el.classList.add('is-flipped'); } }, 6000);
+          el._reveal = setTimeout(() => { if (!audio.paused) { if (window.flipSound) window.flipSound(); el.classList.add('is-flipped'); } }, 2500);
         }
       });
       const stop = () => { clearTimeout(el._reveal); el.classList.remove('is-playing'); setTimeout(() => el.classList.remove('is-flipped'), 1200); };
