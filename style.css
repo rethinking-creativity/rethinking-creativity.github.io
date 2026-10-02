@@ -491,3 +491,4 @@ html, body { overflow-x: clip; }
 .site-footer p { margin: 0 0 0.2rem; }
 .site-footer__stay { margin: 0 auto 0.35rem !important; font-size: 0.85rem; }
 .site-footer__fine { font-size: 0.78rem; }
+.site-footer__stay { max-width: none; }
