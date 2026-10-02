@@ -58,7 +58,7 @@
     { who: 'ai', kind: 'video', src: 'ai_fantasy.mp4', alt: 'A stage trick film with a paper moon', how: '' },
   ];
   // Fixed layout: one chosen seed gives the same order and placement on every visit (?seed=N previews others)
-  const SEED = Number(new URLSearchParams(location.search).get('seed')) || 16;
+  const SEED = Number(new URLSearchParams(location.search).get('seed')) || 3;
   const shuffleRand = (() => { let t = SEED >>> 0; return () => { t = (t + 0x6D2B79F5) >>> 0; let r = Math.imul(t ^ (t >>> 15), 1 | t); r ^= r + Math.imul(r ^ (r >>> 7), 61 | r); return ((r ^ (r >>> 14)) >>> 0) / 4294967296; }; })();
   for (let i = works.length - 1; i > 0; i--) { const j = Math.floor(shuffleRand() * (i + 1)); [works[i], works[j]] = [works[j], works[i]]; }
   const base = field.dataset.wall || 'assets/works/';
