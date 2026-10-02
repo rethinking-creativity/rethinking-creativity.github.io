@@ -95,6 +95,14 @@
     el.innerHTML = `<span class="work__inner"><span class="work__face"></span><span class="work__face work__back">${wk.kind === 'sound' ? `<span class="work__sound work__sound--back"><img src="${base + wk.art.replace('_wave.jpg', '_wave_t.png')}" alt="" draggable="false"><span class="work__play" aria-hidden="true"></span></span>` : ''}<span class="work__who">${wk.who === 'ai' ? 'AI' : 'Human'}</span>${wk.who === 'human' ? `<span class="work__how">${wk.how}</span>` : ''}</span></span>`;
     const face = el.querySelector('.work__face');
     face.appendChild(media);
+    // Faint copy of the front on the back (images, video, poems), in the same place and size
+    if (wk.kind !== 'sound') {
+      const ghost = media.cloneNode(true);
+      ghost.classList.add('work__ghost');
+      ghost.removeAttribute('alt'); ghost.setAttribute('aria-hidden', 'true');
+      if (ghost.tagName === 'VIDEO') { ghost.muted = true; ghost.loop = true; ghost.autoplay = true; ghost.playsInline = true; }
+      el.querySelector('.work__back').prepend(ghost);
+    }
     field.appendChild(el);
     const card = { el, timer: 0 };
     cards.push(card);

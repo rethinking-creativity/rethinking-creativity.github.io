@@ -528,3 +528,13 @@ html, body { overflow-x: clip; }
 .work.is-playing .work__sound--back .work__play::before { left: 0.8rem; top: 0.75rem; width: 0.8rem; height: 0.9rem; border: 0;
   background: linear-gradient(90deg, rgba(255,255,255,0.7) 0 35%, transparent 35% 65%, rgba(255,255,255,0.7) 65%); }
 .wall-hero::before { content: none; }
+
+/* Card backs show a faint copy of the front in its original place */
+.work__ghost { position: absolute; top: 0.5rem; left: 0.5rem; right: 0.5rem; width: calc(100% - 1rem) !important; border-radius: 4px; opacity: 0.22; mix-blend-mode: luminosity; pointer-events: none; }
+img.work__ghost, video.work__ghost { height: auto; }
+.work__text.work__ghost { background: none; color: #fff; opacity: 0.35; mix-blend-mode: normal; }
+.work__film.work__ghost { aspect-ratio: 1.55; }
+/* Ghost has no colour of its own: a pale white trace like the waveform */
+.work__ghost { mix-blend-mode: normal; filter: grayscale(1) brightness(1.9) contrast(0.9); opacity: 0.28; }
+.work__text.work__ghost { filter: none; color: #fff; opacity: 0.4; }
+.work__text.work__ghost { text-align: left; opacity: 0.25; }
