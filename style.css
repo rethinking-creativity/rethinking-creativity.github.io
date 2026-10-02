@@ -527,3 +527,4 @@ html, body { overflow-x: clip; }
 .work__sound--back .work__play::before { left: 0.95rem; top: 0.7rem; border-width: 0.5rem 0 0.5rem 0.75rem; border-color: transparent transparent transparent rgba(255, 255, 255, 0.7); }
 .work.is-playing .work__sound--back .work__play::before { left: 0.8rem; top: 0.75rem; width: 0.8rem; height: 0.9rem; border: 0;
   background: linear-gradient(90deg, rgba(255,255,255,0.7) 0 35%, transparent 35% 65%, rgba(255,255,255,0.7) 65%); }
+.wall-hero::before { content: none; }
