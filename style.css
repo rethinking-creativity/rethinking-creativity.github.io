@@ -538,3 +538,10 @@ img.work__ghost, video.work__ghost { height: auto; }
 .work__ghost { mix-blend-mode: normal; filter: grayscale(1) brightness(1.9) contrast(0.9); opacity: 0.28; }
 .work__text.work__ghost { filter: none; color: #fff; opacity: 0.4; }
 .work__text.work__ghost { text-align: left; opacity: 0.25; }
+
+/* Hovered card first comes to the front, then turns over */
+.work:hover { z-index: auto; }
+.work.is-raised, .work.is-playing { z-index: 20 !important; }
+.work.is-raised .work__inner { transform: translateY(-6px) scale(1.06); }
+.work.is-raised.is-flipped .work__inner { transform: translateY(-6px) scale(1.06) rotateY(180deg); }
+.work.is-raised .work__face { box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 24px 44px -16px rgba(42, 33, 64, 0.5); }

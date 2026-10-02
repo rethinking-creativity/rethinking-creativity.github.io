@@ -50,9 +50,15 @@
     { who: 'ai', kind: 'sound', src: 'ai_prelude.mp3', art: 'ai_prelude_wave.jpg', alt: 'A Baroque-style piano prelude', how: '' },
     { who: 'human', kind: 'sound', src: 'chopin.mp3', art: 'chopin_wave.jpg', alt: 'Nocturne in E-flat major, Op. 9 No. 2', how: 'Chopin, 1832' },
     { who: 'ai', kind: 'sound', src: 'ai_nocturne.mp3', art: 'ai_nocturne_wave.jpg', alt: 'A romantic-style piano nocturne', how: '' },
+    { who: 'human', kind: 'video', src: 'lumiere_train.mp4', alt: 'Arrival of a Train at La Ciotat', how: 'Lumi\u00e8re brothers, 1895' },
+    { who: 'ai', kind: 'video', src: 'ai_tram.mp4', alt: 'A horse-drawn tram in 1890s film style', how: '' },
+    { who: 'human', kind: 'video', src: 'lumiere_factory.mp4', alt: 'Workers Leaving the Lumi\u00e8re Factory', how: 'Lumi\u00e8re brothers, 1895' },
+    { who: 'ai', kind: 'video', src: 'ai_market.mp4', alt: 'A crowd leaving a church in 1890s film style', how: '' },
+    { who: 'human', kind: 'video', src: 'melies_moon.mp4', alt: 'A Trip to the Moon', how: 'Georges M\u00e9li\u00e8s, 1902' },
+    { who: 'ai', kind: 'video', src: 'ai_fantasy.mp4', alt: 'A stage trick film with a paper moon', how: '' },
   ];
   // Fixed layout: one chosen seed gives the same order and placement on every visit (?seed=N previews others)
-  const SEED = Number(new URLSearchParams(location.search).get('seed')) || 18;
+  const SEED = Number(new URLSearchParams(location.search).get('seed')) || 16;
   const shuffleRand = (() => { let t = SEED >>> 0; return () => { t = (t + 0x6D2B79F5) >>> 0; let r = Math.imul(t ^ (t >>> 15), 1 | t); r ^= r + Math.imul(r ^ (r >>> 7), 61 | r); return ((r ^ (r >>> 14)) >>> 0) / 4294967296; }; })();
   for (let i = works.length - 1; i > 0; i--) { const j = Math.floor(shuffleRand() * (i + 1)); [works[i], works[j]] = [works[j], works[i]]; }
   const base = field.dataset.wall || 'assets/works/';
@@ -62,6 +68,8 @@
   works.forEach((wk, i) => {
     const el = document.createElement('div');
     el.className = `work work--${wk.who}`;
+    const GROUPS = {"ai_horse": "horse", "lumiere_train": "film-train", "ai_tram": "film-train", "lumiere_factory": "film-crowd", "ai_market": "film-crowd", "melies_moon": "film-trick", "ai_fantasy": "film-trick", "vangogh": "vangogh", "ai_night": "vangogh", "hokusai": "ukiyoe", "ai_wave": "ukiyoe", "hiroshige": "ukiyoe", "ai_rain": "ukiyoe", "ai_redmount": "ukiyoe", "monet": "impression", "ai_harbor": "impression", "vermeer": "dutch", "ai_portrait": "dutch", "rembrandt": "dutch", "ai_oldman": "dutch", "botticelli": "renaissance", "ai_shell": "renaissance", "seurat": "pointillism", "ai_park": "pointillism", "klimt": "klimt", "jeongseon": "korean-ink", "ai_jinkyeong": "korean-ink", "kimhongdo": "korean-genre", "ai_pungsok": "korean-genre", "ai_miin": "korean-genre", "chaekgado": "chaekgado", "ai_chaekgado": "chaekgado"};
+    el.dataset.group = wk.kind === 'sound' ? 'music' : wk.kind === 'text' ? 'poem' : wk.kind === 'film' ? 'horse' : (GROUPS[(wk.src || '').replace(/\.\w+$/, '')] || wk.src);
     el.style.setProperty('--w', `${8.4 + ((i * 37) % 30) / 10}rem`);
     let media;
     if (wk.kind === 'img') {
@@ -107,8 +115,18 @@
     const card = { el, timer: 0 };
     cards.push(card);
 
-    el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { clearTimeout(card.timer); if (!el.classList.contains('is-flipped') && window.flipSound) window.flipSound(); el.classList.add('is-flipped'); } });
-    el.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !el.classList.contains('is-playing')) { clearTimeout(card.timer); card.timer = setTimeout(() => el.classList.remove('is-flipped'), 250); } });
+    el.addEventListener('pointerenter', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      clearTimeout(card.timer); clearTimeout(card.lower);
+      el.classList.add('is-raised');
+      card.timer = setTimeout(() => { if (!el.classList.contains('is-flipped') && window.flipSound) window.flipSound(); el.classList.add('is-flipped'); }, 160);
+    });
+    el.addEventListener('pointerleave', (e) => {
+      if (e.pointerType !== 'mouse' || el.classList.contains('is-playing')) return;
+      clearTimeout(card.timer);
+      card.timer = setTimeout(() => el.classList.remove('is-flipped'), 200);
+      card.lower = setTimeout(() => el.classList.remove('is-raised'), 800);
+    });
     if (wk.kind !== 'sound') el.addEventListener('click', () => flip(card));
   });
 
@@ -130,9 +148,15 @@
   function scatter() {
     const W = field.clientWidth, H = field.clientHeight;
     const small = W < 640;
-    const box = document.querySelector('.wall-title__box').getBoundingClientRect();
+    // Reserve only the area the title text actually covers, not the whole title box
+    const tb = document.querySelector('.wall-title__box');
+    const rg = document.createRange(); rg.selectNodeContents(tb);
+    const rects = [...rg.getClientRects()].filter((q) => q.width > 2 && q.height > 2);
+    const box = rects.length ? rects.reduce((u, q) => ({ left: Math.min(u.left, q.left), top: Math.min(u.top, q.top), right: Math.max(u.right, q.right), bottom: Math.max(u.bottom, q.bottom) }),
+      { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity }) : tb.getBoundingClientRect();
+    box.width = box.right - box.left; box.height = box.bottom - box.top;
     const f = field.getBoundingClientRect();
-    const pad = small ? 8 : 20;
+    const pad = small ? 6 : 14;
     const title = { x: box.left - f.left - pad, y: box.top - f.top - pad, w: box.width + pad * 2, h: box.height + pad * 2 };
     const r = rand(SEED * 7919);
     // Jittered grid: pick the smallest cell size whose free cells (not under the title) do not
@@ -154,8 +178,19 @@
     const placed = [];
     cards.forEach((c, i) => {
       c.el.style.display = '';
-      c.el.style.setProperty('--w', small ? `${7 + (i % 3) * 0.5}rem` : `${13 + ((i * 37) % 22) / 10}rem`);
-      const slot = cells[i];
+      c.el.style.setProperty('--w', small ? `${7 + (i % 3) * 0.5}rem` : `${15 + ((i * 37) % 22) / 10}rem`);
+      let slot = null;
+      if (cells.length) {
+        const mates = placed.filter((p) => p.g === c.el.dataset.group);
+        let best = -1, bi = 0;
+        cells.forEach((cl, ci) => {
+          const cx = cl.x + cl.w / 2, cy = cl.y + cl.h / 2;
+          const d = mates.length ? Math.min(...mates.map((p) => Math.hypot(p.x + p.w / 2 - cx, p.y + p.h / 2 - cy))) : 1e9;
+          const sc = Math.min(d, 900) + r() * 40;
+          if (sc > best) { best = sc; bi = ci; }
+        });
+        slot = cells.splice(bi, 1)[0];
+      }
       if (slot) {
         // Fit the card to its cell so neighbours never bury each other
         let cw0 = c.el.offsetWidth, ch0 = c.el.offsetHeight;
@@ -179,7 +214,7 @@
       }
       if (overlap(rect, title) > cw * ch * 0.05) { c.el.style.display = 'none'; return; }
       const x = rect.x, y = rect.y;
-      placed.push(rect);
+      rect.g = c.el.dataset.group; placed.push(rect);
       c.el.style.left = `${x}px`; c.el.style.top = `${y}px`;
       c.el.style.transform = `rotate(${((r() - 0.5) * 16).toFixed(1)}deg)`;
     });
@@ -189,13 +224,13 @@
   Promise.all([...field.querySelectorAll('img')].map((im) => (im.complete ? Promise.resolve() : im.decode().catch(() => {})))).then(scatter);
   window.__wallMetrics = () => {
     const vis = [...field.querySelectorAll('.work')].filter((e) => e.style.display !== 'none');
-    const R = vis.map((e) => ({ r: e.getBoundingClientRect(), k: e.className, s: !!e.querySelector('.work__sound'), t: !!e.querySelector('.work__text') }));
+    const R = vis.map((e) => ({ r: e.getBoundingClientRect(), g: e.dataset.group }));
     let worst = 0, sum = 0, sameAdj = 0;
     for (let i = 0; i < R.length; i++) for (let j = 0; j < i; j++) {
       const a = R[i].r, b = R[j].r;
       const w = Math.min(a.right, b.right) - Math.max(a.left, b.left), h = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
       const near = Math.hypot((a.left + a.right - b.left - b.right) / 2, (a.top + a.bottom - b.top - b.bottom) / 2) < 260;
-      if (near && ((R[i].s && R[j].s) || (R[i].t && R[j].t))) sameAdj++;
+      if (near && R[i].g === R[j].g) sameAdj++;
       if (w > 0 && h > 0) { const o = w * h / Math.min(a.width * a.height, b.width * b.height); worst = Math.max(worst, o); sum += o; }
     }
     return { n: R.length, worst: +worst.toFixed(2), mean: +(sum / R.length).toFixed(3), sameAdj };
