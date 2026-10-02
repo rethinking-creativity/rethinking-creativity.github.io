@@ -581,3 +581,6 @@ img.work__ghost, video.work__ghost { height: auto; }
 .wall-field .work { opacity: 0; translate: 0 18px; scale: 0.96; transition: opacity 0.5s ease, translate 0.6s cubic-bezier(.2, .8, .2, 1), scale 0.6s cubic-bezier(.2, .8, .2, 1); }
 .wall-field.is-ready .work { opacity: 1; translate: 0 0; scale: 1; }
 @media (prefers-reduced-motion: reduce) { .wall-field .work { transition: none; translate: none; scale: none; } }
+/* Seen from behind: the faint copy of the front is mirrored left to right */
+.work__ghost { transform: scaleX(-1); }
+.work__sound--back { transform: scaleX(-1); }
