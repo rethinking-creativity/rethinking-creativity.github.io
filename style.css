@@ -586,3 +586,5 @@ img.work__ghost, video.work__ghost { height: auto; }
 .work__sound--back { transform: scaleX(-1); }
 .wall-field .work { transition: opacity 0.35s ease, translate 0.45s cubic-bezier(.2, .8, .2, 1), scale 0.45s cubic-bezier(.2, .8, .2, 1); }
 .work img, .work video { height: auto; }
+/* Audience cards: shorter, landscape illustrations */
+.stickers__art { height: auto !important; aspect-ratio: 4 / 3 !important; object-fit: cover; object-position: center 60%; }
