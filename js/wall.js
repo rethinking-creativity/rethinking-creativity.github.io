@@ -78,13 +78,10 @@
         e.stopImmediatePropagation();
         const playing = !audio.paused;
         document.querySelectorAll('.work.is-playing').forEach((w) => { w._audio.pause(); });
-        if (!playing) {
-          audio.currentTime = 0; audio.play(); el.classList.add('is-playing');
-          clearTimeout(el._reveal);
-          el._reveal = setTimeout(() => { if (!audio.paused) { if (window.flipSound) window.flipSound(); el.classList.add('is-flipped'); } }, 2500);
-        }
+        if (!playing) { audio.currentTime = 0; audio.play(); el.classList.add('is-playing'); }
+        if (e.pointerType !== 'mouse') el.classList.add('is-flipped');
       });
-      const stop = () => { clearTimeout(el._reveal); el.classList.remove('is-playing'); setTimeout(() => el.classList.remove('is-flipped'), 1200); };
+      const stop = () => { el.classList.remove('is-playing'); if (!el.matches(':hover')) el.classList.remove('is-flipped'); };
       audio.addEventListener('ended', stop);
       audio.addEventListener('pause', stop);
       el._audio = audio;
@@ -94,15 +91,15 @@
       Object.assign(media, { src: base + wk.src, muted: true, loop: true, autoplay: true, playsInline: true });
       media.setAttribute('aria-label', wk.alt);
     }
-    el.innerHTML = `<span class="work__inner"><span class="work__face"></span><span class="work__face work__back"><span class="work__who">${wk.who === 'ai' ? 'AI' : 'Human'}</span>${wk.who === 'human' ? `<span class="work__how">${wk.how}</span>` : ''}</span></span>`;
+    el.innerHTML = `<span class="work__inner"><span class="work__face"></span><span class="work__face work__back">${wk.kind === 'sound' ? `<span class="work__sound work__sound--back"><img src="${base + wk.art}" alt="" draggable="false"><span class="work__play" aria-hidden="true"></span></span>` : ''}<span class="work__who">${wk.who === 'ai' ? 'AI' : 'Human'}</span>${wk.who === 'human' ? `<span class="work__how">${wk.how}</span>` : ''}</span></span>`;
     const face = el.querySelector('.work__face');
     face.appendChild(media);
     field.appendChild(el);
     const card = { el, timer: 0 };
     cards.push(card);
 
-    el.addEventListener('pointerenter', (e) => { if (wk.kind !== 'sound' && e.pointerType === 'mouse') { clearTimeout(card.timer); if (!el.classList.contains('is-flipped') && window.flipSound) window.flipSound(); el.classList.add('is-flipped'); } });
-    el.addEventListener('pointerleave', (e) => { if (wk.kind !== 'sound' && e.pointerType === 'mouse') { clearTimeout(card.timer); card.timer = setTimeout(() => el.classList.remove('is-flipped'), 250); } });
+    el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { clearTimeout(card.timer); if (!el.classList.contains('is-flipped') && window.flipSound) window.flipSound(); el.classList.add('is-flipped'); } });
+    el.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !el.classList.contains('is-playing')) { clearTimeout(card.timer); card.timer = setTimeout(() => el.classList.remove('is-flipped'), 250); } });
     if (wk.kind !== 'sound') el.addEventListener('click', () => flip(card));
   });
 

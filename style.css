@@ -503,3 +503,10 @@ html, body { overflow-x: clip; }
 .work:hover .work__face { box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 22px 40px -16px rgba(42, 33, 64, 0.45); }
 /* Poem line breaks */
 .work__text { white-space: pre-line; }
+
+/* Music cards: the back keeps the waveform and play button above Human/AI */
+.work__sound--back { width: 100%; margin-bottom: 0.35rem; border-radius: 4px; overflow: hidden; opacity: 0.95; }
+.work__sound--back img { aspect-ratio: 2.4; }
+.work__sound--back .work__play { width: 1.9rem; height: 1.9rem; margin: -0.95rem 0 0 -0.95rem; }
+.work__sound--back .work__play::before { left: 0.72rem; top: 0.5rem; border-width: 0.45rem 0 0.45rem 0.65rem; }
+.work.is-playing .work__sound--back .work__play::before { left: 0.58rem; top: 0.52rem; width: 0.75rem; height: 0.85rem; }
