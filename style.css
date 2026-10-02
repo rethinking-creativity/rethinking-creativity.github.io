@@ -481,3 +481,7 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
 }
 .br-phone { display: none; }
 @media (max-width: 40rem) { .br-phone { display: inline; } .wall-title h1 .grad::before { content: none; } }
+/* Keep the illustration's own proportions (the width/height attributes otherwise stretch it) */
+.contribute__art { height: auto; aspect-ratio: 1; object-fit: contain; }
+/* Never let anything push the page sideways */
+html, body { overflow-x: clip; }
