@@ -41,6 +41,12 @@
     { who: 'ai', kind: 'sound', src: 'ai_rag.mp3', art: 'ai_rag_wave.jpg', alt: 'A ragtime piano piece', how: '' },
     { who: 'human', kind: 'sound', src: 'joplin.mp3', art: 'joplin_wave.jpg', alt: 'Maple Leaf Rag', how: 'Scott Joplin, 1916' },
     { who: 'ai', kind: 'sound', src: 'ai_waltz.mp3', art: 'ai_waltz_wave.jpg', alt: 'A slow piano waltz', how: '' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'jeongseon.jpg', alt: 'Inwang Jesaekdo, Clearing after Rain on Mount Inwang', how: 'Jeong Seon, 1751' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_pungsok.jpg', alt: 'A Joseon-style genre painting of a riverside market', how: '' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'kimhongdo.jpg', alt: 'Seodang, a village schoolroom', how: 'Kim Hong-do, c. 1780' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_miin.jpg', alt: 'A Joseon-style portrait of a woman in hanbok holding a fan', how: '' },
+    { who: 'human', kind: 'img', label: 'Painting', src: 'shinyunbok.jpg', alt: 'Miindo, Portrait of a Beauty', how: 'Shin Yun-bok, early 1800s' },
+    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_jinkyeong.jpg', alt: 'A Joseon-style ink landscape of misty peaks', how: '' },
   ];
   const base = field.dataset.wall || 'assets/works/';
   const label = { img: 'Image', text: 'Poem', film: 'Video', video: 'Video', sound: 'Music' };
