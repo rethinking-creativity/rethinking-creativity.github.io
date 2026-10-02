@@ -549,3 +549,15 @@ img.work__ghost, video.work__ghost { height: auto; }
 .work__ghost { filter: grayscale(1) brightness(1.9) contrast(0.9) blur(1.5px); }
 .work__text.work__ghost { filter: blur(1.2px); }
 .work__sound--back img { filter: blur(1.5px); }
+
+/* Glossy frosted-glass back: the front shows through, softly blurred, under a sheen */
+.work__ghost { filter: grayscale(1) brightness(1.8) blur(6px); opacity: 0.45; transform: scale(1.04); }
+.work__text.work__ghost { filter: blur(3px); opacity: 0.45; }
+.work__sound--back img { filter: blur(5px); opacity: 0.5; }
+.work__back { overflow: hidden; }
+.work__back::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: inherit;
+  background:
+    linear-gradient(125deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.12) 32%, rgba(255, 255, 255, 0) 48%),
+    radial-gradient(120% 70% at 85% 110%, rgba(255, 255, 255, 0.22), transparent 60%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.25); }
+.work__back .work__who, .work__back .work__how { position: relative; z-index: 1; }
