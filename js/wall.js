@@ -238,10 +238,9 @@
     const shown = cards.filter((c) => c.el.style.display !== 'none');
     shown.sort((a, b) => Math.hypot(a.el.offsetLeft - W, a.el.offsetTop - H) - Math.hypot(b.el.offsetLeft - W, b.el.offsetTop - H));
     shown.forEach((c, i) => { c.el.style.transitionDelay = `${i * 18}ms`; });
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      field.classList.add('is-ready');
-      setTimeout(() => shown.forEach((c) => { c.el.style.transitionDelay = ''; }), shown.length * 18 + 500);
-    }));
+    void field.offsetHeight; // commit the hidden state so the transition runs
+    field.classList.add('is-ready');
+    setTimeout(() => shown.forEach((c) => { c.el.style.transitionDelay = ''; }), shown.length * 18 + 500);
   };
   (document.fonts ? Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 300))]) : Promise.resolve()).then(reveal);
   window.__wallMetrics = () => {
