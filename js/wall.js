@@ -30,8 +30,6 @@
     { who: 'human', kind: 'img', label: 'Painting', src: 'botticelli.jpg', alt: 'The Birth of Venus', how: 'Botticelli, c. 1485' },
     { who: 'ai', kind: 'text', text: 'Shall I compare thee to an autumn rain? / Thou art more patient, and more plain. / So long as clouds can gather, roofs can ring, / So long lives this, and quiet things it brings.', how: '' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'rembrandt.jpg', alt: 'Self-Portrait', how: 'Rembrandt, 1659' },
-    { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_gold.jpg', alt: 'A woman reading in a golden ornamented garden', how: '' },
-    { who: 'human', kind: 'img', label: 'Print', src: 'redfuji.jpg', alt: 'Fine Wind, Clear Morning', how: 'Hokusai, c. 1831' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_shell.jpg', alt: 'A young woman picking oranges while angels play music', how: '' },
     { who: 'human', kind: 'img', label: 'Painting', src: 'seurat.jpg', alt: 'A Sunday on La Grande Jatte', how: 'Seurat, 1884' },
     { who: 'ai', kind: 'img', label: 'Painting', src: 'ai_oldman.jpg', alt: 'A portrait of an elderly woman with a lace collar', how: '' },
@@ -53,7 +51,10 @@
     { who: 'human', kind: 'sound', src: 'chopin.mp3', art: 'chopin_wave.jpg', alt: 'Nocturne in E-flat major, Op. 9 No. 2', how: 'Chopin, 1832' },
     { who: 'ai', kind: 'sound', src: 'ai_nocturne.mp3', art: 'ai_nocturne_wave.jpg', alt: 'A romantic-style piano nocturne', how: '' },
   ];
-  for (let i = works.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [works[i], works[j]] = [works[j], works[i]]; }
+  // Fixed layout: one chosen seed gives the same order and placement on every visit (?seed=N previews others)
+  const SEED = Number(new URLSearchParams(location.search).get('seed')) || 18;
+  const shuffleRand = (() => { let t = SEED >>> 0; return () => { t = (t + 0x6D2B79F5) >>> 0; let r = Math.imul(t ^ (t >>> 15), 1 | t); r ^= r + Math.imul(r ^ (r >>> 7), 61 | r); return ((r ^ (r >>> 14)) >>> 0) / 4294967296; }; })();
+  for (let i = works.length - 1; i > 0; i--) { const j = Math.floor(shuffleRand() * (i + 1)); [works[i], works[j]] = [works[j], works[i]]; }
   const base = field.dataset.wall || 'assets/works/';
   const label = { img: 'Image', text: 'Poem', film: 'Video', video: 'Video', sound: 'Music' };
   const cards = [];
@@ -91,7 +92,7 @@
       Object.assign(media, { src: base + wk.src, muted: true, loop: true, autoplay: true, playsInline: true });
       media.setAttribute('aria-label', wk.alt);
     }
-    el.innerHTML = `<span class="work__inner"><span class="work__face"></span><span class="work__face work__back">${wk.kind === 'sound' ? `<span class="work__sound work__sound--back"><img src="${base + wk.art}" alt="" draggable="false"><span class="work__play" aria-hidden="true"></span></span>` : ''}<span class="work__who">${wk.who === 'ai' ? 'AI' : 'Human'}</span>${wk.who === 'human' ? `<span class="work__how">${wk.how}</span>` : ''}</span></span>`;
+    el.innerHTML = `<span class="work__inner"><span class="work__face"></span><span class="work__face work__back">${wk.kind === 'sound' ? `<span class="work__sound work__sound--back"><img src="${base + wk.art.replace('_wave.jpg', '_wave_t.png')}" alt="" draggable="false"><span class="work__play" aria-hidden="true"></span></span>` : ''}<span class="work__who">${wk.who === 'ai' ? 'AI' : 'Human'}</span>${wk.who === 'human' ? `<span class="work__how">${wk.how}</span>` : ''}</span></span>`;
     const face = el.querySelector('.work__face');
     face.appendChild(media);
     field.appendChild(el);
@@ -125,7 +126,7 @@
     const f = field.getBoundingClientRect();
     const pad = small ? 8 : 20;
     const title = { x: box.left - f.left - pad, y: box.top - f.top - pad, w: box.width + pad * 2, h: box.height + pad * 2 };
-    const r = rand(Math.floor(Math.random() * 1e9));
+    const r = rand(SEED * 7919);
     // Jittered grid: pick the smallest cell size whose free cells (not under the title) do not
     // outnumber the cards, so the wall is always full whatever the screen size
     let cells = [];
@@ -178,7 +179,21 @@
 
   // Lay out again once every image has its real size
   Promise.all([...field.querySelectorAll('img')].map((im) => (im.complete ? Promise.resolve() : im.decode().catch(() => {})))).then(scatter);
+  window.__wallMetrics = () => {
+    const vis = [...field.querySelectorAll('.work')].filter((e) => e.style.display !== 'none');
+    const R = vis.map((e) => ({ r: e.getBoundingClientRect(), k: e.className, s: !!e.querySelector('.work__sound'), t: !!e.querySelector('.work__text') }));
+    let worst = 0, sum = 0, sameAdj = 0;
+    for (let i = 0; i < R.length; i++) for (let j = 0; j < i; j++) {
+      const a = R[i].r, b = R[j].r;
+      const w = Math.min(a.right, b.right) - Math.max(a.left, b.left), h = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+      const near = Math.hypot((a.left + a.right - b.left - b.right) / 2, (a.top + a.bottom - b.top - b.bottom) / 2) < 260;
+      if (near && ((R[i].s && R[j].s) || (R[i].t && R[j].t))) sameAdj++;
+      if (w > 0 && h > 0) { const o = w * h / Math.min(a.width * a.height, b.width * b.height); worst = Math.max(worst, o); sum += o; }
+    }
+    return { n: R.length, worst: +worst.toFixed(2), mean: +(sum / R.length).toFixed(3), sameAdj };
+  };
   window.addEventListener('load', scatter);
+  if (new URLSearchParams(location.search).has('metrics')) window.addEventListener('load', () => setTimeout(() => { document.body.dataset.metrics = JSON.stringify(window.__wallMetrics()); }, 300));
   window.addEventListener('resize', scatter);
   scatter();
 })();
