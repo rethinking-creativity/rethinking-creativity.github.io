@@ -117,6 +117,12 @@
 
     el.addEventListener('pointerenter', (e) => {
       if (e.pointerType !== 'mouse') return;
+      // Only one card is active at a time: put any other card back right away
+      cards.forEach((o) => {
+        if (o === card || o.el.classList.contains('is-playing')) return;
+        clearTimeout(o.timer); clearTimeout(o.lower);
+        o.el.classList.remove('is-flipped', 'is-raised');
+      });
       clearTimeout(card.timer); clearTimeout(card.lower);
       el.classList.add('is-raised');
       card.timer = setTimeout(() => { if (!el.classList.contains('is-flipped') && window.flipSound) window.flipSound(); el.classList.add('is-flipped'); }, 160);
