@@ -68,8 +68,20 @@ html, body { width: 1280px; height: 720px; overflow: hidden; }
 .c2 { left: 1010px; top: 190px; transform: rotate(6deg); } .c2 b { background: #2563eb; color: #fff; }
 """
 
-for name, L in LOOKS.items():
-    css = CSS
+# Shorts / Reels cover (1080x1920): everything inside the centre 4:5 band (y 285-1635) that Instagram's grid shows
+VERTICAL = """
+html, body, .t { width: 1080px; height: 1920px; }
+.kick { left: 0; right: 0; top: 330px; text-align: center; font-size: 54px; }
+.head { left: 60px; right: 60px; width: auto; top: 412px; text-align: center; font-size: {vsize}px; }
+.card { width: 300px; height: 370px; } .c1 { left: 200px; top: 790px; } .c2 { left: 560px; top: 840px; }
+.badge { left: 50%; transform: translateX(-50%); top: 1262px; font-size: 38px; white-space: nowrap; }
+.faces { left: 120px; right: 120px; bottom: auto; top: 1360px; flex-wrap: wrap; justify-content: center; gap: 14px 18px; }
+.faces img { width: 118px; height: 118px; }
+.sun { left: 540px; top: 1300px; } .floor { top: 1560px; } .ring { left: 50%; top: 42%; }
+"""
+
+for (name, L), shape in [(item, shape) for item in LOOKS.items() for shape in ("", "-shorts")]:
+    css = CSS + (VERTICAL.replace("{vsize}", "68" if L.get("upper") else "80") if shape else "")
     subs = dict(F=F, bg=L["bg"], font=L["font"], ink=L["ink"], weight=L["weight"], acc_bg=L["acc_bg"], acc_ink=L["acc_ink"],
                 badge_bg=L["badge_bg"], badge_ink=L["badge_ink"], face_border="#fff",
                 upper="text-transform: uppercase; font-size: 56px;" if L.get("upper") else "",
@@ -94,5 +106,5 @@ for name, L in LOOKS.items():
   <div class="faces">{faces}</div>
 </div></body></html>"""
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / f"{name}.html").write_text(html)
-    print("wrote", OUT / f"{name}.html")
+    (OUT / f"{name}{shape}.html").write_text(html)
+    print("wrote", OUT / f"{name}{shape}.html")
