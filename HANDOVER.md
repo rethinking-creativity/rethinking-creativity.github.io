@@ -1,5 +1,5 @@
 # HANDOVER
-기준: 2026-11-20(현지) / 2026-11-21 UTC, `main` = `submit-form` = 이 커밋, 작업 트리 깨끗함, 둘 다 origin에 push됨. **main에 머지 완료 → 공개 사이트에 배포됨**(GitHub Pages는 main에서 배포).
+기준: 2026-11-20(현지) / 2026-11-21 UTC, `main` = `submit-form` = 이 커밋(사이트 코드는 `632ec54`), 작업 트리 깨끗함, 둘 다 origin에 push됨. **main에 머지 완료 → 공개 사이트에 배포됨**(GitHub Pages는 main에서 배포).
 CHI 2027 Meet-Up 사이트의 작품 제출 → QR 작품 페이지 → 주최자 관리·인쇄 백엔드. 확정된 결정: `~/Projects/scratch/rc-submit/docs/interface/decisions.md` (디자인·문구·동의서는 바꾸지 않는다).
 
 ## 하던 일
@@ -13,6 +13,7 @@ CHI 2027 Meet-Up 사이트의 작품 제출 → QR 작품 페이지 → 주최�
 | `aee6a91` | 접근성: 카드 뒤집기 버튼 분리, skip link, landmark, reduced-motion, 관리 페이지 대비 |
 | `24dd66f` | 대비: With AI `#2563eb`, 회색 `#736a88`(카드·QR 페이지·인쇄); 질문 점 24px 타깃(간격 넓힘) |
 | `da2d927` | 승인 단계 제거(status `active`/`withdrawn`), 관리 페이지 Not printed/Printed/Withdrawn 탭·Permission·Mark printed·Withdraw/Restore, 작품 벽은 화면낭독기에 한 문단 설명, 함수 DB 대기 시간 제한·단계 로그 |
+| `f37525c`…`632ec54` (2026-11-20, 모두 main 배포) | QR 미리보기 버튼 삭제, 관리 페이지 Credit 줄; 참석 질문(Yes/Not sure yet/No, `attending`); About 페이지(CHI·meet-up·우리 meet-up·Why share); 선택 의견 칸 "What should future creativity tools do, or never do?"(`tool_wish`, 이름 없이 meet-up에서 공유 가능); 메일링 리스트 opt-in(`keep_posted`) + 관리 페이지 Copy mailing list; **짝짓기 폐지**(카드를 펼쳐 놓고 한 장씩 추측; `pair_id`는 미사용으로 남김); 문구 정리("made by hand or with AI", 바닥글 풀어쓰기) |
 
 ## 어디까지
 - 완료·검증: 실제 제출(이미지·링크·영상·소리·YouTube·PDF), 버킷 업로드, QR 페이지, 날짜 규칙(MEETUP_END 과거로 바꿔 확인 후 2027-05-15 복구), 표지 자동 생성, 4x6 시트 1800×1200, 현장 등록→인쇄 시트. 스크린샷: `~/Projects/scratch/rc-submit/demo/shots/`.
@@ -29,6 +30,9 @@ CHI 2027 Meet-Up 사이트의 작품 제출 → QR 작품 페이지 → 주최�
 - [ ] 현장 흐름 리허설: admin.html → On-site entry → 제출 → Print card → Enter another.
 
 ## 남은 것
+- Overleaf 원고(`~/Projects/Overleaf/CHI27_Meet-Up_Rethinking_Creativity`, git=Overleaf)도 짝 없이·비참석자 제출·의견 칸에 맞춰 고쳐 push함(`984802b`, `26235d3`). 공동 저자에게 활동 변경 알리기. 최종본 마감 2026-12-17.
+- SNS 글 초안: `~/Projects/scratch/rc-submit/posts.md`(LinkedIn·X 확정본).
+- DB 정리 거리(삭제성이라 SQL Editor로): `pair_id` 칸 drop.
 - 프린터 시험 결과에 따라 QR 크기/주소 길이 결정.
 - Underwater 예시의 Description/Process는 Hye-Young이 줄 내용 대기(decisions.md Open).
 - 정적 파일 캐시 무력화(버전 쿼리) 검토: GitHub Pages가 ~10분 캐시해서 배포 직후 CSS/JS가 섞일 수 있음. 인쇄 시트는 레이아웃 CSS를 `card-render.js`에 넣어 이미 독립시킴.
