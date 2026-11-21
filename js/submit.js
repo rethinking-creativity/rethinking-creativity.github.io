@@ -145,6 +145,7 @@
       credit: radio('credit'),
       email: val('email'),
       attending: radio('attending') || null,
+      tool_wish: val('tool-wish'),
       consent: byId('c-own').checked && byId('c-show').checked,
       rights_owned: byId('c-own').checked,
       consent_show: byId('c-show').checked,

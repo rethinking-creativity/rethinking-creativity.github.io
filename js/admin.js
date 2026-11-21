@@ -122,6 +122,7 @@
         <dt>Used AI</dt><dd>${w.used_ai ? 'Yes' : 'No'}</dd>
         ${w.description_long ? `<dt>Full description</dt><dd>${esc(w.description_long)}</dd>` : ''}
         ${w.process_long ? `<dt>About the process</dt><dd>${esc(w.process_long)}</dd>` : ''}
+        ${w.tool_wish ? `<dt>For future tools</dt><dd>${esc(w.tool_wish)}</dd>` : ''}
         <dt>QR key</dt><dd>${esc(w.qr_key)}</dd>
       </dl>
       <p class="ad-keys">Keys: j / k next and previous · p print</p>`;

@@ -23,7 +23,7 @@ async function list() {
     select s.id, s.qr_key, s.created_at, s.status, s.pair_id, s.medium, s.source, s.link, s.text,
            s.file_path, s.file_type, s.file_size, s.cover_path, s.title, s.year, s.materials,
            s.description, s.description_long, s.used_ai, s.process, s.process_long, s.name, s.credit,
-           s.email, s.attending, s.consent_web, s.consent_future, s.excerpt, s.printed_at,
+           s.email, s.attending, s.tool_wish, s.consent_web, s.consent_future, s.excerpt, s.printed_at,
            (s.source <> 'file' or exists (select 1 from storage.objects o where o.bucket_id = ${BUCKET} and o.name = s.file_path)) as file_ok,
            exists (select 1 from storage.objects o where o.bucket_id = ${BUCKET} and o.name = s.cover_path) as cover_ok
     from meetup.submissions s order by s.created_at`;

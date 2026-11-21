@@ -58,6 +58,7 @@ function check(p: Record<string, unknown>, file: Record<string, unknown> | null)
     description: str(p.description, 120, "description"),
     description_long: str(p.description_long, 1000, "description_long"),
     process_long: str(p.process_long, 1000, "process_long"),
+    tool_wish: str(p.tool_wish, 500, "tool_wish"),
     name: str(p.name, 40, "name", true)!,
     credit: p.credit as string,
     attending: (p.attending as string | null) ?? null,
