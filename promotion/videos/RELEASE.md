@@ -42,6 +42,6 @@ LinkedIn에서는 공동 주최자를 @로 직접 골라 태그(`~/Projects/scra
 | 02 zoom | https://youtu.be/kr3XxCjwIt4 | https://youtube.com/shorts/ntO3ytw3s3g |
 | 03 fly | https://youtu.be/FxoYM4J3iak | https://youtube.com/shorts/rUkhcOaBSW8 |
 | 04 scroll | https://youtu.be/8aQmj_SJc9c (사이트 About에 임베드) | https://youtube.com/shorts/k0pD5YVqMo8 |
-| 05 glitch | 아직 없음 | 아직 없음 |
+| 05 glitch | https://youtu.be/z0pPgAZr_R8 | https://youtube.com/shorts/Nb2t-0Xsjic |
 
 영상 ID와 스타일의 짝은 각 영상 제목("… ( 01 punch landscape )")으로 확인함.
