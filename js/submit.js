@@ -146,6 +146,7 @@
       email: val('email'),
       attending: radio('attending') || null,
       tool_wish: val('tool-wish'),
+      answers: { q1: val('q1'), q2: val('q2'), q3: val('q3'), q4: val('q4') },
       consent: byId('c-own').checked && byId('c-show').checked,
       rights_owned: byId('c-own').checked,
       consent_show: byId('c-show').checked,

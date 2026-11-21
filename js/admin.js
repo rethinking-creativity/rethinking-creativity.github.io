@@ -116,6 +116,7 @@
         ${w.description_long ? `<dt>Full description</dt><dd>${esc(w.description_long)}</dd>` : ''}
         ${w.process_long ? `<dt>About the process</dt><dd>${esc(w.process_long)}</dd>` : ''}
         ${w.tool_wish ? `<dt>For future tools</dt><dd>${esc(w.tool_wish)}</dd>` : ''}
+        ${['q1', 'q2', 'q3', 'q4'].map((k) => w.answers && w.answers[k] ? `<dt>${k.toUpperCase()}</dt><dd>${esc(w.answers[k])}</dd>` : '').join('')}
         <dt>QR key</dt><dd>${esc(w.qr_key)}</dd>
       </dl>
       <p class="ad-keys">Keys: j / k next and previous · p print</p>`;

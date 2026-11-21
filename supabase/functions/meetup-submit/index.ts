@@ -59,6 +59,7 @@ function check(p: Record<string, unknown>, file: Record<string, unknown> | null)
     description_long: str(p.description_long, 1000, "description_long"),
     process_long: str(p.process_long, 1000, "process_long"),
     tool_wish: str(p.tool_wish, 500, "tool_wish"),
+    answers: sql.json(answers(p.answers)),
     name: str(p.name, 40, "name", true)!,
     credit: p.credit as string,
     attending: (p.attending as string | null) ?? null,
@@ -82,6 +83,17 @@ function check(p: Record<string, unknown>, file: Record<string, unknown> | null)
     row.file_size = size;
   }
   return row;
+}
+
+// Optional answers to the meet-up's four questions: { q1..q4 }, each up to 500 characters; empty ones dropped
+function answers(v: unknown): Record<string, string> {
+  const o = (v && typeof v === "object" && !Array.isArray(v)) ? v as Record<string, unknown> : {};
+  const out: Record<string, string> = {};
+  for (const k of ["q1", "q2", "q3", "q4"]) {
+    const a = str(o[k], 500, "answers");
+    if (a) out[k] = a;
+  }
+  return out;
 }
 
 async function turnstile(token: unknown, ip: string): Promise<boolean> {
