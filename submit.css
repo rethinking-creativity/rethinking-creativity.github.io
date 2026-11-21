@@ -121,8 +121,12 @@
 
 /* Example cards above the form: the four mock-ups, small, each flips on tap */
 .examples { margin: 0 0 2.5rem; }
-.examples__label { margin: 0 0 1rem; font-size: 0.9rem; font-weight: 600; color: var(--violet); }
-.examples__label span { margin-left: 0.5rem; font-weight: 400; color: var(--soft); }
+.examples__label { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0; font-size: 0.9rem; font-weight: 600; color: var(--violet); cursor: pointer; list-style: none; }
+.examples__label::-webkit-details-marker { display: none; }
+.examples__label::before { content: ""; width: 0.45rem; height: 0.45rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform 0.2s; }
+.examples__fold[open] .examples__label::before { transform: rotate(45deg); }
+.examples__label:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 4px; }
+.examples__hint { margin: 0.6rem 0 1rem; font-size: 0.85rem; color: var(--soft); }
 .examples__row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
 .examples__row .flip { width: 19rem; zoom: 0.78; }
 @media (max-width: 70rem) { .examples__row .flip { zoom: 0.62; } }
@@ -140,8 +144,8 @@
 /* Example cards follow the main page rule: hover turns them on a mouse, tap on touch screens */
 .examples .flip:hover .card--front, .examples .flip:focus-visible .card--front { transform: rotateY(-180deg); }
 .examples .flip:hover .card--back, .examples .flip:focus-visible .card--back { transform: rotateY(0deg); }
-.examples__label .on-touch { display: none; }
-@media (hover: none) { .examples__label .on-hover { display: none; } .examples__label .on-touch { display: inline; } }
+.examples__hint .on-touch { display: none; }
+@media (hover: none) { .examples__hint .on-hover { display: none; } .examples__hint .on-touch { display: inline; } }
 
 /* Empty frame in the preview until the person adds their work */
 .card__empty { flex: 1; margin: 0.15rem 0.2rem 0.35rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; border: 1.5px dashed #d6d4dc; border-radius: 2px; color: #b8b0c9; font-size: 0.8rem; text-align: center; padding: 0.5rem; }

@@ -40,7 +40,9 @@
     </header>
 
     <section class="examples" aria-label="Example cards">
-      <p class="examples__label">What the cards look like <span class="on-hover">Hover over a card to turn it over.</span><span class="on-touch">Tap a card to turn it over.</span></p>
+      <details class="examples__fold">
+      <summary class="examples__label">See what the cards look like</summary>
+      <p class="examples__hint"><span class="on-hover">Hover over a card to turn it over.</span><span class="on-touch">Tap a card to turn it over.</span></p>
       <ul class="examples__row">
         <li><div class="flip"><button class="flip__turn" type="button" aria-label="Turn over the example card Kettle"></button><article class="card card--front card--text"><span class="card__medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 11h16M4 16h10"/></svg><span>Text</span></span>
           <div class="card__excerpt"><span>The kettle learns my name each morning.<br>It calls twice, and I come home.</span><span class="more">…</span></div>
@@ -83,6 +85,7 @@
           <div class="card__brand"><span><b>Rethinking <span class="grad">Human Creativity</span> ✦<br>in the Generative AI Era</b><small>CHI 2027 Meet-Up</small></span><img src="assets/examples/qr_meetup.svg" alt="QR code to the meet-up website"></div>
         </article></div></li>
       </ul>
+      </details>
     </section>
 
     <div class="submit__grid">
