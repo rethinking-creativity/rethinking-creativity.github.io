@@ -32,15 +32,20 @@ TIMELINE = [("hook", 8, "intro"), ("four", 4, "build"), ("questions", 16, "drop"
 SECTIONS = [("intro", 8), ("build", 4), ("drop", 16), ("break", 4), ("groove", 16), ("drop", 24), ("outro", 10)]
 
 
-def timeline(look):
-    """TIMELINE with the look's longer holds (Look.hold: scene -> beats)."""
-    return [(n, look.hold.get(n, b), sec) for n, b, sec in TIMELINE]
+# The landscape cut is for the website: it asks for work, not for CHI registration, so it skips the
+# meet-up logistics scene and says researchers will discuss the work.
+WEB_SKIP = {"meetup"}
 
 
-def sections(look):
+def timeline(look, v=True):
+    """TIMELINE with the look's longer holds (Look.hold: scene -> beats); the web cut drops WEB_SKIP."""
+    return [(n, look.hold.get(n, b), sec) for n, b, sec in TIMELINE if v or n not in WEB_SKIP]
+
+
+def sections(look, v=True):
     """Music sections follow the look's timeline: consecutive scenes of one section add up."""
     out = []
-    for _, b, sec in timeline(look):
+    for _, b, sec in timeline(look, v):
         if out and out[-1][0] == sec:
             out[-1] = (sec, out[-1][1] + b)
         else:
@@ -96,7 +101,7 @@ def content(ctx, look):
                  [(0, "in", "#four-a .wi"), (0.5, "pop", "#four-n"), (1, "in", "#four-t .wi"), (2.5, "in", "#four-b .wi")])
     # 3 the questions, back to back
     rows, ev = [], []
-    qs = dict((n, b) for n, b, _ in timeline(look))["questions"] / 4  # beats per question
+    qs = dict((n, b) for n, b, _ in timeline(look, v))["questions"] / 4  # beats per question
     for i, (lab, q) in enumerate(QUESTIONS):
         rows.append(f'<div class="q" id="q{i}"><span class="qn" id="q{i}-n">0{i + 1}</span><span class="qlab" id="q{i}-l">{lab}</span>{P(f"q{i}-t", q, "qt")}</div>')
         ev += [(qs * i, "pop", f"#q{i}-n"), (qs * i, "pop", f"#q{i}-l"), (qs * i + 0.25, "in", f"#q{i}-t .wi")]
@@ -113,7 +118,9 @@ def content(ctx, look):
     S["meetup"] = (f'''<div class="safe">{P("mu-a", "A *90-minute* meet-up.", "big")}{P("mu-b", "Open to everyone registered for CHI.", "mid")}{P("mu-c", "No extra sign-up.", "mid")}</div>''',
                    [(0, "in", "#mu-a .wi"), (2, "in", "#mu-b .wi"), (4, "in", "#mu-c .wi")])
     # 7 who
-    S["who"] = (f'<div class="safe">{P("who-a", "For people who *build* creative tools,", "big")}{P("who-b", "and people who *use* them.", "big")}</div>',
+    who = (("For people who *build* creative tools,", "and people who *use* them.") if v else
+           ("Researchers who build creative tools", "will *discuss your work.*"))
+    S["who"] = (f'<div class="safe">{P("who-a", who[0], "big")}{P("who-b", who[1], "big")}</div>',
                 [(0, "in", "#who-a .wi"), (2, "in", "#who-b .wi")])
     # 8 share
     media = "".join(f'<span class="md" id="md{i}">{m}</span>' for i, m in enumerate(["Text", "Image", "Video", "Sound"]))
@@ -536,7 +543,7 @@ def film(ctx, look, beat):
     S = content(ctx, look)
     scenes, js, sfx = [], [], []
     b = 0
-    TL = timeline(look)
+    TL = timeline(look, ctx.v)
     for i, (name, beats, sec) in enumerate(TL):
         html, events = S[name]
         style, cls = look.place(ctx, i, name)
@@ -601,11 +608,11 @@ def film(ctx, look, beat):
     return html, total, sfx
 
 
-def music(look, total):
+def music(look, total, v=True):
     CACHE.mkdir(parents=True, exist_ok=True)
-    out = CACHE / f"k_{look.genre}_{look.bpm}_{sum(b for _, b in sections(look))}.wav"
+    out = CACHE / f"k_{look.genre}_{look.bpm}_{sum(b for _, b in sections(look, v))}.wav"
     if not out.exists():
-        kmusic.build(look.genre, look.bpm, sections(look), str(out))
+        kmusic.build(look.genre, look.bpm, sections(look, v), str(out))
     return out
 
 
@@ -622,7 +629,7 @@ def build(look, W, H, folder):
     beat = 60.0 / look.bpm
     html, total, sfx = film(ctx, look, beat)
     (root / "compositions" / "film.html").write_text(html)
-    m = music(look, total)
+    m = music(look, total, ctx.v)
     ctx.asset(m, "assets/music/track.wav")
     for _, f, _ in sfx:
         ctx.asset(SFX_SRC / f"{f}.mp3", f"assets/sfx/{f}.mp3")
