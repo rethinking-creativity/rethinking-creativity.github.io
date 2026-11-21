@@ -19,7 +19,10 @@
 
 ## 어디까지
 - 키네틱 영상 5개는 사용자가 "전부 좋아, 다 킵"이라고 함.
-- 마지막 수정 두 가지를 반영해서 10개를 다시 렌더 중이야: "We've got / **4 questions** / for you."와 아웃트로의 "Link in bio" 삭제(주소만 남김). 결과물은 `promotion/videos/_out/kinetic/*.mp4`(git 제외)에 쌓여.
+- 마지막 수정 세 가지를 반영해서 10개를 다시 렌더 중이야(37–45초). 결과물은 `promotion/videos/_out/kinetic/*.mp4`(git 제외)에 쌓여.
+  - "We've got / **4 questions** / for you."
+  - 아웃트로의 "Link in bio" 삭제(주소만 남김).
+  - CHI에 못 오는 사람 장면(12박)에 "Help the people who build creative tools *see through your eyes.*"와 작은 글씨 안내를 추가. 안내 문구는 `submit.html` 동의서 범위 안이야: 비상업적 연구·교육에만 쓰고 AI 학습엔 안 씀.
 - 사용자에게 답을 기다리는 질문:
   1. 캘린더 공개 일정(`promotion/videos/RELEASE.md` 표)을 이대로 넣을지.
   2. 오늘(2026-11-21) Instagram에 01 punch(세로)를 올릴지.

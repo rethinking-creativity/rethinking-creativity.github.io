@@ -13,3 +13,4 @@ kinetic/
 _tools/music/
 __pycache__/
 *.log
+_tools/.cache-old/

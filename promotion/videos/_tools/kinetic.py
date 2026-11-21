@@ -28,8 +28,8 @@ CACHE = VOUT / "_tools" / ".cache"
 # (scene, beats, music section). Sections: intro 8, build 4, drop 16, break 4, groove 16, drop 16, outro 10.
 TIMELINE = [("hook", 8, "intro"), ("four", 4, "build"), ("questions", 16, "drop"), ("together", 4, "break"),
             ("chi", 6, "groove"), ("meetup", 6, "groove"), ("who", 4, "groove"),
-            ("share", 6, "drop"), ("game", 6, "drop"), ("cant", 4, "drop"), ("outro", 10, "outro")]
-SECTIONS = [("intro", 8), ("build", 4), ("drop", 16), ("break", 4), ("groove", 16), ("drop", 16), ("outro", 10)]
+            ("share", 6, "drop"), ("game", 6, "drop"), ("cant", 12, "drop"), ("outro", 10, "outro")]
+SECTIONS = [("intro", 8), ("build", 4), ("drop", 16), ("break", 4), ("groove", 16), ("drop", 24), ("outro", 10)]
 QUESTIONS = [("Contribution", "Can creativity be *shared* with AI?"),
              ("Delegation", "What do you want to *keep* for yourself?"),
              ("Growth", "How do you *grow* when AI can do the work?"),
@@ -97,8 +97,11 @@ def content(ctx, look):
     S["game"] = (f'''<div class="safe"><div class="tiles">{"".join(tiles)}</div>{P("gm-a", "We’ll guess which ones used *AI*,", "mid")}{P("gm-b", "then read how each was made.", "small")}</div>''',
                  [(0, "tiles", "#sc-game .tt"), (1, "in", "#gm-a .wi")] + [(2 + i * 0.5, "flip", f"#tt{i}-in") for i in range(4)] + [(4, "in", "#gm-b .wi")])
     # 10 can't come
-    S["cant"] = (f'<div class="safe">{P("ct-a", "Can’t make it to CHI?", "big")}{P("ct-b", "*Send it anyway.*", "big")}</div>',
-                 [(0, "in", "#ct-a .wi"), (2, "in", "#ct-b .wi")])
+    # 10 can't come: why it still matters, and what happens to the work (consent terms on submit.html)
+    S["cant"] = (f'''<div class="safe">{P("ct-a", "Can’t make it to CHI?", "big")}{P("ct-b", "*Send it anyway.*", "big")}
+{P("ct-c", "Help the people who build creative tools *see through your eyes.*", "mid")}
+<p class="l fine" id="ct-d">A meet-up for creativity support tool researchers on how technology can better support human creativity. Your work is used only for non-commercial research and education, never to train AI.</p></div>''',
+                 [(0, "in", "#ct-a .wi"), (2, "in", "#ct-b .wi"), (4, "in", "#ct-c .wi"), (6.5, "pop", "#ct-d")])
     # 11 outro
     ppl = []
     for i, (name, _, f) in enumerate(PEOPLE):
@@ -176,7 +179,7 @@ class Look:
     .pp img {{ width: {96 if ctx.v else 104}px; height: {96 if ctx.v else 104}px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,.85); }}
     .pp span {{ font-size: 28px; font-weight: 500; line-height: 1.1; opacity: .9; }}
     .url {{ padding: 20px 40px; border-radius: 999px; background: {self.accent}; color: #111; font-size: 40px; font-weight: 700; }}
-    .cta {{ font-size: 34px; font-weight: 600; opacity: .8; }}"""
+    .fine {{ font-size: {32 if ctx.v else 28}px; font-weight: 500; line-height: 1.35; opacity: .78; max-width: {860 if ctx.v else 1100}px; letter-spacing: 0; }}"""
 
     # --- defaults each look may override
     def css(self, ctx):
