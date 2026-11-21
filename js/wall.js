@@ -94,7 +94,7 @@
       audio.addEventListener('ended', stop);
       audio.addEventListener('pause', stop);
       el._audio = audio;
-      el.setAttribute('role', 'button'); el.setAttribute('tabindex', '0'); el.setAttribute('aria-label', `Play ${wk.alt}`);
+      // The wall is described once for screen readers (index.html) and hidden from them, so no work takes focus
     } else {
       media = document.createElement('video'); if (wk.w) { media.width = wk.w; media.height = wk.h; }
       Object.assign(media, { src: base + wk.src, muted: true, loop: true, autoplay: true, playsInline: true });

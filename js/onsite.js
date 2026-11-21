@@ -1,5 +1,5 @@
 // On-site entry at the meet-up: the submit page opened from the organizer page (admin.html, same tab),
-// so this tab holds the organizer password. Entries then skip Turnstile, arrive approved, and the
+// so this tab holds the organizer password. Entries then skip Turnstile, and the
 // thank-you screen offers "Print card" (SELPHY, 4 x 6 in) and "Enter another".
 // For everyone else this file does nothing.
 (function () {
@@ -8,7 +8,7 @@
   window.RC_ORGANIZER_KEY = key; // read by submit-api.js
 
   const head = document.querySelector('.submit__head');
-  if (head) head.insertAdjacentHTML('afterbegin', '<p class="onsite-note">Organizer mode: entries are approved and ready to print · <a href="admin.html">Submissions</a></p>');
+  if (head) head.insertAdjacentHTML('afterbegin', '<p class="onsite-note">Organizer mode: entries are ready to print · <a href="admin.html">Submissions</a></p>');
 
   // The print tools load only here, one after another (each needs the one before)
   const libs = ['js/vendor/qrcode.js', 'js/vendor/html-to-image.js', 'js/card-render.js', 'js/covers.js', 'js/admin-api.js', 'js/print-sheet.js'];

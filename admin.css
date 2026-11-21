@@ -1,10 +1,10 @@
 /* Organizer page: list of submissions on the left, the selected one on the right */
 .ad-page { background: var(--wash); }
-.ad-btn { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.45rem 0.85rem; border: 1px solid #ddd4ef; border-radius: 999px; background: #fff; color: var(--ink); font: inherit; font-size: 0.86rem; cursor: pointer; }
+.ad-btn { text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.45rem 0.85rem; border: 1px solid #ddd4ef; border-radius: 999px; background: #fff; color: var(--ink); font: inherit; font-size: 0.86rem; cursor: pointer; }
 .ad-btn:hover { border-color: var(--violet); }
 .ad-btn:disabled { opacity: 0.5; cursor: default; }
 .ad-btn--main { background: var(--violet); border-color: var(--violet); color: #fff; }
-.ad-btn--main:hover { background: var(--violet-deep); }
+.ad-btn--main:hover { background: var(--violet-deep); color: #fff; }
 .ad-btn--warn { color: var(--del); }
 .ad-link { padding: 0; border: 0; background: none; color: var(--soft); font: inherit; font-size: 0.86rem; cursor: pointer; text-decoration: underline; text-underline-offset: 0.2em; }
 
@@ -23,7 +23,7 @@
 .ad-tabs button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 0 #e3dcf3; font-weight: 600; }
 .ad-tabs b { font-weight: 400; color: var(--soft); margin-left: 0.2rem; }
 .ad-top #zip { margin-left: auto; }
-.ad-top #zip[hidden] + .ad-link { margin-left: auto; }
+.ad-top #zip[hidden] + .ad-btn { margin-left: auto; }
 
 .ad-body { display: grid; grid-template-columns: minmax(20rem, 1fr) minmax(0, 42rem); gap: 1.25rem; align-items: start; }
 .ad-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; }

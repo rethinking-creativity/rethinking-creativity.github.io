@@ -2,8 +2,9 @@
 // password in x-admin-key, checked against the MEETUP_ADMIN_KEY secret.
 // POST { action, ... }:
 //   list                      all submissions (with email; never the IP hash) + short-lived file URLs
-//   status  { id, status }    pending | approved | rejected | withdrawn; leaving approved breaks the pair
-//   pair    { id, other }     two approved works, 1:1; unpair { id }
+//   status  { id, status }    active | withdrawn (no approval step; withdrawing breaks the pair)
+//   printed { id, printed }   record that the card was printed (or undo)
+//   pair    { id, other }     two live works, 1:1; unpair { id }
 //   delete  { id }            the row and every file under <id>/
 //   cover_upload { id, ext }  signed upload for <id>/cover.<ext> (video frame / sound waveform made in the browser)
 //   cover_set    { id, path } record the uploaded cover once the file exists
@@ -22,7 +23,7 @@ async function list() {
     select s.id, s.qr_key, s.created_at, s.status, s.pair_id, s.medium, s.source, s.link, s.text,
            s.file_path, s.file_type, s.file_size, s.cover_path, s.title, s.year, s.materials,
            s.description, s.description_long, s.used_ai, s.process, s.process_long, s.name, s.credit,
-           s.email, s.consent_web, s.consent_future, s.excerpt,
+           s.email, s.consent_web, s.consent_future, s.excerpt, s.printed_at,
            (s.source <> 'file' or exists (select 1 from storage.objects o where o.bucket_id = ${BUCKET} and o.name = s.file_path)) as file_ok,
            exists (select 1 from storage.objects o where o.bucket_id = ${BUCKET} and o.name = s.cover_path) as cover_ok
     from meetup.submissions s order by s.created_at`;
@@ -119,25 +120,23 @@ Deno.serve(async (req) => {
     case "list":
       return json(req, 200, { ok: true, works: await list() });
     case "status": {
-      if (!isId(id) || !["pending", "approved", "rejected", "withdrawn"].includes(b.status as string)) break;
-      if (b.status === "approved") {
-        const [r] = await sql`select source, file_path from meetup.submissions where id = ${id}`;
-        if (!r || (r.source === "file" && !(await objectExists(r.file_path)))) return json(req, 409, { ok: false, error: "file_missing" });
-      }
+      if (!isId(id) || !["active", "withdrawn"].includes(b.status as string)) break;
       await sql.begin(async (t) => {
         await t`update meetup.submissions set status = ${b.status as string} where id = ${id}`;
-        if (b.status !== "approved") {
-          await t`update meetup.submissions set pair_id = null where pair_id = ${id}`;
-          await t`update meetup.submissions set pair_id = null where id = ${id}`;
-        }
+        if (b.status === "withdrawn") await t`update meetup.submissions set pair_id = null where id = ${id} or pair_id = ${id}`;
       });
+      return json(req, 200, { ok: true });
+    }
+    case "printed": {
+      if (!isId(id) || typeof b.printed !== "boolean") break;
+      await sql`update meetup.submissions set printed_at = ${b.printed ? sql`now()` : null} where id = ${id}`;
       return json(req, 200, { ok: true });
     }
     case "pair": {
       const other = b.other;
       if (!isId(id) || !isId(other) || id === other) break;
-      const ok = await sql`select id from meetup.submissions where id in (${id}, ${other}) and status = 'approved'`;
-      if (ok.length !== 2) return json(req, 409, { ok: false, error: "not_approved" });
+      const ok = await sql`select id from meetup.submissions where id in (${id}, ${other}) and status <> 'withdrawn'`;
+      if (ok.length !== 2) return json(req, 409, { ok: false, error: "withdrawn" });
       await sql.begin(async (t) => {
         await t`update meetup.submissions set pair_id = null where pair_id in (${id}, ${other}) or id in (${id}, ${other})`;
         await t`update meetup.submissions set pair_id = ${other} where id = ${id}`;

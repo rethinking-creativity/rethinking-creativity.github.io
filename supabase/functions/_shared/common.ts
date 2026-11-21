@@ -26,7 +26,26 @@ export function json(req: Request, status: number, body: unknown, extra: Record<
   });
 }
 
-export const sql = postgres(Deno.env.get("SUPABASE_DB_URL")!, { max: 2, prepare: false, idle_timeout: 20 });
+// Bounded waits: a connect or query that stalls fails in seconds (and says so in the log)
+// instead of holding the request until the gateway's 150 s idle timeout.
+export const sql = postgres(Deno.env.get("SUPABASE_DB_URL")!, {
+  max: 2, prepare: false, idle_timeout: 20, connect_timeout: 10,
+  connection: { statement_timeout: 10000 },
+});
+
+// Time one step of a request; slow or failed steps are logged with their name
+export async function step<T>(name: string, run: () => Promise<T>): Promise<T> {
+  const t0 = performance.now();
+  try {
+    return await run();
+  } catch (e) {
+    console.error(`[${name}] failed after ${Math.round(performance.now() - t0)} ms:`, e);
+    throw e;
+  } finally {
+    const ms = performance.now() - t0;
+    if (ms > 2000) console.warn(`[${name}] slow: ${Math.round(ms)} ms`);
+  }
+}
 
 export const storage = createClient(
   Deno.env.get("SUPABASE_URL")!,

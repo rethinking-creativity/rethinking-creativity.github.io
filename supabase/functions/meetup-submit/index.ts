@@ -100,7 +100,7 @@ Deno.serve(async (req) => {
   let body: Record<string, unknown>;
   try { body = await req.json(); } catch { return json(req, 400, { ok: false, error: "json" }); }
 
-  // On-site entry from the organizer's signed-in browser: trusted, so no Turnstile, and approved at once
+  // On-site entry from the organizer's signed-in browser: trusted, so no Turnstile
   const organizer = await isOrganizer(req);
   const ip = (req.headers.get("x-forwarded-for") || "").split(",")[0].trim();
   if (!organizer && !(await turnstile(body.token, ip))) return json(req, 403, { ok: false, error: "turnstile" });
@@ -121,7 +121,7 @@ Deno.serve(async (req) => {
   if (resumeId) {
     const [old] = await sql`
       select s.id from meetup.submissions s
-      where s.id = ${resumeId} and s.source = 'file' and s.status = 'pending'
+      where s.id = ${resumeId} and s.source = 'file'
         and s.created_at > now() - interval '1 day'
         and not exists (select 1 from storage.objects o where o.bucket_id = 'meetup-works' and o.name = s.file_path)`;
     if (old) {
@@ -137,7 +137,7 @@ Deno.serve(async (req) => {
 
   const id = crypto.randomUUID();
   const file_path = row.source === "file" ? `${id}/work.${ext(fileName)}` : null;
-  await sql`insert into meetup.submissions ${sql({ id, ...row, file_path, status: organizer ? "approved" : "pending" })}`;
+  await sql`insert into meetup.submissions ${sql({ id, ...row, file_path })}`;
 
   if (!file_path) return json(req, 200, { ok: true, id });
   return await uploadReply(req, id, file_path, true);
