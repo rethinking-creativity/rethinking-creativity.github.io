@@ -100,7 +100,7 @@ def content(ctx, look):
     # 10 can't come: why it still matters, and what happens to the work (consent terms on submit.html)
     S["cant"] = (f'''<div class="safe">{P("ct-a", "Can’t make it to CHI?", "big")}{P("ct-b", "*Send it anyway.*", "big")}
 {P("ct-c", "Help the people who build creative tools *see through your eyes.*", "mid")}
-<p class="l fine" id="ct-d">A meet-up for creativity support tool researchers on how technology can better support human creativity. Your work is used only for non-commercial research and education, never to train AI.</p></div>''',
+<p class="l fine" id="ct-d">This is a meet-up for creativity support tool researchers on how technology can better support human creativity. Your work is used only for non-commercial research and education, never to train AI.</p></div>''',
                  [(0, "in", "#ct-a .wi"), (2, "in", "#ct-b .wi"), (4, "in", "#ct-c .wi"), (6.5, "pop", "#ct-d")])
     # 11 outro
     ppl = []
