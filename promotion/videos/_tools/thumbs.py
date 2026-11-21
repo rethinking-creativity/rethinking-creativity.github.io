@@ -50,38 +50,48 @@ html, body { width: 1280px; height: 720px; overflow: hidden; }
 .grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); }
 .grid img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15); opacity: .35; }
 .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.2) 100%); }
-.head { position: absolute; left: 64px; top: 92px; width: 700px; font-weight: {weight}; font-size: 112px; line-height: .98; letter-spacing: -0.05em; {upper} {glow} }
-.head .acc { display: inline-block; background: {acc_bg}; color: {acc_ink}; padding: 0 .08em; border-radius: .06em; }
+.kick { position: absolute; left: 64px; top: 52px; font-size: 40px; font-weight: 800; letter-spacing: -0.02em; {glow} }
+.kick .acc { display: inline-block; background: {acc_bg}; color: {acc_ink}; padding: 0 .1em; border-radius: .06em; }
+.head { position: absolute; left: 64px; top: 124px; width: 840px; font-weight: {weight}; font-size: 64px; line-height: 1.0; letter-spacing: -0.045em; {upper} {glow} }
+.head .acc { display: inline-block; background: {acc_bg}; color: {acc_ink}; padding: 0 .08em .08em; border-radius: .06em; }
 {bars}
-.sub { position: absolute; left: 64px; top: 372px; width: 640px; font-size: 40px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; opacity: .92; }
+.sub { display: none; position: absolute; left: 64px; top: 372px; width: 640px; font-size: 40px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; opacity: .92; }
 {subbar}
-.badge { position: absolute; left: 64px; bottom: 64px; padding: 14px 26px; border-radius: 999px; background: {badge_bg}; color: {badge_ink};
+.badge { position: absolute; left: 64px; top: 360px; padding: 14px 26px; border-radius: 999px; background: {badge_bg}; color: {badge_ink};
          font-size: 30px; font-weight: 700; letter-spacing: -0.01em; }
-.card { position: absolute; width: 270px; height: 330px; border-radius: 20px; background: #fdfcf8; padding: 14px; box-shadow: 0 30px 60px -24px rgba(0,0,0,.6); }
+.faces { position: absolute; left: 64px; bottom: 52px; display: flex; gap: 14px; }
+.faces img { width: 104px; height: 104px; border-radius: 50%; object-fit: cover; border: 4px solid {face_border}; box-shadow: 0 10px 24px -12px rgba(0,0,0,.6); }
+.card { position: absolute; width: 230px; height: 290px; border-radius: 20px; background: #fdfcf8; padding: 14px; box-shadow: 0 30px 60px -24px rgba(0,0,0,.6); }
 .card img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
 .card b { position: absolute; right: -16px; top: -16px; padding: 8px 18px; border-radius: 999px; font-size: 26px; font-weight: 800; }
-.c1 { left: 800px; top: 150px; transform: rotate(-7deg); } .c1 b { background: #6d3be8; color: #fff; }
-.c2 { left: 960px; top: 230px; transform: rotate(6deg); } .c2 b { background: #2563eb; color: #fff; }
+.c1 { left: 905px; top: 70px; transform: rotate(-7deg); } .c1 b { background: #6d3be8; color: #fff; }
+.c2 { left: 1010px; top: 190px; transform: rotate(6deg); } .c2 b { background: #2563eb; color: #fff; }
 """
 
 for name, L in LOOKS.items():
     css = CSS
     subs = dict(F=F, bg=L["bg"], font=L["font"], ink=L["ink"], weight=L["weight"], acc_bg=L["acc_bg"], acc_ink=L["acc_ink"],
-                badge_bg=L["badge_bg"], badge_ink=L["badge_ink"],
-                upper="text-transform: uppercase; font-size: 90px;" if L.get("upper") else "",
+                badge_bg=L["badge_bg"], badge_ink=L["badge_ink"], face_border="#fff",
+                upper="text-transform: uppercase; font-size: 56px;" if L.get("upper") else "",
                 glow="text-shadow: 0 0 30px rgba(255,79,154,.8);" if L.get("glow") else "",
-                bars=".head { font-size: 98px; width: 760px; word-spacing: -0.12em; } .head .w { background: #000; padding: 0 .08em; } .sub { top: 360px; }" if L.get("bars") else "",
+                bars=".head { word-spacing: -0.1em; } .head .w, .kick .w { background: #000; padding: 0 .08em; }" if L.get("bars") else "",
                 subbar=".sub span { background: #000; padding: 0 .12em; }" if L.get("bars") else "")
     for k, v in subs.items():
         css = css.replace("{" + k + "}", str(v))
-    words = '<span class="w">Which</span> <span class="w">part</span> <span class="w">is</span> <span class="w">still</span> <span class="acc">yours?</span>'
+    W2 = lambda t: " ".join(f'<span class="w">{x}</span>' for x in t.split())
+    kick = W2("Which part is still") + ' <span class="acc">yours?</span>'
+    title = W2("Rethinking") + '<br><span class="acc">Human Creativity</span> ' + W2("✦") + "<br>" + W2("in the Generative AI Era")
+    faces = "".join(f'<img src="../../../assets/people/{f}" alt="">' for f in
+                    ["hye-young.jpg", "elise.jpg", "erzhen.jpg", "david.jpg", "nic.jpg", "jun.jpg", "juho.jpg", "takeo.jpg", "ryo.jpg"])
     html = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><style>{css}</style></head><body>
 <div class="t">{L["extra"]}
-  <h1 class="head">{words}</h1>
+  <p class="kick">{kick}</p>
+  <h1 class="head">{title}</h1>
   <p class="sub"><span>Share artwork made with or without AI.</span></p>
   <div class="card c1"><img src="{W}hokusai.jpg" alt=""><b>Human</b></div>
   <div class="card c2"><img src="{W}ai_wave.jpg" alt=""><b>AI</b></div>
   <p class="badge">CHI 2027 Meet-Up · Call for artwork</p>
+  <div class="faces">{faces}</div>
 </div></body></html>"""
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / f"{name}.html").write_text(html)
