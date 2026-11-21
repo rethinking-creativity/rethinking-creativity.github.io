@@ -1,5 +1,5 @@
 # HANDOVER
-기준: 2026-11-21 밤, `main` = `submit-form` = 이 문서 커밋. 작업 트리 깨끗하고 둘 다 push됨. GitHub Pages는 `main`에서 배포.
+기준: 2026-11-21 밤(논문·ACM 갱신 포함), `main` = `submit-form` = 이 문서 커밋. 작업 트리 깨끗하고 둘 다 push됨. GitHub Pages는 `main`에서 배포.
 이 저장소는 CHI 2027 Meet-Up 사이트야. 작품 제출 → QR 작품 페이지 → 관리·인쇄(Supabase)로 이어져.
 확정된 디자인 결정: `~/Projects/scratch/rc-submit/docs/interface/decisions.md`. 홍보 영상: `promotion/videos/README.md`, `RELEASE.md`.
 
@@ -26,7 +26,24 @@
 - **SQL:** 두 개 모두 사용자가 실행 완료. 함수 3개(`meetup-submit`, `meetup-work`, `meetup-admin`) 배포 완료.
 - **답을 기다리는 질문:** 없음.
 
+### 논문(CHI EA '27) 카메라레디 · ACM 출판 절차 (2026-11-21)
+- **원고:** Overleaf 원고(`~/Projects/Overleaf/CHI27_Meet-Up_Rethinking_Creativity`, git=Overleaf)에 준의 요청 세 가지를 반영함(`7fe7aa5`).
+  - Tweeq 대신 ProConte(UIST '26) 인용
+  - SIGCCC extended abstract(CHI EA '23) 인용
+  - JST PRESTO JPMJPR25I1 · CRONOS JPMJCS25K1 사사
+- **원고 메타데이터:** `78c169f`에서 SkillBench에 Santa Barbara, California를 넣고 `\acmDOI{10.1145/3856832.3872011}`를 채움.
+- **ACM 데이터 검증 양식:** 원고 기준으로 고치고 Save Only까지 함("Save complete!").
+  - Elise: "Chenxinran (Elise)", elise@dgp.toronto.edu, 학과 비움
+  - Erzhen: erzhenhu@microsoft.com
+  - Nicolai: nicmarquardt@microsoft.com
+  - Juho: 두 번째 소속 SkillBench(Santa Barbara, CA) 추가
+  - Funders: JST 두 건(FundRef 501100002241)
+- **eRights 서명:** 아직 안 함("Save And Proceed to eRights Form"). 사용자가 2026-11-21에 공저자 전원에게 양식 PDF를 보내고, 2026-12-02(AoE)까지 👍로 확인해 달라고 함.
+- **ACM 마감:** 2027-04-04. 원고 최종본 마감 2026-12-17 전에 서명해서, ACM이 주는 저작권 정보(`\setcopyright`, `\acmISBN` 등)를 원고에 넣는 게 목표.
+
 ## 확인할 것
+- [ ] 2026-12-02(AoE)까지 공저자 확인 답 모으기. 고칠 게 있으면 ACM 양식과 원고 둘 다 고치기 → ACM 페이지 맨 아래 체크박스 → "Save And Proceed to eRights Form" → 서명(사용자가 직접). 서명 후 받은 저작권 정보와 ISBN을 원고에 넣기.
+- [ ] Overleaf에서 재컴파일: Juho 소속 줄바꿈, ProConte·SIGCCC 인용, 사사, 페이지 수 확인(이 컴퓨터엔 LaTeX 없음).
 - [ ] 실제 사이트에서 작품 1건 제출하기("Your take"와 "What do you make / Your background" 채워서) → `admin.html`에 나오는지, Copy QR link로 연 QR 페이지에 "The artist's take"와 "About the artist"가 나오는지 확인 → Withdraw → Delete. Turnstile 때문에 Claude는 시험 못 함.
 - [ ] LinkedIn 새 영상 게시물 올리고, 기존 게시물에 "Watch the video:" 댓글 달기.
 - [ ] SELPHY CP1500 도착 후: Print card 시험, 접기, 폰으로 QR 스캔, 현장 등록 리허설(`admin.html` → On-site entry).
@@ -38,6 +55,10 @@
 - DB 정리: `pair_id` drop(지우는 작업이라 SQL Editor에서 사용자가 직접). 프린터 결과를 보고 QR 크기와 주소 길이 결정. 정적 파일 캐시 무력화 검토.
 
 ## 다음 세션 주의
+- **ACM 양식 링크:** 메일(no-reply@acm.org, 2026-11-21)에 있는 교신저자용 편집 링크라 받은 사람 누구나 양식을 고칠 수 있어. 저장소나 공유 문서에 적지 말 것. 링크를 공유하지 말고 PDF로 확인받기로 한 이유도 이거야.
+  - Chrome 확장으로 이 페이지를 다룰 때: Save를 누르면 `alert()`가 떠서 탭이 멈춤. 먼저 `window.alert`를 덮어쓴 뒤 버튼을 눌렀더니 "Save complete!"를 읽을 수 있었어.
+  - Funding Body 칸은 자동완성 목록에서 골라야 FundRef ID가 붙어.
+- **원고 원칙:** ACM 양식은 최종 PDF와 똑같아야 해. 원고를 기준으로 양식을 고치는 게 원칙(사용자 지시).
 - **말투:** 답은 무조건 한국어 반말, 짧게. 영어 자료를 읽은 직후에 영어로 답했다가 이번 세션에서도 세 번 지적받음.
 - **문구는 먼저 확정:** 사용자는 문구(영상·사이트)를 텍스트로 먼저 같이 확정한 다음에 렌더하거나 배포하길 원해. 확정 전에 렌더를 돌렸다가 멈춘 적이 있음.
 - **제출 폼에 칸을 추가할 때 순서:** 추가용 SQL(`~/Projects/scratch/rc-submit/sql/*.sql` + `run-*.sh`를 사용자가 실행) → 함수 배포(`supabase functions deploy <name> --project-ref rojnzjoznpkcqfgweohk --no-verify-jwt --use-api`) → 사이트 배포. 칸이 생기기 전에 폼을 배포하면 제출이 실패해.
