@@ -68,6 +68,8 @@
         !w.file_ok && '<span class="ad-tag ad-tag--bad">Upload incomplete</span>',
         pair && `<span class="ad-tag ad-tag--pair">↔ ${esc(pair.title)}</span>`,
         `<span class="ad-tag${w.consent_web || w.consent_future ? ' ad-tag--ok' : ''}">${permission(w)}</span>`,
+        w.attending === 'no' && '<span class="ad-tag">Not attending</span>',
+        w.attending === 'unsure' && '<span class="ad-tag">Maybe attending</span>',
         tab === 'all' && (live(w) ? (w.printed_at ? '<span class="ad-tag">Printed</span>' : '') : '<span class="ad-tag ad-tag--bad">Withdrawn</span>'),
       ].filter(Boolean).join('');
       return `<li><button class="ad-row" type="button" data-id="${w.id}" aria-current="${w.id === current}">
@@ -110,6 +112,7 @@
       <dl class="ad-fields">
         <dt>Name</dt><dd>${esc(w.name)}</dd>
         <dt>Credit</dt><dd>${w.credit === 'anon' ? 'Anonymous' : 'Name'}</dd>
+        <dt>At CHI in person</dt><dd>${({ yes: 'Yes', unsure: 'Not sure yet', no: 'No' })[w.attending] || '—'}</dd>
         <dt>Email</dt><dd><a href="mailto:${esc(w.email)}">${esc(w.email)}</a></dd>
         <dt>Submitted</dt><dd>${when(w.created_at)}</dd>
         <dt>Work</dt><dd>${file}</dd>

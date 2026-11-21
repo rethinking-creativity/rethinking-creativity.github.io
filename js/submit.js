@@ -144,6 +144,7 @@
       name: val('name'),
       credit: radio('credit'),
       email: val('email'),
+      attending: radio('attending') || null,
       consent: byId('c-own').checked && byId('c-show').checked,
       rights_owned: byId('c-own').checked,
       consent_show: byId('c-show').checked,
@@ -259,6 +260,7 @@
     ai: () => form.querySelectorAll('input[name="ai"]'),
     name: () => [byId('name')],
     email: () => [byId('email')],
+    attending: () => form.querySelectorAll('input[name="attending"]'),
     consent: () => [byId('c-own'), byId('c-show')].filter((c) => !c.checked),
   };
   const ALL_CONTROLS = { ...CONTROLS, source: () => [byId('file'), byId('link'), byId('pasted')], consent: () => [byId('c-own'), byId('c-show')] };
@@ -279,6 +281,7 @@
     bad = err('ai', d.used_ai === null) || bad;
     bad = err('name', !d.name) || bad;
     bad = err('email', !/^\S+@\S+\.\S+$/.test(d.email)) || bad;
+    bad = err('attending', !d.attending) || bad;
     bad = err('consent', !d.consent) || bad;
     return !bad;
   }

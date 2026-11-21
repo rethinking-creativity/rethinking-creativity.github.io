@@ -48,6 +48,8 @@ function check(p: Record<string, unknown>, file: Record<string, unknown> | null)
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Bad("email");
   if (p.rights_owned !== true || p.consent_show !== true) throw new Bad("consent");
   if (!["name", "anon"].includes(p.credit as string)) throw new Bad("credit");
+  // Required by the form; optional here so a page cached from before the question still submits
+  if (p.attending != null && !["yes", "unsure", "no"].includes(p.attending as string)) throw new Bad("attending");
 
   const row = {
     medium, source, used_ai, process: sql.json(process), year, email,
@@ -58,6 +60,7 @@ function check(p: Record<string, unknown>, file: Record<string, unknown> | null)
     process_long: str(p.process_long, 1000, "process_long"),
     name: str(p.name, 40, "name", true)!,
     credit: p.credit as string,
+    attending: (p.attending as string | null) ?? null,
     rights_owned: true, consent_show: true,
     consent_web: bool(p.consent_web, "consent_web"),
     consent_future: bool(p.consent_future, "consent_future"),

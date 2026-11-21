@@ -34,7 +34,7 @@
   <main class="container submit" id="top">
     <header class="submit__head">
       <h1>Submit your work</h1>
-      <p>Are you a researcher by day, artist by night, or the other way around? Share the artwork you made, with or without AI. We pair it with another work in the same medium, and at the meet-up attendees guess which one used AI, then turn the card over to see how each was made.</p>
+      <p>Are you a researcher by day, artist by night, or the other way around? Share the artwork you made, with or without AI. We pair it with another work in the same medium, and at the meet-up attendees guess which one used AI, then turn the card over to see how each was made. CHI is a conference where researchers who design creative tools meet the people who use them. You don't need to attend to share your work.</p>
     </header>
 
     <section class="examples" aria-label="Example cards">
@@ -202,6 +202,15 @@
             <input class="input" id="email" type="email" autocomplete="email">
             <p class="field__err" data-err="email">Add an email we can reach you at.</p>
           </div>
+          <fieldset class="field">
+            <legend>Will you be at CHI 2027 in person?</legend>
+            <div class="pills" data-name="attending">
+              <label><input type="radio" name="attending" value="yes"><span>Yes</span></label>
+              <label><input type="radio" name="attending" value="unsure"><span>Not sure yet</span></label>
+              <label><input type="radio" name="attending" value="no"><span>No</span></label>
+            </div>
+            <p class="field__err" data-err="attending">Let us know if you plan to be there.</p>
+          </fieldset>
           <fieldset class="field consent">
             <legend>Terms and consent</legend>
             <ol class="consent__terms">
