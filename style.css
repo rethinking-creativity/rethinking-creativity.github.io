@@ -344,6 +344,7 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
 .schedule li:nth-child(2) { background: var(--lemon); }
 .schedule li:nth-child(3) { background: var(--mint); }
 .schedule li:nth-child(4) { background: var(--sky); }
+.schedule li:nth-child(5) { background: var(--lilac); }
 .schedule b { font-weight: 600; font-size: 0.95rem; line-height: 1.25; }
 .schedule span { color: var(--soft); font-size: 0.85rem; }
 @media (max-width: 40rem) {
@@ -623,3 +624,28 @@ img.work__ghost, video.work__ghost { height: auto; }
 .site-header { z-index: 100; }
 .qdeck__stack { isolation: isolate; }
 .site-footer .container { max-width: none; }
+
+/* Share Your Practice: an example card attendees fill in */
+.pcard { margin: 0; padding: 1.5rem; border-radius: 20px; background: var(--peach); box-shadow: 0 30px 60px -30px rgba(30, 40, 70, 0.35); transform: rotate(-2deg); }
+.pcard__label { margin: 0 0 0.9rem; font-weight: 600; color: var(--violet); }
+.pcard dl { margin: 0; display: grid; gap: 0.75rem; }
+.pcard dt { font-size: 0.82rem; color: var(--soft); }
+.pcard dd { margin: 0.1rem 0 0; font-family: "Instrument Serif", serif; font-size: 1.35rem; line-height: 1.2; border-bottom: 1px dashed rgba(0, 0, 0, 0.18); padding-bottom: 0.3rem; }
+
+/* Calls to submit a work: nav pill and hero button */
+.nav__links a.nav__cta { margin-left: 0.4rem; padding: 0.35rem 0.9rem; border-radius: 999px; background: var(--violet); color: #fff; font-weight: 600; }
+.nav__links a.nav__cta:hover { background: var(--violet-deep); color: #fff; }
+.hero-cta { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; margin-top: 1.4rem !important; }
+.hero-cta span { font-size: 0.88rem; color: var(--soft); }
+
+/* Submit buttons: drifting gradient and twinkling diamond sparkles */
+.shine { position: relative; overflow: visible; background-image: linear-gradient(110deg, #5b2fd6, #8b5cf6 30%, #e79ad0 50%, #8b5cf6 70%, #5b2fd6) !important; background-size: 250% 100% !important; animation: shine-drift 4s ease-in-out infinite alternate; }
+.nav__links a.nav__cta.shine { color: #fff; }
+.sparkle { position: absolute; inset: 0; pointer-events: none; }
+.sparkle i { position: absolute; font-style: normal; color: #fff; text-shadow: 0 0 6px rgba(255, 220, 245, 0.95), 0 0 2px #e79ad0; opacity: 0; animation: twinkle 2.4s ease-in-out infinite; }
+.sparkle i:nth-child(1) { top: -0.55em; right: 0.6em; font-size: 0.9em; color: #f5c2e0; }
+.sparkle i:nth-child(2) { bottom: -0.45em; left: 0.9em; font-size: 0.7em; color: #c9b5ff; animation-delay: 0.8s; }
+.sparkle i:nth-child(3) { top: 0.15em; right: -0.55em; font-size: 0.6em; color: #ffe08a; animation-delay: 1.6s; }
+@keyframes shine-drift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+@keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); } 45% { opacity: 1; transform: scale(1.15) rotate(20deg); } 60% { opacity: 0.9; transform: scale(1) rotate(30deg); } }
+@media (prefers-reduced-motion: reduce) { .shine, .sparkle i { animation: none; } .sparkle i { opacity: 0.85; } }

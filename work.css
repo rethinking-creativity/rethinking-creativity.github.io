@@ -1,0 +1,69 @@
+/* QR page: one work in full, opened by scanning a card. Same type, palette and process grid as the card. */
+.wk-page { background: #fdfcf8; min-height: 100vh; display: flex; flex-direction: column; }
+.wk { flex: 1; width: 100%; max-width: 40rem; margin-inline: auto; padding: 1.25rem 1.25rem 2rem; }
+.wk__work { min-width: 0; }
+.wk__medium { display: flex; align-items: center; gap: 0.35rem; margin: 0 0 0.6rem; font-size: 0.78rem; color: #9a91ad; letter-spacing: 0.02em; }
+.wk__medium svg { width: 0.95rem; height: 0.95rem; }
+
+/* The work */
+.wk-img { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.wk-img img { display: block; width: 100%; max-height: 80vh; object-fit: contain; border-radius: 2px; }
+.wk-video { display: block; width: 100%; border-radius: 2px; background: #000; }
+.wk-sound { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.wk-sound img { width: min(100%, 22rem); aspect-ratio: 1; }
+.wk-sound audio { width: 100%; }
+.wk-text { padding: clamp(1.1rem, 4vw, 1.6rem) clamp(1rem, 4vw, 1.5rem); border-radius: 2px; background: #fff; font-family: "Instrument Serif", Georgia, serif; font-size: clamp(1.2rem, 4.6vw, 1.4rem); line-height: 1.4; }
+.wk-text p { margin: 0 0 1.1em; }
+.wk-text span { display: block; padding-left: 1em; text-indent: -1em; }
+.wk-text p:last-child { margin: 0; }
+.wk-hold { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; min-height: 14rem; padding: 1rem; border: 1.5px solid #e6e3eb; border-radius: 2px; color: var(--soft); font-size: 0.9rem; text-align: center; overflow-wrap: anywhere; }
+.wk-hold svg { width: 1.8rem; height: 1.8rem; color: #b8b0c9; }
+
+/* Title, artist, materials, Description and Process on white panels, as on the back of the card */
+.wk__title { margin: 1.4rem 0 0; font-family: "Instrument Serif", serif; font-size: 2.3rem; font-weight: 400; line-height: 1.05; }
+.wk__byline { margin: 0.3rem 0 1.4rem; }
+.wk__artist { margin: 0; color: var(--soft); }
+.wk__materials { margin: 0.15rem 0 0; font-size: 0.92rem; color: #8a829c; }
+.wk__blk { margin: 0 0 0.9rem; padding: 1rem 1.1rem; border-radius: 14px; background: #fff; }
+.wk__blk h2 { margin: 0 0 0.5rem; font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
+.wk__blk h3 { margin: 1rem 0 0.35rem; font-size: 0.82rem; font-weight: 600; color: var(--soft); }
+.wk__blk p { margin: 0 0 0.6rem; font-size: 0.98rem; line-height: 1.55; color: #3d3550; }
+.wk__blk p:last-child { margin-bottom: 0; }
+.wk__process { display: grid; grid-template-columns: fit-content(6.5rem) minmax(0, 1fr) minmax(0, 1fr); column-gap: 0.7rem; font-size: 0.92rem; line-height: 1.35; }
+.wk__process > span { padding: 0.45rem 0; border-bottom: 1px solid #ebe5f6; }
+.wk__process > span:nth-last-child(-n+3) { border-bottom: 0; }
+.wk__process .hd { display: flex; align-items: center; gap: 0.35rem; padding-top: 0; font-size: 0.85rem; font-weight: 600; border-bottom: 1.5px solid #ddd4ef; }
+.wk__process .hd i { width: 0.5rem; height: 0.5rem; border-radius: 50%; }
+.wk__process .hd.h { color: var(--human); }
+.wk__process .hd.h i { background: var(--human); }
+.wk__process .hd.a { color: var(--ai); }
+.wk__process .hd.a i { background: var(--ai); }
+.wk__process .st { min-width: 3.4rem; font-size: 0.8rem; color: #9a91ad; padding-top: 0.55rem; overflow-wrap: anywhere; }
+.wk__process .h { color: #2e2366; }
+.wk__process .a { color: #1e3a8a; }
+
+.wk-none { padding-block: 4rem; text-align: center; }
+.wk-none h1 { margin: 0 0 0.6rem; font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; }
+
+.wk-foot { padding: 1.5rem 1.25rem 2.5rem; text-align: center; font-size: 0.82rem; }
+.wk-foot a { color: var(--soft); text-decoration: none; }
+.wk-foot a:hover { color: var(--violet-deep); }
+.wk-foot .grad { background: linear-gradient(140deg, #6d3be8, #e79ad0); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 600; }
+
+/* Full-resolution view */
+.wk-zoom { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(20, 15, 35, 0.94); }
+.wk-zoom::backdrop { background: transparent; }
+.wk-zoom__frame { width: 100%; height: 100%; overflow: auto; display: grid; place-items: center; }
+.wk-zoom img { max-width: 100vw; max-height: 100dvh; object-fit: contain; cursor: zoom-in; }
+.wk-zoom.is-full .wk-zoom__frame { place-items: start; }
+.wk-zoom.is-full img { max-width: none; max-height: none; cursor: zoom-out; }
+.wk-zoom__close { position: fixed; top: 0.6rem; right: 0.6rem; z-index: 1; width: 2.6rem; height: 2.6rem; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: var(--ink); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+
+/* Wide screens: the work on the left, stays in view; the words on the right */
+@media (min-width: 64rem) {
+  .wk { max-width: 72rem; display: grid; grid-template-columns: minmax(0, 1fr) 26rem; gap: 3rem; align-items: start; padding-top: 2.5rem; }
+  .wk__work { position: sticky; top: 2rem; }
+  .wk-img img { max-height: calc(100vh - 6rem); }
+  .wk__title { margin-top: 1.9rem; font-size: 2.8rem; }
+  .wk-none { grid-column: 1 / -1; }
+}

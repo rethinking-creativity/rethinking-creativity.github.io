@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit your work · Rethinking Human Creativity</title>
+  <meta name="description" content="Share one work you made, with or without AI, for the CHI 2027 meet-up.">
+  <link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="card.css">
+  <link rel="stylesheet" href="submit.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Sections">
+      <div class="nav__left">
+        <a class="nav__logo" href="https://chi2027.acm.org/" aria-label="CHI 2027 website">
+          <img src="assets/chi2027-logo.svg" alt="CHI 2027, May 10-14, Pittsburgh" width="118" height="48">
+        </a>
+        <a class="nav__brand" href="./" aria-label="Rethinking Human Creativity">Rethinking <span class="grad">Human Creativity</span><span class="title-spark is-on nav-spark" aria-hidden="true">&#10022;</span></a>
+      </div>
+      <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="./#activities">Activities</a></li>
+        <li><a href="./#attendees">Attendees</a></li>
+        <li><a href="./#contribute">Contribute</a></li>
+        <li><a href="./#organizers">Organizers</a></li>
+        <li><a href="./#reading">Reading</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container submit" id="top">
+    <header class="submit__head">
+      <h1>Submit your work</h1>
+      <p>Are you a researcher by day, artist by night, or the other way around? Share the artwork you made, with or without AI. We pair it with another work in the same medium, and at the meet-up attendees guess which one used AI, then turn the card over to see how each was made.</p>
+    </header>
+
+    <section class="examples" aria-label="Example cards">
+      <p class="examples__label">What the cards look like <span class="on-hover">Hover over a card to turn it over.</span><span class="on-touch">Tap a card to turn it over.</span></p>
+      <ul class="examples__row">
+        <li><div class="flip" role="button" tabindex="0" aria-label="Example text card, turn over"><article class="card card--front card--text"><span class="card__medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 11h16M4 16h10"/></svg><span>Text</span></span>
+          <div class="card__excerpt"><span>The kettle learns my name each morning.<br>It calls twice, and I come home.</span><span class="more">…</span></div>
+          <div class="card__bottom"><span><h3 class="card__title">Kettle</h3><p class="card__artist">Anonymous, 2026</p><p class="card__materials">Poem</p></span><span class="card__qr"><a class="card__qrlink" href="work.html?id=kettle" target="_blank"><img src="assets/examples/qr_read.svg" alt="QR code to read the full text"></a></span></div>
+        </article><article class="card card--back card--panels">
+          <div class="card__blk"><p class="card__sec">Description</p>
+          <p class="card__about">A short poem about living alone and the small sounds that keep me company.</p></div>
+          <div class="card__blk"><p class="card__sec">Process</p>
+          <div class="card__process"><span class="hd"></span><span class="hd h"><i></i>By hand</span><span class="hd a"><i></i>With AI</span><span class="st">First line</span><span class="h">A line said half-asleep</span><span class="a"></span><span class="st">Drafting</span><span class="h">Wrote it on the bus</span><span class="a">ChatGPT endings, unused</span><span class="st">Tighten</span><span class="h">Cut it to two stanzas</span><span class="a">ChatGPT rhythm check</span></div></div>
+          <div class="card__brand"><span><b>Rethinking <span class="grad">Human Creativity</span> ✦<br>in the Generative AI Era</b><small>CHI 2027 Meet-Up</small></span><img src="assets/examples/qr_meetup.svg" alt="QR code to the meet-up website"></div>
+        </article></div></li>
+        <li><div class="flip" role="button" tabindex="0" aria-label="Example image card, turn over"><article class="card card--front card--image"><span class="card__medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 16l5-5 4 4 3-3 6 6"/><circle cx="16" cy="9" r="1.5"/></svg><span>Image</span></span>
+          <div class="card__media" style="background-image:url('assets/examples/underwater.jpg')"></div>
+          <div class="card__bottom"><span><h3 class="card__title">Underwater</h3><p class="card__artist">Hye-Young Jo, 2026</p><p class="card__materials">Monotype, oil-based ink on paper</p></span><span class="card__qr"><a class="card__qrlink" href="work.html?id=underwater" target="_blank"><img src="assets/examples/qr_view.svg" alt="QR code to view the image in detail"></a></span></div>
+        </article><article class="card card--back card--panels">
+          <div class="card__blk"><p class="card__sec">Description</p>
+          <p class="card__about">An abstract take on a sea filled with plastic.</p></div>
+          <div class="card__blk"><p class="card__sec">Process</p>
+          <div class="card__process"><span class="hd"></span><span class="hd h"><i></i>By hand</span><span class="hd a"><i></i>With AI</span><span class="st">Roll</span><span class="h">Blue-to-white gradient</span><span class="a"></span><span class="st">Texture</span><span class="h">Cloth, bubble wrap, mesh</span><span class="a"></span><span class="st">Glove</span><span class="h">Rolled red and black ink</span><span class="a"></span><span class="st">Press</span><span class="h">Laid it on top, pressed</span><span class="a"></span></div></div>
+          <div class="card__brand"><span><b>Rethinking <span class="grad">Human Creativity</span> ✦<br>in the Generative AI Era</b><small>CHI 2027 Meet-Up</small></span><img src="assets/examples/qr_meetup.svg" alt="QR code to the meet-up website"></div>
+        </article></div></li>
+        <li><div class="flip" role="button" tabindex="0" aria-label="Example video card, turn over"><article class="card card--front card--video"><span class="card__medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg><span>Video</span></span>
+          <div class="card__media" style="background-image:url('assets/examples/tram_frame.jpg')"><span class="card__play">▶</span></div>
+          <div class="card__bottom"><span><h3 class="card__title">Tram at Dusk</h3><p class="card__artist">Sam Rivera, 2026</p><p class="card__materials">Video</p></span><span class="card__qr"><a class="card__qrlink" href="work.html?id=tram" target="_blank"><img src="assets/examples/qr_watch.svg" alt="QR code to watch the video"></a></span></div>
+        </article><article class="card card--back card--panels">
+          <div class="card__blk"><p class="card__sec">Description</p>
+          <p class="card__about">A short scene of a city tram, built from my grandfather's photos of the line he rode to work.</p></div>
+          <div class="card__blk"><p class="card__sec">Process</p>
+          <div class="card__process"><span class="hd"></span><span class="hd h"><i></i>By hand</span><span class="hd a"><i></i>With AI</span><span class="st">Archive</span><span class="h">Gathered his tram photos</span><span class="a"></span><span class="st">Plan</span><span class="h">Wrote the shot list</span><span class="a"></span><span class="st">Generate</span><span class="h">Picked 3 clips</span><span class="a">Generated 8 Veo clips</span><span class="st">Edit</span><span class="h">Cut and color graded</span><span class="a"></span></div></div>
+          <div class="card__brand"><span><b>Rethinking <span class="grad">Human Creativity</span> ✦<br>in the Generative AI Era</b><small>CHI 2027 Meet-Up</small></span><img src="assets/examples/qr_meetup.svg" alt="QR code to the meet-up website"></div>
+        </article></div></li>
+        <li><div class="flip" role="button" tabindex="0" aria-label="Example sound card, turn over"><article class="card card--front card--sound"><span class="card__medium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 11v2"/></svg><span>Sound</span></span>
+          <div class="card__media" style="background-image:url('assets/examples/sound_radial.svg')"></div>
+          <div class="card__bottom"><span><h3 class="card__title">Nocturne for a Rainy Night</h3><p class="card__artist">Anonymous, 2026</p><p class="card__materials">Audio</p></span><span class="card__qr"><a class="card__qrlink" href="work.html?id=nocturne" target="_blank"><img src="assets/examples/qr_listen.svg" alt="QR code to listen"></a></span></div>
+        </article><article class="card card--back card--panels">
+          <div class="card__blk"><p class="card__sec">Description</p>
+          <p class="card__about">A short piano nocturne for late, rainy evenings.</p></div>
+          <div class="card__blk"><p class="card__sec">Process</p>
+          <div class="card__process"><span class="hd"></span><span class="hd h"><i></i>By hand</span><span class="hd a"><i></i>With AI</span><span class="st">Melody</span><span class="h">Hummed the opening</span><span class="a"></span><span class="st">Variations</span><span class="h">Kept one with a new turn</span><span class="a">20 variations with Lyria</span><span class="st">Piano</span><span class="h">Played piano over one</span><span class="a"></span><span class="st">Mix</span><span class="h">Mixed by ear</span><span class="a"></span></div></div>
+          <div class="card__brand"><span><b>Rethinking <span class="grad">Human Creativity</span> ✦<br>in the Generative AI Era</b><small>CHI 2027 Meet-Up</small></span><img src="assets/examples/qr_meetup.svg" alt="QR code to the meet-up website"></div>
+        </article></div></li>
+      </ul>
+    </section>
+
+    <div class="submit__grid">
+    <div class="submit__left">
+    <form class="sform" id="sform" novalidate>
+      <!-- 1. The work -->
+      <section class="sform__step">
+        <p class="sform__num">1</p>
+        <div>
+          <h2>Your work</h2>
+
+          <fieldset class="field">
+            <legend>Medium</legend>
+            <div class="pills" data-name="medium">
+              <label><input type="radio" name="medium" value="text"><span>Text</span></label>
+              <label><input type="radio" name="medium" value="image"><span>Image</span></label>
+              <label><input type="radio" name="medium" value="video"><span>Video</span></label>
+              <label><input type="radio" name="medium" value="sound"><span>Sound</span></label>
+            </div>
+            <p class="field__err" data-err="medium">Pick a medium.</p>
+          </fieldset>
+
+          <div class="field">
+            <div class="tabs" role="group" aria-label="How to share the work">
+              <button type="button" aria-pressed="true" data-src="file">Upload a file</button>
+              <button type="button" aria-pressed="false" data-src="link">Paste a link</button>
+              <button type="button" aria-pressed="false" data-src="paste" hidden>Paste text</button>
+            </div>
+            <label class="drop" data-pane="file">
+              <input type="file" id="file" accept="image/*,video/*,audio/*,.pdf,.txt,.md">
+              <span class="drop__main">Drop a file here, or <u>choose one</u></span>
+              <span class="drop__hint">Image, video, sound, or text · up to 100 MB</span>
+              <span class="drop__file" hidden></span>
+            </label>
+            <input class="input" data-pane="link" type="url" id="link" placeholder="https://youtube.com/…  or a Drive, Vimeo, SoundCloud link" hidden>
+            <textarea class="input" data-pane="paste" id="pasted" rows="6" hidden></textarea>
+            <p class="field__err" data-err="source">Add a file or a link.</p>
+          </div>
+
+          <div class="field">
+            <div class="row2">
+              <label class="field__label" for="title">Title</label>
+              <label class="field__label" for="year">Year</label>
+              <input class="input" id="title" type="text" maxlength="60">
+              <input class="input" id="year" type="text" inputmode="numeric" maxlength="4">
+            </div>
+            <p class="field__err" data-err="title">Give it a title.</p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="materials">Materials</label>
+            <input class="input" id="materials" type="text" maxlength="40">
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="description">Description <span class="opt" data-count="description">0 / 120</span></label>
+            <textarea class="input" id="description" rows="3" maxlength="120"></textarea>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="description-long">Full description <span class="opt">optional · shown on the QR page</span><span class="opt" data-count="description-long">0 / 1000</span></label>
+            <textarea class="input" id="description-long" rows="4" maxlength="1000"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. How it was made -->
+      <section class="sform__step">
+        <p class="sform__num">2</p>
+        <div>
+          <h2>How you made it</h2>
+
+          <fieldset class="field">
+            <legend>Did you use AI for this work?</legend>
+            <div class="pills" data-name="ai">
+              <label><input type="radio" name="ai" value="yes"><span>Yes</span></label>
+              <label><input type="radio" name="ai" value="no"><span>No</span></label>
+            </div>
+            <p class="field__err" data-err="ai">Let us know either way.</p>
+          </fieldset>
+
+          <div class="field">
+            <p class="field__label">Your process</p>
+            <p class="field__help">Name your steps. A few words per box, up to 24 characters.</p>
+            <div class="steps" id="track">
+              <div class="steps__head" aria-hidden="true"><span></span><span class="steps__col steps__col--hand">By hand</span><span class="steps__col steps__col--ai">With AI</span></div>
+              <ol class="steps__list" id="stepList"></ol>
+            </div>
+            <button type="button" class="linkish steps__add" id="addStep">Add step</button>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="process-long">More about your process <span class="opt">optional · shown on the QR page</span><span class="opt" data-count="process-long">0 / 1000</span></label>
+            <textarea class="input" id="process-long" rows="4" maxlength="1000"></textarea>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 3. About you -->
+      <section class="sform__step">
+        <p class="sform__num">3</p>
+        <div>
+          <h2>About you</h2>
+          <div class="field">
+            <label class="field__label" for="name">Name</label>
+            <input class="input" id="name" type="text" maxlength="40" autocomplete="name">
+            <p class="field__err" data-err="name">Add your name.</p>
+          </div>
+          <fieldset class="field">
+            <legend>On the card and the website, show</legend>
+            <div class="pills" data-name="credit">
+              <label><input type="radio" name="credit" value="name" checked><span>My name</span></label>
+              <label><input type="radio" name="credit" value="anon"><span>Anonymous</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label class="field__label" for="email">Email</label>
+            <input class="input" id="email" type="email" autocomplete="email">
+            <p class="field__err" data-err="email">Add an email we can reach you at.</p>
+          </div>
+          <fieldset class="field consent">
+            <legend>Terms and consent</legend>
+            <ol class="consent__terms">
+              <li><b>Copyright.</b> You, the contributor ("you"), retain all copyright in the submitted work.</li>
+              <li><b>Purpose.</b> The organizers will use the work solely for non-commercial research and educational purposes.</li>
+              <li><b>Restrictions.</b> The organizers will not sell the work, use it in commercial advertising, or use it to train artificial intelligence models or to build datasets for that purpose.</li>
+              <li><b>Risks.</b> The meet-up is part of CHI 2027, where attendees may photograph and record sessions, so your work may be photographed or recorded there. Any work shown in person or online can also be copied by others. To reduce this, the organizers will keep each work's QR page unlisted and close it after the meet-up unless you allow publication on this website, and will mark the website's work pages so that search engines and AI crawlers are asked not to index or collect them. These measures lower the risk but cannot prevent it, and the organizers cannot control how others use copies they make.</li>
+              <li><b>Integrity.</b> The organizers will not alter the work. They may only scale it to fit a card or a screen, or show the opening lines of a text with a link to the full text.</li>
+              <li><b>Attribution.</b> The work will be credited to you by name or as "Anonymous," as selected above.</li>
+              <li><b>Withdrawal.</b> You may request removal of the work at any time by writing to <a href="mailto:hye-young.jo@colorado.edu">hye-young.jo@colorado.edu</a>. The work will then be removed from this website and excluded from future materials. Publications that have already appeared cannot be altered.</li>
+            </ol>
+            <label class="check">
+              <input type="checkbox" id="c-own">
+              <span><b>Required.</b> I confirm that I created this work or hold the right to share it, and that it does not include the work of others without their permission.</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="c-show">
+              <span><b>Required.</b> I grant the organizers permission to print this work on a card, and to play it on a tablet if it is a video or sound, without altering it, for in-person discussion among attendees during the CHI 2027 Meet-Up, and to make it viewable through an unlisted page linked from the card's QR code until the end of the meet-up. I understand that attendees may photograph or record the work during the meet-up.</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="c-web">
+              <span><b>Optional.</b> I grant the organizers permission to publish this work, with its card and without altering it, on this website after the meet-up. I understand that works published online can be viewed and copied by others, and that the organizers cannot control such third-party use.</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="c-future">
+              <span><b>Optional.</b> I grant the organizers permission to use this work, without altering it, in future meet-ups, workshops, and publications on generative AI and creativity, and in non-commercial announcements of these events.</span>
+            </label>
+            <p class="field__err" data-err="consent">Please check the two required boxes to submit.</p>
+          </fieldset>
+        </div>
+      </section>
+
+      <div class="sform__submit">
+        <button class="contribute__button shine" type="submit">Submit your work<span class="sparkle" aria-hidden="true"><i>&#10022;</i><i>&#10022;</i><i>&#10022;</i></span></button>
+        <p class="sform__status" id="status" role="status"></p>
+      </div>
+    </form>
+
+    <section class="done" id="done" tabindex="-1" hidden>
+      <h2>Thank you!</h2>
+      <p>We will email you when your work is paired.</p>
+      <p><a href="./">Back to the meet-up page</a></p>
+    </section>
+    </div>
+
+    <aside class="preview" aria-label="Card preview">
+      <div class="preview__sticky">
+        <p class="preview__label">Preview</p>
+        <div class="dims">
+        <div class="flip" id="card" role="button" tabindex="0" aria-label="Turn the card over">
+          <article class="card" id="cFront">
+            <span class="card__medium" id="cMedium"></span>
+            <div id="cContent" class="card__content"></div>
+            <div class="card__bottom">
+              <span><h3 class="card__title" id="cTitle"></h3><p class="card__artist" id="cArtist"></p><p class="card__materials" id="cMaterials"></p></span>
+              <span class="card__qr" id="cQR"><img src="assets/examples/qr_view.svg" alt=""></span>
+            </div>
+          </article>
+          <article class="card card--back card--panels" id="cBack">
+            <div class="card__blk"><p class="card__sec">Description</p><p class="card__about" id="cDesc"></p></div>
+            <div class="card__blk"><p class="card__sec">Process</p><div class="card__process" id="cProcess"></div></div>
+            <div class="card__brand"><span><b>Rethinking <span class="grad">Human Creativity</span> ✦<br>in the Generative AI Era</b><small>CHI 2027 Meet-Up</small></span><img src="assets/examples/qr_meetup.svg" alt=""></div>
+          </article>
+        </div>
+        <span class="dims__w">3 in · 7.6 cm</span>
+        <span class="dims__h">4 in · 10.2 cm</span>
+        </div>
+        <a class="preview__qr" id="qrPreview" href="work.html?preview=1" target="_blank">Open QR page preview</a>
+      </div>
+    </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Questions? <a href="mailto:hye-young.jo@colorado.edu">Contact us</a>.</p>
+    </div>
+  </footer>
+  <script src="js/sfx.js" defer></script>
+  <script src="js/submit-api.js" defer></script>
+  <script src="js/submit.js" defer></script>
+  <script src="js/deck.js" defer></script>
+</body>
+</html>
