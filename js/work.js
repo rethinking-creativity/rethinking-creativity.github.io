@@ -1,9 +1,7 @@
 // QR page: one work in full. work.html?k=<qr_key> loads a submitted work (js/works-api.js),
 // work.html?id=<id> one of the sample works (js/works-mock.js);
-// work.html?preview=1 shows the submit form's current data, handed over in localStorage by submit.js.
 (function () {
   const root = document.getElementById('work');
-  const PREVIEW_KEY = 'rc-work-preview';
   const ICON = {
     text: '<path d="M4 6h16M4 11h16M4 16h10"/>',
     image: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 16l5-5 4 4 3-3 6 6"/><circle cx="16" cy="9" r="1.5"/>',
@@ -32,8 +30,8 @@
     if (m === 'image' && src) return `<button class="wk-img" type="button" aria-label="View full resolution"><img src="${esc(src)}" alt="${esc(w.title)}"></button>`;
     if (m === 'video' && src) return `<video class="wk-video" controls playsinline preload="metadata"${w.poster ? ` poster="${esc(safeURL(w.poster))}"` : ''} src="${esc(src)}"></video>`;
     if (m === 'sound' && src) return `<div class="wk-sound">${w.art ? `<img src="${esc(safeURL(w.art))}" alt="">` : ''}<audio controls preload="metadata" src="${esc(src)}"></audio></div>`;
-    // Preview of a file not uploaded yet: a neutral frame with its name
-    return `<div class="wk-hold">${svg(m)}${w.pending ? `<span>${esc(w.pending)}</span>` : ''}</div>`;
+    // No picture to show (e.g. a file that did not finish uploading): a neutral frame
+    return `<div class="wk-hold">${svg(m)}</div>`;
   }
 
   function show(w) {
@@ -95,15 +93,7 @@
   dlg.addEventListener('click', (e) => { if (e.target === dlg || e.target.classList.contains('wk-zoom__frame')) dlg.close(); });
 
   const q = new URLSearchParams(location.search);
-  if (q.has('preview')) {
-    const read = () => { try { return JSON.parse(localStorage.getItem(PREVIEW_KEY)); } catch (e) { return null; } };
-    const draw = () => { const w = read(); if (w && w.medium) show(w); else notFound(); };
-    draw();
-    // Stays in step with the form while both tabs are open
-    window.addEventListener('storage', (e) => { if (e.key === PREVIEW_KEY) draw(); });
-  } else {
-    const k = q.get('k');
-    (k ? window.WorksAPI.byKey(k) : window.WorksAPI.get(q.get('id')))
-      .then((w) => (w && w.closed ? closed() : w ? show(w) : notFound()), notFound);
-  }
+  const k = q.get('k');
+  (k ? window.WorksAPI.byKey(k) : window.WorksAPI.get(q.get('id')))
+    .then((w) => (w && w.closed ? closed() : w ? show(w) : notFound()), notFound);
 })();

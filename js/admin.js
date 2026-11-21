@@ -108,7 +108,8 @@
       </div>
       <div class="ad-actions">${pairUI}${status}${del}</div>
       <dl class="ad-fields">
-        <dt>Name</dt><dd>${esc(w.name)}${w.credit === 'anon' ? ' — printed as “Anonymous”' : ''}</dd>
+        <dt>Name</dt><dd>${esc(w.name)}</dd>
+        <dt>Credit</dt><dd>${w.credit === 'anon' ? 'Anonymous' : 'Name'}</dd>
         <dt>Email</dt><dd><a href="mailto:${esc(w.email)}">${esc(w.email)}</a></dd>
         <dt>Submitted</dt><dd>${when(w.created_at)}</dd>
         <dt>Work</dt><dd>${file}</dd>

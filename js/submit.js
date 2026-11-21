@@ -19,11 +19,6 @@
   let file = null;
   let fileURL = null;
   let tried = false;
-  // What the QR page preview (work.html?preview=1) can show of a picked file: object URLs do not
-  // cross tabs, so images are kept as a downscaled data URL and plain text is read in; nothing else.
-  let previewFile = null;
-  let previewOpen = false;
-  const PREVIEW_KEY = 'rc-work-preview';
   const NEEDS_LOOK = 'A few fields need a look.';
 
   const byId = (id) => document.getElementById(id);
@@ -119,14 +114,12 @@
   const shown = drop.querySelector('.drop__file');
   function takeFile(f) {
     if (!f) return;
-    previewFile = null;
     if (fileURL) { URL.revokeObjectURL(fileURL); fileURL = null; }
     if (f.size > MAX) { file = null; shown.hidden = false; shown.textContent = `${f.name} is over 100 MB. Paste a link instead.`; shown.classList.add('is-bad'); drop.classList.remove('has-file'); render(); return; }
     file = f; shown.hidden = false; shown.classList.remove('is-bad');
     shown.textContent = `${f.name} · ${(f.size / 1048576).toFixed(1)} MB`;
     drop.classList.add('has-file');
     if (f.type.startsWith('image/')) fileURL = URL.createObjectURL(f);
-    keepForPreview(f);
     render();
   }
   byId('file').addEventListener('change', (e) => takeFile(e.target.files[0]));
@@ -212,7 +205,6 @@
     });
 
     form.querySelectorAll('[data-count]').forEach((el) => { const f = byId(el.dataset.count); el.textContent = `${f.value.length} / ${f.maxLength}`; });
-    if (previewOpen) savePreview();
     // After a first submit attempt, messages clear as soon as a field is fixed
     if (tried && validate(d) && byId('status').textContent === NEEDS_LOOK) byId('status').textContent = '';
   }
@@ -257,47 +249,6 @@
     });
   });
 
-  // QR page preview: the current form, in the shape works-mock.js uses, handed over via localStorage
-  function keepForPreview(f) {
-    const mine = () => file === f;
-    if (f.type.startsWith('image/')) {
-      const img = new Image();
-      const url = URL.createObjectURL(f);
-      img.onload = () => {
-        const k = Math.min(1, 1600 / Math.max(img.naturalWidth, img.naturalHeight));
-        const cv = document.createElement('canvas');
-        cv.width = Math.round(img.naturalWidth * k); cv.height = Math.round(img.naturalHeight * k);
-        cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
-        URL.revokeObjectURL(url);
-        if (mine()) { previewFile = { kind: 'image', src: cv.toDataURL('image/jpeg', 0.85) }; if (previewOpen) savePreview(); }
-      };
-      img.onerror = () => URL.revokeObjectURL(url);
-      img.src = url;
-    } else if (/^text\/|\.(txt|md)$/i.test(f.type || f.name) && f.size < 200 * 1024) {
-      f.text().then((t) => { if (mine()) { previewFile = { kind: 'text', text: t }; if (previewOpen) savePreview(); } });
-    }
-  }
-  function previewWork() {
-    const d = collect();
-    const m = d.medium || 'image';
-    const w = { id: 'preview', medium: m, title: d.title, year: d.year, materials: d.materials, credit: d.credit, name: d.name,
-      description: d.description, description_long: d.description_long, process: d.process, process_long: d.process_long };
-    if (source === 'paste') w.text = d.text;
-    else if (source === 'link') w.link = d.link;
-    else if (file && previewFile && previewFile.kind === 'text' && m === 'text') w.text = previewFile.text;
-    else if (file && previewFile && previewFile.kind === 'image' && m === 'image') w.src = previewFile.src;
-    else if (file) w.pending = file.name;
-    return w;
-  }
-  function savePreview() {
-    const w = previewWork();
-    try { localStorage.setItem(PREVIEW_KEY, JSON.stringify(w)); } catch (e) {
-      // Over the storage quota: keep the words, drop the picture
-      delete w.src; w.pending = file ? file.name : '';
-      try { localStorage.setItem(PREVIEW_KEY, JSON.stringify(w)); } catch (e2) { /* storage unavailable */ }
-    }
-  }
-  byId('qrPreview').addEventListener('click', () => { previewOpen = true; savePreview(); });
 
   // Validation and submit
   // Each message is tied to its controls: described by it and marked invalid while it shows
@@ -352,7 +303,6 @@
     btn.disabled = false;
     if (!res.ok) { status.textContent = 'Something went wrong. Please try again, or email us.'; return; }
     status.textContent = '';
-    try { localStorage.removeItem(PREVIEW_KEY); } catch (_) { /* storage unavailable */ }
     form.hidden = true;
     document.querySelector('.submit__head').hidden = true;
     byId('done').hidden = false;
