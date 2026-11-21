@@ -33,3 +33,15 @@ X (280자):
 > rethinking-creativity.github.io
 
 LinkedIn에서는 공동 주최자를 @로 직접 골라 태그(`~/Projects/scratch/rc-submit/posts.md` 참고).
+
+## YouTube에 올린 영상 (2026-11-21, 채널 @hye-youngjo)
+
+| 영상 | 가로 (YouTube) | 세로 (Shorts) |
+|---|---|---|
+| 01 punch | https://youtu.be/J7KFJHB4quQ | https://youtube.com/shorts/iu9rOcphz1o |
+| 02 zoom | https://youtu.be/kr3XxCjwIt4 | https://youtube.com/shorts/ntO3ytw3s3g |
+| 03 fly | https://youtu.be/FxoYM4J3iak | https://youtube.com/shorts/rUkhcOaBSW8 |
+| 04 scroll | https://youtu.be/8aQmj_SJc9c (사이트 About에 임베드) | https://youtube.com/shorts/k0pD5YVqMo8 |
+| 05 glitch | 아직 없음 | 아직 없음 |
+
+영상 ID와 스타일의 짝은 각 영상 제목("… ( 01 punch landscape )")으로 확인함.
