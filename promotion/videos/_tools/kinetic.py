@@ -94,7 +94,7 @@ def content(ctx, look):
         face, _ = work_face(ctx, w)
         lab, cls = who_label(w)
         tiles.append(f'<div class="tt" id="tt{i}"><div class="ti" id="tt{i}-in"><div class="tf">{face}</div><div class="tf tb"><b class="{cls}">{lab}</b></div></div></div>')
-    S["game"] = (f'''<div class="safe"><div class="tiles">{"".join(tiles)}</div>{P("gm-a", "We want to learn about *your practice,*", "mid")}{P("gm-b", "and talk about how research can better support your creativity.", "small")}</div>''',
+    S["game"] = (f'''<div class="safe"><div class="tiles">{"".join(tiles)}</div>{P("gm-a", "We want to learn about *your practice,*", "mid")}{P("gm-b", "and talk about how researchers can better support your creativity.", "small")}</div>''',
                  [(0, "tiles", "#sc-game .tt"), (1, "in", "#gm-a .wi")] + [(2 + i * 0.5, "flip", f"#tt{i}-in") for i in range(4)] + [(4, "in", "#gm-b .wi")])
     # 10 can't come
     # 10 can't come: why it still matters, and what happens to the work (consent terms on submit.html)
