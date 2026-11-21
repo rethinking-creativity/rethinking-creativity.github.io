@@ -105,6 +105,8 @@
       <dl class="ad-fields">
         <dt>Name</dt><dd>${esc(w.name)}</dd>
         <dt>Credit</dt><dd>${w.credit === 'anon' ? 'Anonymous' : 'Name'}</dd>
+        ${w.practice ? `<dt>Makes</dt><dd>${esc(w.practice)}</dd>` : ''}
+        ${w.background ? `<dt>Background</dt><dd>${esc(w.background)}</dd>` : ''}
         <dt>Keep posted</dt><dd>${w.keep_posted ? 'Yes' : 'No'}</dd>
         <dt>At CHI in person</dt><dd>${({ yes: 'Yes', unsure: 'Not sure yet', no: 'No' })[w.attending] || '—'}</dd>
         <dt>Email</dt><dd><a href="mailto:${esc(w.email)}">${esc(w.email)}</a></dd>

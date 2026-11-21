@@ -64,6 +64,10 @@
           ${hasCells ? `<div class="wk__process"><span class="hd"></span><span class="hd h"><i></i>By hand</span><span class="hd a"><i></i>With AI</span>${cells}</div>` : ''}
           ${w.process_long ? `${hasCells ? '<h3>More about the process</h3>' : ''}${para(w.process_long)}` : ''}
         </section>` : ''}
+        ${w.practice || w.background ? `<section class="wk__blk" aria-labelledby="h-artist">
+          <h2 id="h-artist">About the artist</h2>
+          <dl class="wk__kv">${w.practice ? `<dt>Makes</dt><dd>${esc(w.practice)}</dd>` : ''}${w.background ? `<dt>Background</dt><dd>${esc(w.background)}</dd>` : ''}</dl>
+        </section>` : ''}
       </div>`;
     const btn = root.querySelector('.wk-img');
     if (btn) btn.addEventListener('click', () => zoom(btn.querySelector('img').src, w.title));

@@ -71,3 +71,8 @@
   .wk__title { margin-top: 1.9rem; font-size: 2.8rem; }
   .wk-none { grid-column: 1 / -1; }
 }
+
+/* About the artist (optional, from the submit form) */
+.wk__kv { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.45rem 1rem; margin: 0; }
+.wk__kv dt { font-size: 0.8rem; color: var(--soft); padding-top: 0.15rem; }
+.wk__kv dd { margin: 0; }

@@ -8,6 +8,7 @@
   const WORKS = {
     kettle: {
       medium: 'text', title: 'Kettle', credit: 'anon', name: '', year: '2026', materials: 'Poem',
+      practice: 'Poems, mostly about home', background: 'Writing for five years, alongside a day job in a lab',
       text: 'The kettle learns my name each morning.\nIt calls twice, and I come home.\nThe radiator answers in its own slow code,\nthree knocks, a sigh, then nothing.\nThe fridge hums the one note it remembers.\n\nI set out a cup for no one,\nthen drink from it myself.\nSomewhere a neighbour’s door says goodnight.\nI count the small voices of the house\nuntil the quiet has a shape,\nand the shape is almost company.',
       description: 'A short poem about living alone and the small sounds that keep me company.',
       description_long: 'I moved into a flat on my own last winter and started noticing how much the house talks. The poem is a list of those voices, and of the habits I picked up to answer them. It is meant to be read slowly, out loud if you can.',
@@ -34,6 +35,7 @@
     },
     tram: {
       medium: 'video', title: 'Horse Tram', credit: 'name', name: 'Sam Rivera', year: '2026', materials: 'Video',
+      practice: 'Short films and video essays', background: 'Film student; edits video essays on the side',
       src: 'assets/works/ai_tram.mp4', poster: 'assets/examples/tram_frame.jpg',
       description: 'A horse-drawn tram on a crowded street, made to look like an 1890s film.',
       description_long: 'I love the first films of the 1890s: one fixed camera, and a street full of people who had never been filmed before. I wanted a scene that could sit beside them.',
@@ -47,6 +49,7 @@
     },
     nocturne: {
       medium: 'sound', title: 'Nocturne for a Rainy Night', credit: 'anon', name: '', year: '2026', materials: 'Audio',
+      practice: 'Piano pieces and ambient sound', background: 'Self-taught pianist, playing for fifteen years',
       src: 'assets/works/ai_nocturne.mp3', art: 'assets/examples/sound_radial.svg',
       description: 'A short piano nocturne for late, rainy evenings.',
       description_long: 'Written for the hour when the rain is loud enough to cover the city. It is short on purpose: one idea, played quietly, then left alone.',

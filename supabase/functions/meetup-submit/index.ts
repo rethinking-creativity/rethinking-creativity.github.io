@@ -59,6 +59,8 @@ function check(p: Record<string, unknown>, file: Record<string, unknown> | null)
     description_long: str(p.description_long, 1000, "description_long"),
     process_long: str(p.process_long, 1000, "process_long"),
     tool_wish: str(p.tool_wish, 500, "tool_wish"),
+    practice: str(p.practice, 80, "practice"),
+    background: str(p.background, 160, "background"),
     answers: sql.json(answers(p.answers)),
     name: str(p.name, 40, "name", true)!,
     credit: p.credit as string,
