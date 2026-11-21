@@ -30,6 +30,22 @@ TIMELINE = [("hook", 8, "intro"), ("four", 4, "build"), ("questions", 16, "drop"
             ("chi", 6, "groove"), ("meetup", 6, "groove"), ("who", 4, "groove"),
             ("share", 6, "drop"), ("game", 6, "drop"), ("cant", 12, "drop"), ("outro", 10, "outro")]
 SECTIONS = [("intro", 8), ("build", 4), ("drop", 16), ("break", 4), ("groove", 16), ("drop", 24), ("outro", 10)]
+
+
+def timeline(look):
+    """TIMELINE with the look's longer holds (Look.hold: scene -> beats)."""
+    return [(n, look.hold.get(n, b), sec) for n, b, sec in TIMELINE]
+
+
+def sections(look):
+    """Music sections follow the look's timeline: consecutive scenes of one section add up."""
+    out = []
+    for _, b, sec in timeline(look):
+        if out and out[-1][0] == sec:
+            out[-1] = (sec, out[-1][1] + b)
+        else:
+            out.append((sec, b))
+    return out
 QUESTIONS = [("Contribution", "Can creativity be *shared* with AI?"),
              ("Delegation", "What do you want to *keep* for yourself?"),
              ("Growth", "How do you *grow* when AI can do the work?"),
@@ -65,11 +81,12 @@ def content(ctx, look):
                  [(0, "in", "#four-a .wi"), (0.5, "pop", "#four-n"), (1, "in", "#four-t .wi"), (2.5, "in", "#four-b .wi")])
     # 3 the questions, back to back
     rows, ev = [], []
+    qs = dict((n, b) for n, b, _ in timeline(look))["questions"] / 4  # beats per question
     for i, (lab, q) in enumerate(QUESTIONS):
         rows.append(f'<div class="q" id="q{i}"><span class="qn" id="q{i}-n">0{i + 1}</span><span class="qlab" id="q{i}-l">{lab}</span>{P(f"q{i}-t", q, "qt")}</div>')
-        ev += [(4 * i, "pop", f"#q{i}-n"), (4 * i, "pop", f"#q{i}-l"), (4 * i + 0.25, "in", f"#q{i}-t .wi")]
+        ev += [(qs * i, "pop", f"#q{i}-n"), (qs * i, "pop", f"#q{i}-l"), (qs * i + 0.25, "in", f"#q{i}-t .wi")]
         if i:
-            ev.append((4 * i, "dim" if look.q_mode == "stack" else "out", f"#q{i - 1}"))
+            ev.append((qs * i, "dim" if look.q_mode == "stack" else "out", f"#q{i - 1}"))
     S["questions"] = (f'<div class="safe qs {look.q_mode}">{"".join(rows)}</div>', ev)
     # 4 bridge
     S["together"] = (f'<div class="safe">{P("tg", "Let’s figure it out *together*", "big")}</div>', [(0, "in", "#tg .wi")])
@@ -118,6 +135,7 @@ class Look:
     num = slug = desc = genre = ""
     bpm = 120
     q_mode = "stack"
+    hold = {}  # scene -> beats, for a look that needs longer reading time
     perspective = False
     sizes = dict(huge=(300, 300), big=(112, 120), mid=(68, 70), small=(46, 46), meta=(40, 40), qt=(64, 60), title=(84, 92))
     accent = "#ff7ab8"
@@ -436,6 +454,8 @@ class Glitch(Look):
     desc = "A wall of real works flickers on the beat behind black type bars; cuts land with an RGB split, a snap of rotation and a zoom-out. Original glitch-pop track, 128 BPM."
     accent = "#2b5bff"
     ink = "#fff"
+    # 128 BPM with steps-eased reveals read too fast in places: longer holds on the text-heavy scenes
+    hold = {"questions": 24, "chi": 8, "meetup": 8, "who": 6, "share": 8, "game": 8}
 
     def css(self, ctx):
         return f"""
@@ -499,7 +519,8 @@ def film(ctx, look, beat):
     S = content(ctx, look)
     scenes, js, sfx = [], [], []
     b = 0
-    for i, (name, beats, sec) in enumerate(TIMELINE):
+    TL = timeline(look)
+    for i, (name, beats, sec) in enumerate(TL):
         html, events = S[name]
         style, cls = look.place(ctx, i, name)
         scenes.append(f'<section class="sc {cls}" id="sc-{name}" style="{style}">{html}</section>')
@@ -528,13 +549,13 @@ def film(ctx, look, beat):
                 sfx.append((t + 0.2, "pop", 0.4))
             elif act == "people":
                 js.append(f'tl.fromTo("{sel}", {{ y: 30, opacity: 0, scale: 0.8 }}, {{ y: 0, opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)", stagger: 0.05 }}, {t:.3f});')
-        if i < len(TIMELINE) - 1:
+        if i < len(TL) - 1:
             js += look.scene_out(ctx, i, name, t1, beat)
         b += beats
     total_beats = b
     total = round(total_beats * beat + 1.2, 3)
-    js += look.camera(ctx, TIMELINE, beat, total)
-    js += look.extra(ctx, TIMELINE, beat, total)
+    js += look.camera(ctx, TL, beat, total)
+    js += look.extra(ctx, TL, beat, total)
     world_extra = look.world_extra(ctx) if hasattr(look, "world_extra") else ""
     hidden = "" if isinstance(look, (Fly, Scroll)) else ".sc { visibility: hidden; }"
     html = f"""<template>
@@ -565,9 +586,9 @@ def film(ctx, look, beat):
 
 def music(look, total):
     CACHE.mkdir(parents=True, exist_ok=True)
-    out = CACHE / f"k_{look.genre}_{look.bpm}.wav"
+    out = CACHE / f"k_{look.genre}_{look.bpm}_{sum(b for _, b in sections(look))}.wav"
     if not out.exists():
-        kmusic.build(look.genre, look.bpm, SECTIONS, str(out))
+        kmusic.build(look.genre, look.bpm, sections(look), str(out))
     return out
 
 
