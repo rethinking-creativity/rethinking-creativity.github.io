@@ -16,6 +16,10 @@
 .wk-text p { margin: 0 0 1.1em; }
 .wk-text span { display: block; padding-left: 1em; text-indent: -1em; }
 .wk-text p:last-child { margin: 0; }
+.wk-pdf { display: flex; flex-direction: column; gap: 0.6rem; }
+.wk-pdf object { display: block; width: 100%; height: 75vh; border: 1.5px solid #e6e3eb; border-radius: 2px; background: #fff; }
+.wk-pdf a { display: inline-flex; align-items: center; gap: 0.4rem; align-self: flex-start; font-size: 0.9rem; }
+.wk-pdf svg { width: 1.1rem; height: 1.1rem; }
 .wk-hold { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; min-height: 14rem; padding: 1rem; border: 1.5px solid #e6e3eb; border-radius: 2px; color: var(--soft); font-size: 0.9rem; text-align: center; overflow-wrap: anywhere; }
 .wk-hold svg { width: 1.8rem; height: 1.8rem; color: #b8b0c9; }
 

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submissions · Rethinking Human Creativity</title>
+  <meta name="robots" content="noindex, nofollow, noarchive, noai, noimageai">
+  <link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="card.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="ad-page">
+  <form class="ad-login" id="login" hidden>
+    <h1>Submissions</h1>
+    <label for="key">Organizer password</label>
+    <input class="input" id="key" type="password" autocomplete="current-password" required>
+    <button class="ad-btn ad-btn--main" type="submit">Sign in</button>
+    <p class="ad-login__err" id="loginErr" role="alert"></p>
+  </form>
+
+  <div class="ad" id="app" hidden>
+    <header class="ad-top">
+      <h1>Submissions</h1>
+      <nav class="ad-tabs" id="tabs" aria-label="Filter by status"></nav>
+      <button class="ad-btn" type="button" id="zip" hidden>Download print sheets (.zip)</button>
+      <button class="ad-link" type="button" id="signOut">Sign out</button>
+    </header>
+    <div class="ad-body">
+      <ul class="ad-list" id="list" aria-label="Submissions"></ul>
+      <section class="ad-detail" id="detail" aria-live="polite"></section>
+    </div>
+    <p class="ad-toast" id="toast" role="status"></p>
+  </div>
+
+  <!-- Print sheets are drawn here at their true size, off screen, then saved as PNG -->
+  <div class="ad-stage" id="stage" aria-hidden="true"></div>
+
+  <script src="js/vendor/qrcode.js" defer></script>
+  <script src="js/vendor/html-to-image.js" defer></script>
+  <script src="js/vendor/fflate.js" defer></script>
+  <script src="js/card-render.js" defer></script>
+  <script src="js/covers.js" defer></script>
+  <script src="js/admin-api.js" defer></script>
+  <script src="js/admin.js" defer></script>
+</body>
+</html>

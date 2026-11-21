@@ -1,0 +1,80 @@
+/* Organizer page: list of submissions on the left, the selected one on the right */
+.ad-page { background: var(--wash); }
+.ad-btn { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.45rem 0.85rem; border: 1px solid #ddd4ef; border-radius: 999px; background: #fff; color: var(--ink); font: inherit; font-size: 0.86rem; cursor: pointer; }
+.ad-btn:hover { border-color: var(--violet); }
+.ad-btn:disabled { opacity: 0.5; cursor: default; }
+.ad-btn--main { background: var(--violet); border-color: var(--violet); color: #fff; }
+.ad-btn--main:hover { background: var(--violet-deep); }
+.ad-btn--warn { color: var(--del); }
+.ad-link { padding: 0; border: 0; background: none; color: var(--soft); font: inherit; font-size: 0.86rem; cursor: pointer; text-decoration: underline; text-underline-offset: 0.2em; }
+
+.ad-login { max-width: 20rem; margin: 18vh auto 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.ad-login h1 { margin: 0 0 0.6rem; font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em; }
+.ad-login label { font-size: 0.86rem; color: var(--soft); }
+.ad-login .input { padding: 0.55rem 0.7rem; border: 1px solid #ddd4ef; border-radius: 10px; font: inherit; }
+.ad-login button { align-self: flex-start; }
+.ad-login__err { margin: 0; min-height: 1.2em; font-size: 0.86rem; color: var(--del); }
+
+.ad { max-width: 90rem; margin: 0 auto; padding: 1.25rem; }
+.ad-top { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.ad-top h1 { margin: 0; font-size: 1.4rem; font-weight: 600; letter-spacing: -0.03em; }
+.ad-tabs { display: flex; gap: 0.25rem; }
+.ad-tabs button { padding: 0.35rem 0.75rem; border: 0; border-radius: 999px; background: none; color: var(--soft); font: inherit; font-size: 0.9rem; cursor: pointer; }
+.ad-tabs button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 0 #e3dcf3; font-weight: 600; }
+.ad-tabs b { font-weight: 400; color: #9a91ad; margin-left: 0.2rem; }
+.ad-top #zip { margin-left: auto; }
+.ad-top #zip[hidden] + .ad-link { margin-left: auto; }
+
+.ad-body { display: grid; grid-template-columns: minmax(20rem, 1fr) minmax(0, 42rem); gap: 1.25rem; align-items: start; }
+.ad-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+.ad-row { width: 100%; display: grid; grid-template-columns: 3rem minmax(0, 1fr) auto; gap: 0.75rem; align-items: center; padding: 0.55rem 0.7rem; border: 1px solid transparent; border-radius: 12px; background: #fff; text-align: left; font: inherit; color: inherit; cursor: pointer; }
+.ad-row:hover { border-color: #e3dcf3; }
+.ad-row[aria-current="true"] { border-color: var(--violet); }
+.ad-thumb { width: 3rem; height: 3rem; border-radius: 6px; background: #f3f0f8 center / cover no-repeat; display: grid; place-items: center; color: #b8b0c9; }
+.ad-thumb svg { width: 1.2rem; height: 1.2rem; }
+.ad-row__t { display: block; font-weight: 600; font-size: 0.95rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ad-row__s { display: block; font-size: 0.8rem; color: var(--soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ad-tags { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: flex-end; max-width: 13rem; }
+.ad-tag { padding: 0.1rem 0.45rem; border-radius: 999px; background: #f3f0f8; color: var(--soft); font-size: 0.72rem; white-space: nowrap; }
+.ad-tag--ok { background: #e6f6ee; color: #1d6b45; }
+.ad-tag--bad { background: #fdecea; color: var(--del); }
+.ad-tag--pair { background: var(--lilac); color: var(--violet-deep); }
+.ad-empty { padding: 2rem 1rem; color: var(--soft); text-align: center; }
+
+.ad-detail { position: sticky; top: 1rem; display: flex; flex-direction: column; gap: 1rem; padding: 1.1rem; border-radius: 16px; background: #fff; }
+.ad-detail:empty { display: none; }
+.ad-detail h2 { margin: 0; font-family: "Instrument Serif", serif; font-size: 1.8rem; font-weight: 400; line-height: 1.1; }
+.ad-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.ad-actions select { padding: 0.4rem 0.6rem; border: 1px solid #ddd4ef; border-radius: 999px; background: #fff; font: inherit; font-size: 0.86rem; }
+.ad-note { margin: 0; padding: 0.55rem 0.75rem; border-radius: 10px; background: #fdecea; color: var(--del); font-size: 0.86rem; }
+.ad-fields { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 0.35rem 1rem; margin: 0; font-size: 0.88rem; }
+.ad-fields dt { color: var(--soft); }
+.ad-fields dd { margin: 0; overflow-wrap: anywhere; white-space: pre-line; }
+.ad-keys { margin: 0; font-size: 0.75rem; color: #9a91ad; }
+
+/* Print sheet preview: the true-size sheet, scaled to the panel */
+.ad-sheetbox { position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 4px; box-shadow: 0 0 0 1px #ece7f5; }
+.ad-sheetbox .sheet { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+
+/* The 6 x 4 in sheet (608 x 405.33 px, cards at the mock-up size of 304 px); saved at 1800 x 1200 */
+.sheet { width: 608px; height: 405.333px; display: grid; grid-template-columns: 1fr 1fr; background: #fdfcf8; position: relative; }
+.sheet__half { position: relative; min-width: 0; }
+.sheet .card { height: 100%; border: 0; border-radius: 0; box-shadow: none; }
+/* Fold guide: two short ticks at the edges, on the fold line only */
+.sheet__fold::before, .sheet__fold::after { content: ""; position: absolute; left: 50%; width: 1px; height: 5px; background: #d9d3e6; }
+.sheet__fold::before { top: 0; }
+.sheet__fold::after { bottom: 0; }
+.card__empty { flex: 1; margin: 0.15rem 0.2rem 0.35rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; border: 1.5px solid #d6d4dc; border-radius: 2px; color: var(--soft); font-size: 0.8rem; text-align: center; padding: 0.5rem; }
+.card__empty svg { width: 1.6rem; height: 1.6rem; }
+
+.ad-stage { position: fixed; left: -10000px; top: 0; }
+.ad-toast { position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%); margin: 0; padding: 0.5rem 0.9rem; border-radius: 999px; background: var(--ink); color: #fff; font-size: 0.86rem; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+.ad-toast.is-on { opacity: 1; }
+
+@media (max-width: 60rem) {
+  .ad-body { grid-template-columns: minmax(0, 1fr); }
+  .ad-detail { position: static; order: -1; }
+}
+.ad-login[hidden], .ad[hidden] { display: none; }
+.ad-btn kbd { font: inherit; font-size: 0.72rem; opacity: 0.6; }
+.ad-btn[hidden] { display: none; }

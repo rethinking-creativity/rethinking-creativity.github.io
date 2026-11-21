@@ -14,7 +14,7 @@ export function cors(req: Request): Record<string, string> {
   return {
     ...(ok ? { "Access-Control-Allow-Origin": origin } : {}),
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "authorization, apikey, content-type, x-client-info",
+    "Access-Control-Allow-Headers": "authorization, apikey, content-type, x-client-info, x-admin-key",
     "Vary": "Origin",
   };
 }

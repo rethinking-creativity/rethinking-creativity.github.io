@@ -1,6 +1,7 @@
 // meetup-submit: takes one artwork submission from submit.html.
 // Turnstile check -> input check (same limits as the form) -> per-IP rate limit -> insert row
 // -> for a file, a signed upload token for meetup-works (the browser uploads it resumably, TUS).
+// A file row counts as complete once its object exists in the bucket (storage.objects is the truth).
 // Secrets: TURNSTILE_SECRET, MEETUP_IP_SALT. No confirmation email is sent.
 import { cors, json, sql, storage } from "../_shared/common.ts";
 
@@ -118,6 +119,28 @@ Deno.serve(async (req) => {
   }
 
   const ip_hash = ip ? await ipHash(ip) : null;
+
+  // Retry after a failed upload: the browser sends back the id it got; if that row is still
+  // waiting for its file, it is updated and gets a new upload token instead of a second row.
+  const fileName = (body.file as Record<string, unknown> | null)?.name;
+  const resumeId = typeof body.resume_id === "string" && /^[0-9a-f-]{36}$/.test(body.resume_id) ? body.resume_id : null;
+  if (resumeId) {
+    const [old] = await sql`
+      select s.id from meetup.submissions s
+      where s.id = ${resumeId} and s.source = 'file' and s.status = 'pending'
+        and s.created_at > now() - interval '1 day'
+        and not exists (select 1 from storage.objects o where o.bucket_id = 'meetup-works' and o.name = s.file_path)`;
+    if (old) {
+      if (row.source === "file") {
+        const file_path = `${resumeId}/work.${ext(fileName)}`;
+        await sql`update meetup.submissions set ${sql({ ...row, file_path, ip_hash })} where id = ${resumeId}`;
+        return await uploadReply(req, resumeId, file_path, false);
+      }
+      // Switched to a link or pasted text: the unfinished row goes, a new one is made below
+      await sql`delete from meetup.submissions where id = ${resumeId}`;
+    }
+  }
+
   if (ip_hash) {
     const [c] = await sql`
       select count(*) filter (where created_at > now() - interval '1 hour')::int as hour,
@@ -127,15 +150,19 @@ Deno.serve(async (req) => {
   }
 
   const id = crypto.randomUUID();
-  const file_path = row.source === "file" ? `${id}/work.${ext((body.file as Record<string, unknown>)?.name)}` : null;
+  const file_path = row.source === "file" ? `${id}/work.${ext(fileName)}` : null;
   await sql`insert into meetup.submissions ${sql({ id, ...row, file_path, ip_hash })}`;
 
   if (!file_path) return json(req, 200, { ok: true, id });
+  return await uploadReply(req, id, file_path, true);
+});
 
-  const { data, error } = await storage.createSignedUploadUrl(file_path);
+// Signed token for one resumable upload to file_path (upsert, so a retry may overwrite a partial file)
+async function uploadReply(req: Request, id: string, file_path: string, fresh: boolean): Promise<Response> {
+  const { data, error } = await storage.createSignedUploadUrl(file_path, { upsert: true });
   if (error || !data) {
-    await sql`delete from meetup.submissions where id = ${id}`;
+    if (fresh) await sql`delete from meetup.submissions where id = ${id}`;
     return json(req, 500, { ok: false, error: "upload_url" });
   }
   return json(req, 200, { ok: true, id, upload: { bucket: "meetup-works", path: data.path, token: data.token } });
-});
+}

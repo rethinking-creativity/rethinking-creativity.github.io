@@ -21,6 +21,11 @@
       const u = safeURL(w.link);
       return `<div class="wk-hold">${svg(m)}${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(w.link)}</a>` : `<span>${esc(w.link)}</span>`}</div>`;
     }
+    // A PDF (text works only): shown in the page where the browser can, always with a link
+    if (w.pdf) {
+      const u = safeURL(w.pdf);
+      return `<div class="wk-pdf"><object data="${esc(u)}" type="application/pdf" aria-label="${esc(w.title)}"></object><a href="${esc(u)}" target="_blank" rel="noopener">${svg('text')}Open PDF</a></div>`;
+    }
     // Full text: one line per line, so a wrapped line hangs instead of looking like a new one
     if (m === 'text' && w.text) return `<div class="wk-text">${esc(w.text).split(/\n{2,}/).map((st) => `<p>${st.split('\n').map((l) => `<span>${l}</span>`).join('')}</p>`).join('')}</div>`;
     const src = safeURL(w.src);

@@ -48,7 +48,7 @@
     return new Promise((resolve, reject) => {
       const u = new window.tus.Upload(file, {
         endpoint: TUS_ENDPOINT,
-        headers: { apikey: PUBLISHABLE_KEY, 'x-signature': up.token },
+        headers: { apikey: PUBLISHABLE_KEY, 'x-signature': up.token, 'x-upsert': 'true' },
         metadata: { bucketName: up.bucket, objectName: up.path, contentType: typeOf(file), cacheControl: '3600' },
         chunkSize: 6 * 1024 * 1024, // Supabase requires 6 MB chunks
         retryDelays: [0, 3000, 5000, 10000, 20000],
@@ -62,6 +62,9 @@
     });
   }
 
+  // After a failed upload, the next submit reuses that row (see meetup-submit) instead of adding one
+  let unfinishedId = null;
+
   window.SubmitAPI = {
     async submit(payload, file, { onProgress } = {}) {
       try {
@@ -70,12 +73,16 @@
         const res = await fetch(`${FUNCTIONS}/meetup-submit`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', apikey: PUBLISHABLE_KEY },
-          body: JSON.stringify({ token: t, payload, file: file ? { name: file.name, size: file.size, type: typeOf(file) } : null }),
+          body: JSON.stringify({ token: t, payload, resume_id: unfinishedId, file: file ? { name: file.name, size: file.size, type: typeOf(file) } : null }),
         });
         useToken();
         const out = await res.json().catch(() => ({ ok: false, error: 'network' }));
         if (!out.ok) return out;
-        if (file && out.upload) await upload(file, out.upload, onProgress);
+        if (file && out.upload) {
+          unfinishedId = out.id;
+          await upload(file, out.upload, onProgress);
+        }
+        unfinishedId = null;
         return { ok: true, id: out.id };
       } catch (e) {
         console.error(e);

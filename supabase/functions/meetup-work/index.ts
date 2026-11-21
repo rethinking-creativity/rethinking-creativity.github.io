@@ -22,7 +22,7 @@ Deno.serve(async (req) => {
 
   const [w] = await sql`
     select medium, title, year, materials, description, description_long, process, process_long,
-           credit, name, link, text, file_path, file_type, file_size, consent_web
+           credit, name, link, text, file_path, file_type, file_size, cover_path, consent_web
     from meetup.submissions where qr_key = ${k} and status = 'approved'`;
   if (!w) return json(req, 404, { found: false });
   if (closedNow() && !w.consent_web) return json(req, 200, { closed: true });
@@ -42,8 +42,13 @@ Deno.serve(async (req) => {
       if (data) out.text = await data.text();
     } else {
       const { data } = await storage.createSignedUrl(w.file_path, URL_TTL);
-      if (data?.signedUrl) out.src = data.signedUrl;
+      if (data?.signedUrl) out[w.file_type === "application/pdf" ? "pdf" : "src"] = data.signedUrl;
     }
+  }
+  // Cover (video frame, sound waveform, linked work's thumbnail): the video still and the sound artwork
+  if (w.cover_path && (w.medium === "video" || w.medium === "sound")) {
+    const { data } = await storage.createSignedUrl(w.cover_path, URL_TTL);
+    if (data?.signedUrl) out[w.medium === "video" ? "poster" : "art"] = data.signedUrl;
   }
   return json(req, 200, out);
 });
