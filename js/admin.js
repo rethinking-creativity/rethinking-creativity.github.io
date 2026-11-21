@@ -1,5 +1,5 @@
 // Organizer page: every submission is live at once (no approval step). Here organizers print cards
-// (SELPHY, 4 x 6 in, front | back), see what is printed and what each person allowed, pair two works,
+// (SELPHY, 4 x 6 in, front | back), see what is printed and what each person allowed,
 // and withdraw a work on request (consent: Withdrawal).
 // Data comes from AdminAPI (js/admin-api.js, the meetup-admin Edge Function).
 (function () {
@@ -63,10 +63,8 @@
     if (!current && list.length) current = list[0].id;
     byId('list').innerHTML = list.length ? list.map((w) => {
       const t = thumb(w);
-      const pair = w.pair_id && byKey(w.pair_id);
       const tags = [
         !w.file_ok && '<span class="ad-tag ad-tag--bad">Upload incomplete</span>',
-        pair && `<span class="ad-tag ad-tag--pair">↔ ${esc(pair.title)}</span>`,
         `<span class="ad-tag${w.consent_web || w.consent_future ? ' ad-tag--ok' : ''}">${permission(w)}</span>`,
         w.attending === 'no' && '<span class="ad-tag">Not attending</span>',
         w.attending === 'unsure' && '<span class="ad-tag">Maybe attending</span>',
@@ -84,10 +82,6 @@
     const box = byId('detail');
     const w = current && byKey(current);
     if (!w) { box.innerHTML = ''; return; }
-    const others = works.filter((o) => live(o) && o.id !== w.id);
-    const pairUI = !live(w) ? ''
-      : `<select id="pairSel" aria-label="Pair with"><option value="">${w.pair_id ? 'Change pair…' : 'Pair with…'}</option>${others.map((o) => `<option value="${o.id}">${esc(o.title)}${o.pair_id && o.pair_id !== w.id ? ' (paired)' : ''}</option>`).join('')}</select>`
-        + (w.pair_id ? '<button class="ad-btn" type="button" data-act="unpair">Unpair</button>' : '');
     const can = live(w) && w.file_ok;
     const status = live(w)
       ? '<button class="ad-btn ad-btn--warn" type="button" data-act="withdraw">Withdraw</button>'
@@ -96,7 +90,6 @@
     const file = w.link ? `<a href="${esc(w.link)}" target="_blank" rel="noopener">${esc(w.link)}</a>`
       : w.src || w.pdf ? `<a href="${esc(w.src || w.pdf)}" target="_blank" rel="noopener">Open file</a>`
         : w.text ? 'Pasted text' : '—';
-    const pair = w.pair_id && byKey(w.pair_id);
     box.innerHTML = `
       <h2>${esc(w.title)}</h2>
       ${w.file_ok ? '' : '<p class="ad-note">The file never finished uploading, so there is nothing to show or print. Delete this entry.</p>'}
@@ -108,7 +101,7 @@
         <button class="ad-btn" type="button" data-act="printed"${live(w) ? '' : ' disabled'}>${w.printed_at ? 'Mark not printed' : 'Mark printed'}</button>
         <button class="ad-btn" type="button" data-act="copy">Copy QR link</button>
       </div>
-      <div class="ad-actions">${pairUI}${status}${del}</div>
+      <div class="ad-actions">${status}${del}</div>
       <dl class="ad-fields">
         <dt>Name</dt><dd>${esc(w.name)}</dd>
         <dt>Credit</dt><dd>${w.credit === 'anon' ? 'Anonymous' : 'Name'}</dd>
@@ -119,7 +112,6 @@
         <dt>Work</dt><dd>${file}</dd>
         <dt>Printed</dt><dd>${w.printed_at ? when(w.printed_at) : 'No'}</dd>
         <dt>Permission</dt><dd>In person${w.consent_web ? ' · website after the meet-up' : ''}${w.consent_future ? ' · future events and publications' : ''}</dd>
-        <dt>Pair</dt><dd>${pair ? esc(pair.title) : '—'}</dd>
         <dt>Used AI</dt><dd>${w.used_ai ? 'Yes' : 'No'}</dd>
         ${w.description_long ? `<dt>Full description</dt><dd>${esc(w.description_long)}</dd>` : ''}
         ${w.process_long ? `<dt>About the process</dt><dd>${esc(w.process_long)}</dd>` : ''}
@@ -132,8 +124,6 @@
     const fit = () => { sheet.style.transform = `scale(${sb.clientWidth / SHEET_W})`; };
     fit();
     window.CardRender.fitExcerpt(sb);
-    const sel = byId('pairSel');
-    if (sel) sel.addEventListener('change', () => sel.value && act('pair', sel.value));
     if (needsCover(w)) makeCover(w).then((made) => { if (made) refresh(); });
   }
 
@@ -165,8 +155,6 @@
     if (a === 'withdraw') { if (!confirm(`Withdraw “${w.title}”? Its QR page closes; you can restore it later.`)) return; await api.setStatus(w.id, 'withdrawn'); }
     else if (a === 'restore') await api.setStatus(w.id, 'active');
     else if (a === 'printed') await api.setPrinted(w.id, !w.printed_at);
-    else if (a === 'pair') await api.pair(w.id, arg);
-    else if (a === 'unpair') await api.unpair(w.id);
     else if (a === 'delete') { if (!confirm(`Delete “${w.title}” and its file? This cannot be undone.`)) return; await api.remove(w.id); }
     else if (a === 'copy') { await navigator.clipboard.writeText(window.CardRender.workURL(w)); toast('QR link copied'); return; }
     else if (a === 'png') { download(await window.PrintSheet.png(w), fileName(w)); return; }

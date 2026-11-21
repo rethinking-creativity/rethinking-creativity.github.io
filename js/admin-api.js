@@ -1,5 +1,5 @@
 // Organizer backend: the meetup-admin Edge Function. The password goes in x-admin-key on every call.
-// admin.js and onsite.js call AdminAPI.{signIn, list, setStatus, setPrinted, pair, unpair, remove, makeCover}.
+// admin.js and onsite.js call AdminAPI.{signIn, list, setStatus, setPrinted, remove, makeCover}.
 (function () {
   const PROJECT = 'rojnzjoznpkcqfgweohk';
   const FN = `https://${PROJECT}.supabase.co/functions/v1/meetup-admin`;
@@ -45,8 +45,6 @@
     async list() { return (await call('list')).works; },
     setStatus: (id, status) => call('status', { id, status }),
     setPrinted: (id, printed) => call('printed', { id, printed }),
-    pair: (id, other) => call('pair', { id, other }),
-    unpair: (id) => call('unpair', { id }),
     remove: (id) => call('delete', { id }),
     makeCover,
   };

@@ -38,7 +38,6 @@
 .ad-tag { padding: 0.1rem 0.45rem; border-radius: 999px; background: #f3f0f8; color: var(--soft); font-size: 0.72rem; white-space: nowrap; }
 .ad-tag--ok { background: #e6f6ee; color: #1d6b45; }
 .ad-tag--bad { background: #fdecea; color: var(--del); }
-.ad-tag--pair { background: var(--lilac); color: var(--violet-deep); }
 .ad-empty { padding: 2rem 1rem; color: var(--soft); text-align: center; }
 
 .ad-detail { position: sticky; top: 1rem; display: flex; flex-direction: column; gap: 1rem; padding: 1.1rem; border-radius: 16px; background: #fff; }
