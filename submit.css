@@ -157,3 +157,9 @@
 .consent__terms li { margin: 0.2rem 0; }
 .consent__terms b { color: var(--ink); font-weight: 600; }
 .consent .check b { font-weight: 600; }
+
+/* On-site entry (organizer mode, js/onsite.js) */
+.onsite-note { margin: 0 0 1rem; padding: 0.45rem 0.8rem; border-radius: 999px; background: var(--lilac); color: var(--violet-deep); font-size: 0.85rem; display: inline-block; }
+.onsite-actions { display: flex; align-items: center; justify-content: center; gap: 1.2rem; }
+.onsite-actions button { border: 0; cursor: pointer; font-family: inherit; }
+.onsite-status { min-height: 1.2em; color: var(--soft); font-size: 0.9rem; }

@@ -56,18 +56,6 @@
 .ad-sheetbox { position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 4px; box-shadow: 0 0 0 1px #ece7f5; }
 .ad-sheetbox .sheet { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
 
-/* The 6 x 4 in sheet (608 x 405.33 px, cards at the mock-up size of 304 px); saved at 1800 x 1200 */
-.sheet { width: 608px; height: 405.333px; display: grid; grid-template-columns: 1fr 1fr; background: #fdfcf8; position: relative; }
-.sheet__half { position: relative; min-width: 0; }
-.sheet .card { height: 100%; border: 0; border-radius: 0; box-shadow: none; }
-/* Fold guide: two short ticks at the edges, on the fold line only */
-.sheet__fold::before, .sheet__fold::after { content: ""; position: absolute; left: 50%; width: 1px; height: 5px; background: #d9d3e6; }
-.sheet__fold::before { top: 0; }
-.sheet__fold::after { bottom: 0; }
-.card__empty { flex: 1; margin: 0.15rem 0.2rem 0.35rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; border: 1.5px solid #d6d4dc; border-radius: 2px; color: var(--soft); font-size: 0.8rem; text-align: center; padding: 0.5rem; }
-.card__empty svg { width: 1.6rem; height: 1.6rem; }
-
-.ad-stage { position: fixed; left: -10000px; top: 0; }
 .ad-toast { position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%); margin: 0; padding: 0.5rem 0.9rem; border-radius: 999px; background: var(--ink); color: #fff; font-size: 0.86rem; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
 .ad-toast.is-on { opacity: 1; }
 

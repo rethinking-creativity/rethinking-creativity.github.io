@@ -26,8 +26,9 @@
     const who = w.credit === 'anon' ? 'Anonymous' : w.name;
     const artist = [who, w.year].filter(Boolean).join(', ');
     let content;
-    if (w.medium === 'text' && w.text) {
-      const lines = w.text.split('\n').filter((l) => l.trim()).slice(0, 2).join('\n');
+    const text = w.text || w.excerpt; // pasted text or a text file, else a PDF's opening lines
+    if (w.medium === 'text' && text) {
+      const lines = text.split('\n').filter((l) => l.trim()).slice(0, 2).join('\n');
       content = `<div class="card__excerpt"><span>${esc(lines).replace(/\n/g, '<br>')}</span><span class="more">…</span></div>`;
     } else if (w.medium === 'image' && w.src) {
       content = `<div class="card__media" style="background-image:url('${esc(w.src)}')"></div>`;
@@ -69,9 +70,17 @@
     });
   }
 
-  // One 6 x 4 in sheet: front | back; folding at the middle gives the 3 x 4 in card
+  // One 6 x 4 in sheet: front | back; folding at the middle gives the 3 x 4 in card.
+  // 608 x 405.33 px (cards at the mock-up size, 304 px), saved at 1800 x 1200. The layout travels with
+  // the sheet, so a print never depends on which version of a page's stylesheet the browser has cached.
+  const SHEET_CSS = '.sheet{width:608px;height:405.333px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:100%;background:#fdfcf8;position:relative}'
+    + '.sheet__fold{position:absolute;inset:0;pointer-events:none}'
+    + '.sheet__half{position:relative;min-width:0}'
+    + '.sheet .card{position:relative;inset:auto;height:100%;aspect-ratio:auto;border:0;border-radius:0;box-shadow:none;transform:none}'
+    + '.sheet__fold::before,.sheet__fold::after{content:"";position:absolute;left:50%;width:1px;height:5px;background:#d9d3e6}'
+    + '.sheet__fold::before{top:0}.sheet__fold::after{bottom:0}';
   function sheet(w) {
-    return `<div class="sheet"><div class="sheet__half">${front(w)}</div><div class="sheet__half">${back(w)}</div><i class="sheet__fold" aria-hidden="true"></i></div>`;
+    return `<div class="sheet"><style>${SHEET_CSS}</style><div class="sheet__half">${front(w)}</div><div class="sheet__half">${back(w)}</div><i class="sheet__fold" aria-hidden="true"></i></div>`;
   }
 
   window.CardRender = { front, back, sheet, fitExcerpt, workURL, svg, esc };

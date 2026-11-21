@@ -24,6 +24,7 @@
       <h1>Submissions</h1>
       <nav class="ad-tabs" id="tabs" aria-label="Filter by status"></nav>
       <button class="ad-btn" type="button" id="zip" hidden>Download print sheets (.zip)</button>
+      <a class="ad-btn ad-btn--main" href="submit.html">On-site entry</a>
       <button class="ad-link" type="button" id="signOut">Sign out</button>
     </header>
     <div class="ad-body">
@@ -33,15 +34,13 @@
     <p class="ad-toast" id="toast" role="status"></p>
   </div>
 
-  <!-- Print sheets are drawn here at their true size, off screen, then saved as PNG -->
-  <div class="ad-stage" id="stage" aria-hidden="true"></div>
-
   <script src="js/vendor/qrcode.js" defer></script>
   <script src="js/vendor/html-to-image.js" defer></script>
   <script src="js/vendor/fflate.js" defer></script>
   <script src="js/card-render.js" defer></script>
   <script src="js/covers.js" defer></script>
   <script src="js/admin-api.js" defer></script>
+  <script src="js/print-sheet.js" defer></script>
   <script src="js/admin.js" defer></script>
 </body>
 </html>

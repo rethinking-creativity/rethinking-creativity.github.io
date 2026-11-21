@@ -33,3 +33,16 @@ export const storage = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
   { auth: { persistSession: false } },
 ).storage.from(BUCKET);
+
+// Organizer password (x-admin-key) against the MEETUP_ADMIN_KEY secret, compared as hashes in constant time
+const enc = new TextEncoder();
+const digest = async (t: string) => new Uint8Array(await crypto.subtle.digest("SHA-256", enc.encode(t)));
+export async function isOrganizer(req: Request): Promise<boolean> {
+  const want = Deno.env.get("MEETUP_ADMIN_KEY");
+  const got = req.headers.get("x-admin-key") || "";
+  if (!want || !got) return false;
+  const [a, b] = await Promise.all([digest(want), digest(got)]);
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a[i] ^ b[i];
+  return diff === 0;
+}

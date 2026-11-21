@@ -68,11 +68,13 @@
   window.SubmitAPI = {
     async submit(payload, file, { onProgress } = {}) {
       try {
-        const t = await getToken();
-        if (!t) return { ok: false, error: 'turnstile' };
+        // On-site entry (onsite.js): the organizer password stands in for Turnstile
+        const organizer = window.RC_ORGANIZER_KEY;
+        const t = organizer ? '' : await getToken();
+        if (!t && !organizer) return { ok: false, error: 'turnstile' };
         const res = await fetch(`${FUNCTIONS}/meetup-submit`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', apikey: PUBLISHABLE_KEY },
+          headers: { 'Content-Type': 'application/json', apikey: PUBLISHABLE_KEY, ...(organizer ? { 'x-admin-key': organizer } : {}) },
           body: JSON.stringify({ token: t, payload, resume_id: unfinishedId, file: file ? { name: file.name, size: file.size, type: typeOf(file) } : null }),
         });
         useToken();

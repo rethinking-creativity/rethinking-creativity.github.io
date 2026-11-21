@@ -7,27 +7,13 @@
 //   delete  { id }            the row and every file under <id>/
 //   cover_upload { id, ext }  signed upload for <id>/cover.<ext> (video frame / sound waveform made in the browser)
 //   cover_set    { id, path } record the uploaded cover once the file exists
+//   excerpt_set  { id, excerpt } opening lines of a PDF text work (read in the browser), for the card front
 //   link_cover   { id }       fetch a linked work's thumbnail (YouTube, Vimeo, SoundCloud, else og:image) into <id>/cover.*
-import { BUCKET, cors, json, sql, storage } from "../_shared/common.ts";
+import { BUCKET, cors, isOrganizer, json, sql, storage } from "../_shared/common.ts";
 
 const URL_TTL = 60 * 60;
 const TEXT_INLINE_MAX = 200 * 1024;
 const COVER_MAX = 5 * 1024 * 1024;
-const enc = new TextEncoder();
-
-async function digest(s: string): Promise<Uint8Array> {
-  return new Uint8Array(await crypto.subtle.digest("SHA-256", enc.encode(s)));
-}
-async function authorized(req: Request): Promise<boolean> {
-  const want = Deno.env.get("MEETUP_ADMIN_KEY");
-  const got = req.headers.get("x-admin-key") || "";
-  if (!want || !got) return false;
-  const [a, b] = await Promise.all([digest(want), digest(got)]);
-  let diff = 0;
-  for (let i = 0; i < a.length; i++) diff |= a[i] ^ b[i];
-  return diff === 0;
-}
-
 const objectExists = async (path: string | null) =>
   !!path && (await sql`select 1 from storage.objects where bucket_id = ${BUCKET} and name = ${path}`).length > 0;
 
@@ -36,7 +22,7 @@ async function list() {
     select s.id, s.qr_key, s.created_at, s.status, s.pair_id, s.medium, s.source, s.link, s.text,
            s.file_path, s.file_type, s.file_size, s.cover_path, s.title, s.year, s.materials,
            s.description, s.description_long, s.used_ai, s.process, s.process_long, s.name, s.credit,
-           s.email, s.consent_web, s.consent_future,
+           s.email, s.consent_web, s.consent_future, s.excerpt,
            (s.source <> 'file' or exists (select 1 from storage.objects o where o.bucket_id = ${BUCKET} and o.name = s.file_path)) as file_ok,
            exists (select 1 from storage.objects o where o.bucket_id = ${BUCKET} and o.name = s.cover_path) as cover_ok
     from meetup.submissions s order by s.created_at`;
@@ -119,7 +105,7 @@ const isId = (v: unknown): v is string => typeof v === "string" && /^[0-9a-f-]{3
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors(req) });
   if (req.method !== "POST") return json(req, 405, { ok: false, error: "method" });
-  if (!(await authorized(req))) {
+  if (!(await isOrganizer(req))) {
     await new Promise((r) => setTimeout(r, 800)); // slows password guessing
     return json(req, 401, { ok: false, error: "auth" });
   }
@@ -184,6 +170,12 @@ Deno.serve(async (req) => {
       const path = b.path;
       if (!isId(id) || typeof path !== "string" || !path.startsWith(`${id}/cover.`) || !(await objectExists(path))) break;
       await sql`update meetup.submissions set cover_path = ${path} where id = ${id}`;
+      return json(req, 200, { ok: true });
+    }
+    case "excerpt_set": {
+      const t = typeof b.excerpt === "string" ? b.excerpt.trim().slice(0, 300) : "";
+      if (!isId(id) || !t) break;
+      await sql`update meetup.submissions set excerpt = ${t} where id = ${id}`;
       return json(req, 200, { ok: true });
     }
     case "link_cover":

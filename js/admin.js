@@ -93,6 +93,7 @@
       <div class="ad-sheetbox" id="sheetbox">${window.CardRender.sheet(w)}</div>
       <div class="ad-actions">${status}${del}</div>
       <div class="ad-actions">
+        <button class="ad-btn" type="button" data-act="print"${w.status === 'approved' ? '' : ' disabled'}>Print card</button>
         <button class="ad-btn" type="button" data-act="png"${w.status === 'approved' ? '' : ' disabled'}>Download print sheet</button>
         <button class="ad-btn" type="button" data-act="copy">Copy QR link</button>
         ${pairUI}
@@ -123,8 +124,7 @@
 
   // Card-front picture for video, sound and linked works, made once and stored with the work
   const tried = new Set();
-  const needsCover = (w) => !w.has_cover && w.file_ok && !tried.has(w.id) && window.AdminAPI.makeCover
-    && (w.link ? w.medium !== 'text' : (w.medium === 'video' || w.medium === 'sound') && !!w.src);
+  const needsCover = (w) => !tried.has(w.id) && window.PrintSheet.needsCover(w);
   async function makeCover(w) {
     tried.add(w.id);
     try { return await window.AdminAPI.makeCover(w); } catch (e) { console.error(e); return false; }
@@ -154,7 +154,8 @@
     else if (a === 'unpair') await api.unpair(w.id);
     else if (a === 'delete') { if (!confirm(`Delete “${w.title}” and its file? This cannot be undone.`)) return; await api.remove(w.id); }
     else if (a === 'copy') { await navigator.clipboard.writeText(window.CardRender.workURL(w)); toast('QR link copied'); return; }
-    else if (a === 'png') { download(await sheetPNG(w), fileName(w)); return; }
+    else if (a === 'png') { download(await window.PrintSheet.png(w), fileName(w)); return; }
+    else if (a === 'print') { await window.PrintSheet.print(w); return; }
     else return;
     // Moving on after a decision keeps the review going
     const list = shown();
@@ -164,18 +165,6 @@
     draw();
   }
 
-  // Print sheet: drawn at its true size off screen, saved at 1800 x 1200 (6 x 4 in at 300 dpi)
-  async function sheetPNG(w) {
-    const stage = byId('stage');
-    stage.innerHTML = window.CardRender.sheet(w);
-    await document.fonts.ready;
-    await Promise.all([...stage.querySelectorAll('img')].map((i) => i.decode().catch(() => {})));
-    window.CardRender.fitExcerpt(stage);
-    const node = stage.firstElementChild;
-    const blob = await window.htmlToImage.toBlob(node, { pixelRatio: 1, canvasWidth: 1800, canvasHeight: 1200, backgroundColor: '#fdfcf8' });
-    stage.innerHTML = '';
-    return blob;
-  }
   const slug = (t) => (t || 'work').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
   const fileName = (w) => `${slug(w.title)}-${w.qr_key}.png`;
   function download(blob, name) {
@@ -199,7 +188,7 @@
     if (missing.length) { works = await window.AdminAPI.list(); list = shown(); }
     for (let i = 0; i < list.length; i++) {
       btn.textContent = `Making sheets… ${i + 1} / ${list.length}`;
-      files[fileName(list[i])] = new Uint8Array(await (await sheetPNG(list[i])).arrayBuffer());
+      files[fileName(list[i])] = new Uint8Array(await (await window.PrintSheet.png(list[i])).arrayBuffer());
     }
     const zip = window.fflate.zipSync(files, { level: 0 }); // PNGs are already compressed
     download(new Blob([zip], { type: 'application/zip' }), `print-sheets-${new Date().toISOString().slice(0, 10)}.zip`);

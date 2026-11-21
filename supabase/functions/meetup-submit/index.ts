@@ -1,13 +1,12 @@
 // meetup-submit: takes one artwork submission from submit.html.
-// Turnstile check -> input check (same limits as the form) -> per-IP rate limit -> insert row
+// Turnstile check -> input check (same limits as the form) -> insert row
 // -> for a file, a signed upload token for meetup-works (the browser uploads it resumably, TUS).
 // A file row counts as complete once its object exists in the bucket (storage.objects is the truth).
-// Secrets: TURNSTILE_SECRET, MEETUP_IP_SALT. No confirmation email is sent.
-import { cors, json, sql, storage } from "../_shared/common.ts";
+// Secrets: TURNSTILE_SECRET (MEETUP_ADMIN_KEY for organizer entries). No confirmation email is sent.
+// No per-IP limit: Turnstile stops bots, and a venue network puts many people behind one IP.
+import { cors, isOrganizer, json, sql, storage } from "../_shared/common.ts";
 
 const MAX_FILE = 100 * 1024 * 1024;
-const PER_HOUR = 5;
-const PER_DAY = 20;
 const HOSTNAMES = ["rethinking-creativity.github.io", "localhost", "127.0.0.1"];
 const FILE_TYPES: Record<string, RegExp> = {
   image: /^image\/[\w.+-]+$/,
@@ -91,12 +90,6 @@ async function turnstile(token: unknown, ip: string): Promise<boolean> {
   return out.success === true && HOSTNAMES.includes(out.hostname);
 }
 
-async function ipHash(ip: string): Promise<string> {
-  const data = new TextEncoder().encode(`${Deno.env.get("MEETUP_IP_SALT")}|${ip}`);
-  const digest = await crypto.subtle.digest("SHA-256", data);
-  return Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, "0")).join("");
-}
-
 // Object name inside the bucket: <row id>/work.<ext>; the person's file name is not kept
 const ext = (name: unknown) => (String(name || "").match(/\.([a-z0-9]{1,8})$/i)?.[1] || "bin").toLowerCase();
 
@@ -107,8 +100,10 @@ Deno.serve(async (req) => {
   let body: Record<string, unknown>;
   try { body = await req.json(); } catch { return json(req, 400, { ok: false, error: "json" }); }
 
+  // On-site entry from the organizer's signed-in browser: trusted, so no Turnstile, and approved at once
+  const organizer = await isOrganizer(req);
   const ip = (req.headers.get("x-forwarded-for") || "").split(",")[0].trim();
-  if (!(await turnstile(body.token, ip))) return json(req, 403, { ok: false, error: "turnstile" });
+  if (!organizer && !(await turnstile(body.token, ip))) return json(req, 403, { ok: false, error: "turnstile" });
 
   let row: ReturnType<typeof check>;
   try {
@@ -118,7 +113,6 @@ Deno.serve(async (req) => {
     throw e;
   }
 
-  const ip_hash = ip ? await ipHash(ip) : null;
 
   // Retry after a failed upload: the browser sends back the id it got; if that row is still
   // waiting for its file, it is updated and gets a new upload token instead of a second row.
@@ -133,7 +127,7 @@ Deno.serve(async (req) => {
     if (old) {
       if (row.source === "file") {
         const file_path = `${resumeId}/work.${ext(fileName)}`;
-        await sql`update meetup.submissions set ${sql({ ...row, file_path, ip_hash })} where id = ${resumeId}`;
+        await sql`update meetup.submissions set ${sql({ ...row, file_path })} where id = ${resumeId}`;
         return await uploadReply(req, resumeId, file_path, false);
       }
       // Switched to a link or pasted text: the unfinished row goes, a new one is made below
@@ -141,17 +135,9 @@ Deno.serve(async (req) => {
     }
   }
 
-  if (ip_hash) {
-    const [c] = await sql`
-      select count(*) filter (where created_at > now() - interval '1 hour')::int as hour,
-             count(*)::int as day
-      from meetup.submissions where ip_hash = ${ip_hash} and created_at > now() - interval '1 day'`;
-    if (c.hour >= PER_HOUR || c.day >= PER_DAY) return json(req, 429, { ok: false, error: "rate" });
-  }
-
   const id = crypto.randomUUID();
   const file_path = row.source === "file" ? `${id}/work.${ext(fileName)}` : null;
-  await sql`insert into meetup.submissions ${sql({ id, ...row, file_path, ip_hash })}`;
+  await sql`insert into meetup.submissions ${sql({ id, ...row, file_path, status: organizer ? "approved" : "pending" })}`;
 
   if (!file_path) return json(req, 200, { ok: true, id });
   return await uploadReply(req, id, file_path, true);

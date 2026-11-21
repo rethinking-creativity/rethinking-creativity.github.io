@@ -68,3 +68,7 @@
 .card, .card--back { background: #fdfcf8; border-color: #f0ede4; }
 .card--image .card__media, .card--video .card__media { margin: 0.15rem 0.2rem 0.35rem; }
 
+
+/* Card front with no picture yet (linked work without a thumbnail) */
+.card__empty { flex: 1; margin: 0.15rem 0.2rem 0.35rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; border: 1.5px solid #d6d4dc; border-radius: 2px; color: var(--soft); font-size: 0.8rem; text-align: center; padding: 0.5rem; }
+.card__empty svg { width: 1.6rem; height: 1.6rem; }

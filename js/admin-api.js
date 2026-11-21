@@ -1,11 +1,11 @@
 // Organizer backend: the meetup-admin Edge Function. The password goes in x-admin-key on every call.
-// admin.js calls AdminAPI.{signIn, list, setStatus, pair, unpair, remove, makeCover}.
+// admin.js and onsite.js call AdminAPI.{signIn, list, setStatus, pair, unpair, remove, makeCover}.
 (function () {
   const PROJECT = 'rojnzjoznpkcqfgweohk';
   const FN = `https://${PROJECT}.supabase.co/functions/v1/meetup-admin`;
   const STORAGE = `https://${PROJECT}.supabase.co/storage/v1`;
   const PUBLISHABLE_KEY = 'sb_publishable_xhLGR-vUiEERd5hWaparrA_n1HSyJYn'; // public by design
-  let key = '';
+  let key = sessionStorage.getItem('rc-admin-key') || '';
 
   async function call(action, body = {}) {
     const res = await fetch(FN, {
@@ -21,6 +21,10 @@
   // Covers: video frame and sound waveform are made here from the file; a link's thumbnail is fetched by the server
   async function makeCover(w) {
     if (w.link) return (await call('link_cover', { id: w.id })).ok;
+    if (w.medium === 'text' && w.pdf) {
+      const excerpt = await window.Covers.pdfExcerpt(w.pdf);
+      return !!excerpt && (await call('excerpt_set', { id: w.id, excerpt })).ok;
+    }
     let blob, ext;
     if (w.medium === 'video' && w.src) { blob = await window.Covers.videoFrame(w.src); ext = 'jpg'; }
     else if (w.medium === 'sound' && w.src) { blob = await window.Covers.waveform(w.src); ext = 'svg'; }

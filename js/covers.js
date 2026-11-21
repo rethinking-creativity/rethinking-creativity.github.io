@@ -1,5 +1,6 @@
 // Card-front pictures made in the browser from an uploaded file:
-// a video's frame (JPEG) and a sound's radial waveform (SVG, the style of assets/examples/sound_radial.svg).
+// a video's frame (JPEG) and a sound's radial waveform (SVG, the style of assets/examples/sound_radial.svg);
+// for a PDF text work, its opening lines (pdf.js), since the text card front shows the first two lines.
 (function () {
   // A frame a little into the video (10%, at most 1 s), skipping the black first frame most clips start with
   function videoFrame(url) {
@@ -55,5 +56,16 @@
     return new Blob([svg], { type: 'image/svg+xml' });
   }
 
-  window.Covers = { videoFrame, waveform };
+  async function pdfExcerpt(url) {
+    const pdfjs = await import(new URL('js/vendor/pdf.min.mjs', document.baseURI).href);
+    pdfjs.GlobalWorkerOptions.workerSrc = new URL('js/vendor/pdf.worker.min.mjs', document.baseURI).href;
+    const doc = await pdfjs.getDocument(url).promise;
+    const page = await doc.getPage(1);
+    const { items } = await page.getTextContent();
+    let text = '';
+    items.forEach((it) => { text += it.str + (it.hasEOL ? '\n' : ''); });
+    return text.split('\n').map((l) => l.trim()).filter(Boolean).slice(0, 2).join('\n').slice(0, 300);
+  }
+
+  window.Covers = { videoFrame, waveform, pdfExcerpt };
 })();

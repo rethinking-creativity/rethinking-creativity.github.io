@@ -356,6 +356,7 @@
     form.hidden = true;
     document.querySelector('.submit__head').hidden = true;
     byId('done').hidden = false;
+    document.dispatchEvent(new CustomEvent('rc:submitted', { detail: { id: res.id } })); // on-site printing (onsite.js)
     window.scrollTo({ top: 0 });
     byId('done').focus({ preventScroll: true });
   });
