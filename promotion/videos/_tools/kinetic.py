@@ -61,7 +61,7 @@ def content(ctx, look):
                  [(0, "in", "#hook-ai .wi")] + [(i, "pop", f"#hook-v{i}") for i in range(4)] + [(i + 1, "out", f"#hook-v{i}") for i in range(3)]
                  + [(i, "card", f"#hook-a{i}") for i in range(4)] + [(4, "outpart", "#hook-p1"), (4, "in", "#hook-q .wi")])
     # 2 four questions
-    S["four"] = (f'''<div class="safe">{P("four-a", "We’ve got", "mid")}<div class="row4"><p class="l huge acc-text" id="four-n">4</p>{P("four-t", "questions", "big")}</div>{P("four-b", "for you.", "mid")}</div>''',
+    S["four"] = (f'''<div class="safe">{P("four-a", "We’ve got", "mid")}<div class="row4"><p class="l qbig acc-text" id="four-n">4</p>{P("four-t", "questions", "qbig")}</div>{P("four-b", "for you.", "mid")}</div>''',
                  [(0, "in", "#four-a .wi"), (0.5, "pop", "#four-n"), (1, "in", "#four-t .wi"), (2.5, "in", "#four-b .wi")])
     # 3 the questions, back to back
     rows, ev = [], []
@@ -94,7 +94,7 @@ def content(ctx, look):
         face, _ = work_face(ctx, w)
         lab, cls = who_label(w)
         tiles.append(f'<div class="tt" id="tt{i}"><div class="ti" id="tt{i}-in"><div class="tf">{face}</div><div class="tf tb"><b class="{cls}">{lab}</b></div></div></div>')
-    S["game"] = (f'''<div class="safe"><div class="tiles">{"".join(tiles)}</div>{P("gm-a", "We’ll guess which ones used *AI*,", "mid")}{P("gm-b", "then read how each was made.", "small")}</div>''',
+    S["game"] = (f'''<div class="safe"><div class="tiles">{"".join(tiles)}</div>{P("gm-a", "We want to learn about *your practice,*", "mid")}{P("gm-b", "and talk about how research can better support your creativity.", "small")}</div>''',
                  [(0, "tiles", "#sc-game .tt"), (1, "in", "#gm-a .wi")] + [(2 + i * 0.5, "flip", f"#tt{i}-in") for i in range(4)] + [(4, "in", "#gm-b .wi")])
     # 10 can't come
     # 10 can't come: why it still matters, and what happens to the work (consent terms on submit.html)
@@ -156,7 +156,8 @@ class Look:
     .poem {{ font-family: "Instrument Serif", serif; color: #2a2140; background: #fff; border-radius: 8px; line-height: 1.28; }}
     .apoem {{ font-size: 30px; padding: 14px; }}
     .art .tag {{ position: absolute; right: -14px; top: -14px; padding: 6px 16px; border-radius: 999px; background: {self.accent}; color: #111; font-size: 30px; font-weight: 800; }}
-    .row4 {{ display: flex; flex-direction: row; align-items: baseline; gap: {24 if ctx.v else 40}px; }}
+    .row4 {{ display: flex; flex-direction: {"column" if ctx.v else "row"}; align-items: {"center" if ctx.v else "baseline"}; gap: {0 if ctx.v else 36}px; }}
+    .qbig {{ font-size: {180 if ctx.v else 220}px; font-weight: 900; letter-spacing: -0.06em; line-height: .92; }}
     .qs {{ align-items: flex-start; text-align: left; gap: {34 if ctx.v else 30}px; }}
     .q {{ display: grid; grid-template-columns: auto 1fr; column-gap: 22px; row-gap: 6px; align-items: baseline; }}
     .qn {{ font-size: {z("meta") + 6}px; font-weight: 800; color: {self.accent}; font-variant-numeric: tabular-nums; }}
@@ -263,6 +264,7 @@ class Zoom(Look):
     #bgc {{ position: absolute; inset: 0; background: #050505; overflow: hidden; }}
     .ring {{ position: absolute; left: 50%; top: 50%; width: 900px; height: 900px; margin: -450px 0 0 -450px; border-radius: 50%; border: 2px solid rgba(212,255,58,.22); }}
     .big, .huge, .title, .qt {{ text-transform: uppercase; }}
+    .qbig {{ text-transform: uppercase; font-size: {150 if ctx.v else 200}px; }}
     .acc .wi, .acc-text, .acc-solid {{ color: {self.accent}; }}
     .qn {{ color: {self.accent}; }}"""
 
@@ -304,17 +306,17 @@ class Fly(Look):
 
     def css(self, ctx):
         return f"""
-    #bgc {{ position: absolute; inset: 0; background: linear-gradient(180deg, #0b0020 0%, #2a0845 50%, #6b0f6a {80 if ctx.v else 70}%, #120022 {80.5 if ctx.v else 70.5}%); overflow: hidden; }}
-    #sun {{ position: absolute; left: 50%; top: {ctx.H * (0.8 if ctx.v else 0.7) - 200:.0f}px; width: 400px; height: 400px; margin-left: -200px; border-radius: 50%;
+    #bgc {{ position: absolute; inset: 0; background: linear-gradient(180deg, #0b0020 0%, #2a0845 50%, #6b0f6a 80%, #120022 80.5%); overflow: hidden; }}
+    #sun {{ position: absolute; left: 50%; top: {ctx.H * (0.8 if ctx.v else 0.8) - 200:.0f}px; width: 400px; height: 400px; margin-left: -200px; border-radius: 50%;
             background: linear-gradient(180deg, #ffd36e, #ff4f9a 70%); opacity: .3;
             -webkit-mask: repeating-linear-gradient(180deg, #000 0 26px, transparent 26px 34px); mask: repeating-linear-gradient(180deg, #000 0 26px, transparent 26px 34px); }}
-    #floor {{ position: absolute; left: -50%; width: 200%; top: {ctx.H * (0.8 if ctx.v else 0.7):.0f}px; height: {ctx.H * 0.9:.0f}px; opacity: .7; transform-origin: 50% 0; transform: perspective(500px) rotateX(70deg);
+    #floor {{ position: absolute; left: -50%; width: 200%; top: {ctx.H * (0.8 if ctx.v else 0.8):.0f}px; height: {ctx.H * 0.9:.0f}px; opacity: .7; transform-origin: 50% 0; transform: perspective(500px) rotateX(70deg);
               background-image: linear-gradient(rgba(255,79,154,.75) 2px, transparent 2px), linear-gradient(90deg, rgba(255,79,154,.75) 2px, transparent 2px);
               background-size: 90px 90px; }}
     #cam {{ perspective: 1300px; }}
     #world {{ transform-style: preserve-3d; }}
     .sc {{ transform-style: preserve-3d; }}
-    .big, .huge, .title, .mid, .qt {{ text-shadow: 0 0 24px rgba(255,79,154,.75), 0 0 2px #fff; }}
+    .big, .huge, .title, .mid, .qt, .qbig {{ text-shadow: 0 0 24px rgba(255,79,154,.75), 0 0 2px #fff; }}
     .acc .wi, .acc-text, .acc-solid {{ color: {self.accent}; text-shadow: 0 0 24px rgba(77,243,255,.9); }}"""
 
     def background(self, ctx):
