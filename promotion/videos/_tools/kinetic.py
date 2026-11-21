@@ -73,9 +73,10 @@ def credit(look):
             n = "Joseon folk painting" if k == "chaekgado" else w["how"].split(",")[0]
             if n not in names:
                 names.append(n)
-    return (f"Artworks by {', '.join(names)}: public domain, via Wikimedia Commons. "
-            "AI-made works: Gemini, Veo, Lyria and Claude. Film and music made with Claude Code (HyperFrames); "
-            "the music was synthesized for this film.")
+    lead = ", ".join(names[:-1]) + " and " + names[-1] if len(names) > 1 else names[0]
+    return (f"Artworks in this video include works by {lead}, all public domain, via Wikimedia Commons. "
+            "AI-made artworks were created with Gemini, Veo, Lyria and Claude. "
+            "This video and its music were made in code with HyperFrames and Claude Code.")
 
 
 def content(ctx, look):
