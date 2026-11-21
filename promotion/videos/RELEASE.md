@@ -1,8 +1,7 @@
 # 홍보 영상 공개 계획 (안)
 
-영상: `promotion/videos/_out/kinetic/` (git 제외, 로컬 보관). 세로 = Instagram Reels·YouTube Shorts,
-가로 = X·LinkedIn·YouTube(일반)·웹사이트(2026-11-21 확정: X와 LinkedIn도 가로).
-X는 썸네일을 고를 수 없어서 첫 0.5초에 썸네일을 붙인 X용 파일을 올림: `_out/x/NN-look-landscape-x.mp4` (`_tools/x_versions.sh`, Downloads의 `for-X/`).
+영상: `promotion/videos/_out/kinetic/` (git 제외, 로컬 보관). 세로 = Instagram Reels·YouTube Shorts·X·LinkedIn (2026-11-21 확정), 가로 = YouTube(일반)·웹사이트.
+X는 썸네일을 고를 수 없어서 첫 0.5초에 커버를 붙인 X용 파일을 올림: `_out/x/NN-look-vertical-x.mp4` (`_tools/x_versions.sh`, Downloads의 `for-X/`). LinkedIn은 일반 세로 파일 + 썸네일로 `NN-look-shorts-reels-cover.jpg`.
 다시 만들기: `_tools/kinetic.py` → `_tools/render_kinetic.sh`.
 
 학회: CHI 2027, 2027-05-10–14, Pittsburgh. 작품 모집이 목적이라 앞쪽은 "작품 보내기", 막바지는 "현장에 오기"에 무게.
