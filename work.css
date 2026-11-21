@@ -76,3 +76,5 @@
 .wk__kv { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.45rem 1rem; margin: 0; }
 .wk__kv dt { font-size: 0.8rem; color: var(--soft); padding-top: 0.15rem; }
 .wk__kv dd { margin: 0; }
+.wk__q { margin: 0.9rem 0 0.25rem; font-size: 0.8rem; font-weight: 600; color: var(--soft); }
+.wk__q:first-of-type { margin-top: 0; }

@@ -13,6 +13,15 @@
   const para = (t) => esc(t).split(/\n{2,}/).map((p) => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
   const safeURL = (u) => (/^(https?:|data:image\/|assets\/)/i.test(u || '') ? u : '');
 
+  // The questions on the submit form (Your take), as the person answered them
+  const TAKE = [
+    ['q1', 'Can creativity be shared between you and AI?'],
+    ['q2', 'Which parts of creating do you want to keep for yourself?'],
+    ['q3', 'What does growing as a creator mean to you when more of the creative process can be handed to AI?'],
+    ['q4', 'How do you know whether a tool supports your creativity?'],
+    ['q5', 'What should future creativity tools do, or never do?'],
+  ];
+
   function media(w) {
     const m = w.medium;
     if (w.link) {
@@ -63,6 +72,10 @@
           <h2 id="h-process">Process</h2>
           ${hasCells ? `<div class="wk__process"><span class="hd"></span><span class="hd h"><i></i>By hand</span><span class="hd a"><i></i>With AI</span>${cells}</div>` : ''}
           ${w.process_long ? `${hasCells ? '<h3>More about the process</h3>' : ''}${para(w.process_long)}` : ''}
+        </section>` : ''}
+        ${Object.keys(w.answers || {}).length ? `<section class="wk__blk" aria-labelledby="h-take">
+          <h2 id="h-take">The artist's take</h2>
+          ${TAKE.filter(([k]) => w.answers[k]).map(([k, q]) => `<h3 class="wk__q">${q}</h3>${para(w.answers[k])}`).join('')}
         </section>` : ''}
         ${w.practice || w.background ? `<section class="wk__blk" aria-labelledby="h-artist">
           <h2 id="h-artist">About the artist</h2>

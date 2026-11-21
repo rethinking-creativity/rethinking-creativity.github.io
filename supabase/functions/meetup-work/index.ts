@@ -21,7 +21,7 @@ Deno.serve(async (req) => {
   if (!/^[0-9a-f]{12}$/.test(k)) return json(req, 404, { found: false });
 
   const [w] = await step("db", () => sql`
-    select medium, title, year, materials, description, description_long, process, process_long, practice, background,
+    select medium, title, year, materials, description, description_long, process, process_long, practice, background, answers, tool_wish,
            credit, name, link, text, file_path, file_type, file_size, cover_path, consent_web
     from meetup.submissions where qr_key = ${k} and status = 'active'`);
   if (!w) return json(req, 404, { found: false });
@@ -33,6 +33,7 @@ Deno.serve(async (req) => {
     process: w.process || [], process_long: w.process_long || "",
     credit: w.credit, name: w.credit === "anon" ? "Anonymous" : w.name,
     practice: w.practice || "", background: w.background || "",
+    answers: { ...(w.answers || {}), ...(w.tool_wish ? { q5: w.tool_wish } : {}) },
   };
   if (w.link) out.link = w.link;
   if (w.text) out.text = w.text;

@@ -9,6 +9,7 @@
     kettle: {
       medium: 'text', title: 'Kettle', credit: 'anon', name: '', year: '2026', materials: 'Poem',
       practice: 'Poems, mostly about home', background: 'Writing for five years, alongside a day job in a lab',
+      answers: { q2: 'The first line and the last word. AI can point at what stumbles, but I choose what stays.', q5: 'Show me where a draft is weak; never write the poem for me.' },
       text: 'The kettle learns my name each morning.\nIt calls twice, and I come home.\nThe radiator answers in its own slow code,\nthree knocks, a sigh, then nothing.\nThe fridge hums the one note it remembers.\n\nI set out a cup for no one,\nthen drink from it myself.\nSomewhere a neighbour’s door says goodnight.\nI count the small voices of the house\nuntil the quiet has a shape,\nand the shape is almost company.',
       description: 'A short poem about living alone and the small sounds that keep me company.',
       description_long: 'I moved into a flat on my own last winter and started noticing how much the house talks. The poem is a list of those voices, and of the habits I picked up to answer them. It is meant to be read slowly, out loud if you can.',
