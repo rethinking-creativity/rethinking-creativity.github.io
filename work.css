@@ -2,7 +2,7 @@
 .wk-page { background: #fdfcf8; min-height: 100vh; display: flex; flex-direction: column; }
 .wk { flex: 1; width: 100%; max-width: 40rem; margin-inline: auto; padding: 1.25rem 1.25rem 2rem; }
 .wk__work { min-width: 0; }
-.wk__medium { display: flex; align-items: center; gap: 0.35rem; margin: 0 0 0.6rem; font-size: 0.78rem; color: #9a91ad; letter-spacing: 0.02em; }
+.wk__medium { display: flex; align-items: center; gap: 0.35rem; margin: 0 0 0.6rem; font-size: 0.78rem; color: #736a88; letter-spacing: 0.02em; }
 .wk__medium svg { width: 0.95rem; height: 0.95rem; }
 
 /* The work */
@@ -27,7 +27,7 @@
 .wk__title { margin: 1.4rem 0 0; font-family: "Instrument Serif", serif; font-size: 2.3rem; font-weight: 400; line-height: 1.05; }
 .wk__byline { margin: 0.3rem 0 1.4rem; }
 .wk__artist { margin: 0; color: var(--soft); }
-.wk__materials { margin: 0.15rem 0 0; font-size: 0.92rem; color: #8a829c; }
+.wk__materials { margin: 0.15rem 0 0; font-size: 0.92rem; color: #736a88; }
 .wk__blk { margin: 0 0 0.9rem; padding: 1rem 1.1rem; border-radius: 14px; background: #fff; }
 .wk__blk h2 { margin: 0 0 0.5rem; font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
 .wk__blk h3 { margin: 1rem 0 0.35rem; font-size: 0.82rem; font-weight: 600; color: var(--soft); }
@@ -42,7 +42,7 @@
 .wk__process .hd.h i { background: var(--human); }
 .wk__process .hd.a { color: var(--ai); }
 .wk__process .hd.a i { background: var(--ai); }
-.wk__process .st { min-width: 3.4rem; font-size: 0.8rem; color: #9a91ad; padding-top: 0.55rem; overflow-wrap: anywhere; }
+.wk__process .st { min-width: 3.4rem; font-size: 0.8rem; color: #736a88; padding-top: 0.55rem; overflow-wrap: anywhere; }
 .wk__process .h { color: #2e2366; }
 .wk__process .a { color: #1e3a8a; }
 

@@ -92,7 +92,7 @@ h3 { margin: 0 0 0.35rem; }
   --sky: #d6ebff;
   --lilac: #e7defe;
   --human: #6d3be8;
-  --ai: #3b82f6;
+  --ai: #2563eb; /* 5.2:1 on white (was #3b82f6, 3.7:1) */
   --del: #b42318;
   --wash: #fbf8ff;
   --focus: #6d3be8;
@@ -170,9 +170,12 @@ h3 { font-size: 1.08rem; font-weight: 600; line-height: 1.35; }
 .dcard__label { margin: 0 0 0.6rem; font-weight: 600; color: var(--violet); }
 .dcard__q { margin: 0; font-size: 1.45rem; font-weight: 600; line-height: 1.22; letter-spacing: -0.015em; }
 .dcard__note { margin: auto 0 0; color: var(--soft); font-size: 0.95rem; }
-.qdeck__dots { display: flex; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
-.qdeck__dots button { width: 0.55rem; height: 0.55rem; padding: 0; border: 0; border-radius: 999px; background: #d3d6dc; cursor: pointer; transition: width 0.3s; }
-.qdeck__dots button[aria-current="true"] { width: 1.8rem; background: var(--violet); }
+/* Each dot sits in a 24 px target (WCAG 2.5.8); the dot itself is drawn by ::before */
+.qdeck__dots { display: flex; gap: 0; margin: 0; padding: 0; list-style: none; }
+.qdeck__dots button { position: relative; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 999px; background: none; cursor: pointer; transition: width 0.3s; }
+.qdeck__dots button::before { content: ""; position: absolute; left: 50%; top: 50%; width: 0.55rem; height: 0.55rem; transform: translate(-50%, -50%); border-radius: 999px; background: #d3d6dc; transition: width 0.3s; }
+.qdeck__dots button[aria-current="true"] { width: calc(1.8rem + 16px); }
+.qdeck__dots button[aria-current="true"]::before { width: 1.8rem; background: var(--violet); }
 
 .timeline li { border-top: 1px solid var(--rule); }
 .timeline__time { font-weight: 600; }

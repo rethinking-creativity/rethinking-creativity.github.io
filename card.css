@@ -4,12 +4,12 @@
 .card { position: relative; width: 100%; aspect-ratio: 3 / 4; display: flex; flex-direction: column; gap: 0.6rem; padding: 1rem; border-radius: 18px; background: #fff; border: 1px solid var(--rule); box-shadow: 0 30px 60px -30px rgba(30, 40, 70, 0.35); overflow: hidden; text-align: left; color: var(--ink); }
 
 /* Medium: a small grey icon in the corner, not a label */
-.card__medium { display: flex; align-items: center; gap: 0.3rem; font-size: 0.66rem; color: #9a91ad; letter-spacing: 0.02em; }
+.card__medium { display: flex; align-items: center; gap: 0.3rem; font-size: 0.66rem; color: #736a88; letter-spacing: 0.02em; }
 .card__medium svg { width: 0.8rem; height: 0.8rem; }
 .card__media { flex: 1; min-height: 0; border-radius: 2px; background: transparent center / contain no-repeat; }
 .card__title { margin: 0; font-family: "Instrument Serif", serif; font-size: 1.55rem; font-weight: 400; line-height: 1.08; }
 .card__artist { margin: 0.15rem 0 0; font-size: 0.82rem; color: var(--soft); }
-.card__materials { margin: 0.1rem 0 0; font-size: 0.74rem; line-height: 1.3; color: #8a829c; }
+.card__materials { margin: 0.1rem 0 0; font-size: 0.74rem; line-height: 1.3; color: #736a88; }
 .card__materials:empty { display: none; }
 .card__bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 0.6rem; }
 .card__qr { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; font-size: 0.62rem; color: var(--soft); flex: none; }
@@ -37,7 +37,7 @@
 .card__process .hd.h i { background: var(--human); }
 .card__process .hd.a { color: var(--ai); }
 .card__process .hd.a i { background: var(--ai); }
-.card__process .st { min-width: 2.3rem; font-size: 0.64rem; color: #9a91ad; padding-top: 0.32rem; overflow-wrap: anywhere; }
+.card__process .st { min-width: 2.3rem; font-size: 0.64rem; color: #736a88; padding-top: 0.32rem; overflow-wrap: anywhere; }
 .card__process .h { color: #2e2366; }
 .card__process .a { color: #1e3a8a; }
 .card__brand { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; padding-top: 0.5rem; border-top: 1px solid #e3dcf3; }
