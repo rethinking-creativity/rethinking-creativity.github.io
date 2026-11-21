@@ -58,6 +58,21 @@ def P(id_, text, cls):
     return f'<p class="l {cls}" id="{id_}">{split_words(text, False)}</p>'
 
 
+def credit(look):
+    """Small-print credits for the works this look actually shows (checked on Commons: _tools/sources.md)."""
+    keys = TILES + list(getattr(look, "COLLAGE", [])) + list(getattr(look, "GRID", []))
+    names = []
+    for k in keys:
+        w = WORKS.get(k)
+        if w and w["who"] == "human":
+            n = "Joseon folk painting" if k == "chaekgado" else w["how"].split(",")[0]
+            if n not in names:
+                names.append(n)
+    return (f"Artworks by {', '.join(names)}: public domain, via Wikimedia Commons. "
+            "AI-made works: Gemini, Veo, Lyria and Claude. Film and music made with Claude Code (HyperFrames); "
+            "the music was synthesized for this film.")
+
+
 def content(ctx, look):
     """Scene HTML and timed events (beat offset, action, selector) shared by every look."""
     v = ctx.v
@@ -125,8 +140,8 @@ def content(ctx, look):
         src = ctx.asset(SITE / "assets/people" / f, f"assets/people/{f}")
         ppl.append(f'<div class="pp"><img src="{src}" alt=""><span>{name}</span><small>{aff}</small></div>')
     S["outro"] = (f'''<div class="safe">{P("ou-t", "Rethinking *Human Creativity* ✦ in the Generative AI Era", "title")}{P("ou-m", "CHI 2027 Meet-Up · Pittsburgh · May 10–14", "meta")}
-<div class="people" id="ou-p">{"".join(ppl)}</div><p class="l url" id="ou-u">rethinking-creativity.github.io</p></div>''',
-                  [(0, "in", "#ou-t .wi"), (2, "in", "#ou-m .wi"), (3, "people", "#ou-p .pp"), (5, "pop", "#ou-u")])
+<div class="people" id="ou-p">{"".join(ppl)}</div><p class="l url" id="ou-u">rethinking-creativity.github.io</p><p class="l credit" id="ou-cr">{credit(look)}</p></div>''',
+                  [(0, "in", "#ou-t .wi"), (2, "in", "#ou-m .wi"), (3, "people", "#ou-p .pp"), (5, "pop", "#ou-u"), (5.5, "pop", "#ou-cr")])
     return S
 
 
@@ -197,6 +212,7 @@ class Look:
     .pp img {{ width: 120px; height: 120px; margin-bottom: 4px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,.85); }}
     .pp span {{ font-size: 28px; font-weight: 700; line-height: 1.1; }}
     .pp small {{ font-size: 23px; font-weight: 500; line-height: 1.2; opacity: .75; }}
+    .credit {{ font-size: {20 if ctx.v else 18}px; font-weight: 500; line-height: 1.35; opacity: .7; max-width: {860 if ctx.v else 1300}px; letter-spacing: 0; }}
     .url {{ padding: 20px 40px; border-radius: 999px; background: {self.accent}; color: #111; font-size: 40px; font-weight: 700; }}
     .fine {{ font-size: {32 if ctx.v else 28}px; font-weight: 500; line-height: 1.35; opacity: .78; max-width: {860 if ctx.v else 1100}px; letter-spacing: 0; }}"""
 
@@ -380,6 +396,7 @@ class Fly(Look):
 
 
 class Scroll(Look):
+    COLLAGE = ["hokusai", "vangogh", "ai_night", "vermeer", "monet", "ai_harbor", "jeongseon", "ai_portrait", "klimt", "seurat", "ai_park", "kimhongdo"]
     num, slug, genre, bpm = "04", "scroll", "disco", 118
     desc = "One long sheet of paper in the site's colours; the camera slides diagonally from block to block with a springy overshoot, over a collage of real works. Original disco-funk track, 118 BPM."
     accent = "#6d3be8"
@@ -412,7 +429,7 @@ class Scroll(Look):
 
     def world_extra(self, ctx):
         """A collage of real works between the blocks."""
-        keys = ["hokusai", "vangogh", "ai_night", "vermeer", "monet", "ai_harbor", "jeongseon", "ai_portrait", "klimt", "seurat", "ai_park", "kimhongdo"]
+        keys = self.COLLAGE
         out = []
         # decoration only in the gaps between blocks: halfway down, at the frame's side edges
         for k in range(20):
@@ -450,6 +467,7 @@ class Scroll(Look):
 
 
 class Glitch(Look):
+    GRID = ["hokusai", "ai_wave", "vangogh", "ai_night", "vermeer", "ai_portrait", "monet", "ai_harbor", "klimt", "ai_park", "seurat", "rembrandt",                "ai_oldman", "jeongseon", "ai_jinkyeong", "kimhongdo", "ai_pungsok", "botticelli", "ai_shell", "hiroshige", "ai_rain", "chaekgado", "ai_chaekgado", "ai_miin"]
     num, slug, genre, bpm = "05", "glitch", "glitch", 128
     desc = "A wall of real works flickers on the beat behind black type bars; cuts land with an RGB split, a snap of rotation and a zoom-out. Original glitch-pop track, 128 BPM."
     accent = "#2b5bff"
@@ -471,8 +489,7 @@ class Glitch(Look):
     .md {{ background: #000; }}"""
 
     def background(self, ctx):
-        keys = ["hokusai", "ai_wave", "vangogh", "ai_night", "vermeer", "ai_portrait", "monet", "ai_harbor", "klimt", "ai_park", "seurat", "rembrandt",
-                "ai_oldman", "jeongseon", "ai_jinkyeong", "kimhongdo", "ai_pungsok", "botticelli", "ai_shell", "hiroshige", "ai_rain", "chaekgado", "ai_chaekgado", "ai_miin"]
+        keys = self.GRID
         cols, rows = (4, 6) if ctx.v else (6, 4)
         cw, ch = ctx.W / cols, ctx.H / rows
         cells = []
