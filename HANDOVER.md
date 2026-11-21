@@ -1,5 +1,5 @@
 # HANDOVER
-기준: 2026-11-21, `main` = `submit-form` = `0cc7cbd`(+ 이 문서), 둘 다 push됨. GitHub Pages는 `main`에서 배포.
+기준: 2026-11-21 밤, `main` = `submit-form` = 이 문서 커밋, 둘 다 push됨. GitHub Pages는 `main`에서 배포.
 이 저장소는 CHI 2027 Meet-Up 사이트야. 작품 제출 → QR 작품 페이지 → 관리·인쇄(Supabase)로 이어져.
 확정된 결정은 `~/Projects/scratch/rc-submit/docs/interface/decisions.md`에 있어. 이번 흐름은 홍보 영상과 예시 카드 수정이었어.
 
@@ -16,6 +16,18 @@
 - 처음 10개는 게임 위주라서 전부 탈락했어. 두 번째 라운드(`story.py`)는 67–70초라 너무 느렸어.
 - 음악은 Map2Video에 쓴 `synth_music.py` 비트 대신 새로 합성했어. 사용자 요청이었어.
 - 영상 기법은 hy-agent `skills/video-authoring/references/kinetic-promo.md`에 기록했어(hy-agent `5d388b0`).
+
+### 2026-11-21 오후 추가
+| 커밋 | 한 일 |
+|---|---|
+| `2a6256e` | About을 메인 `#about` 섹션으로(히어로 바로 아래) + CHI 2027 티저(누를 때만 youtube-nocookie 로드). `about.html`은 `#about`으로 리다이렉트 |
+| `c6f718b`·`f0ca4ac`·`9a407a1`·`9d4c3ec`·`12444f1` | 제출 폼 "Your take (optional)": 네 질문(답하는 사람 기준 "you" 문구) + Future tools(`tool_wish`), 주제어 라벨, 번호 없음. 답은 **QR 상세 페이지에 공개**("The artist's take"). DB `answers jsonb` |
+| `c9a5840` | "What do you make?" / "Your background"(자유 입력, QR 상세 페이지 "About the artist"에 공개). DB `practice`, `background` |
+| `58de797` | 예시 카드는 "See what the cards look like"를 눌러야 펼쳐짐 |
+| `4a07cd5`·`45b6e76` 등 | 영상: 아웃트로 출처 표기(사람 작품 12점 모두 Commons 원본과 해시 대조, 전부 Public domain → `promotion/videos/_tools/sources.md`), 가로(웹)판은 작품 제출 홍보로(밋업 안내 장면 빼고 "Researchers who build creative tools will discuss your work."), glitch는 텍스트 장면 길게, 주최자 얼굴 크게 + 기관명 |
+- SQL 두 개(`~/Projects/scratch/rc-submit/sql/2026-11-21-question-answers.sql`, `…-artist-profile.sql`)는 사용자가 SQL Editor에서 실행 완료. 함수 3개(`meetup-submit`, `meetup-work`, `meetup-admin`) 재배포 완료.
+- 대기: 웹 영상은 glitch 가로판(`landscape-05-glitch.mp4`)으로 기울었고, 사용자가 YouTube에 올려 링크를 주면 About의 "Our meet-up" 옆에 티저와 같은 방식으로 넣기. 로컬 미리보기 `preview-about-*.html`은 `.git/info/exclude`로 제외됨.
+- 확인할 것: 실제 사이트에서 한 번 제출해서 Your take·프로필 칸이 관리 페이지와 QR 페이지에 나오는지(Turnstile 때문에 Claude는 시험 못 함).
 
 ## 어디까지
 - 키네틱 영상 5개는 사용자가 "전부 좋아, 다 킵"이라고 함.
