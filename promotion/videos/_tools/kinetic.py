@@ -104,10 +104,9 @@ def content(ctx, look):
                  [(0, "in", "#ct-a .wi"), (2, "in", "#ct-b .wi"), (4, "in", "#ct-c .wi"), (6.5, "pop", "#ct-d")])
     # 11 outro
     ppl = []
-    for i, (name, _, f) in enumerate(PEOPLE):
+    for i, (name, aff, f) in enumerate(PEOPLE):
         src = ctx.asset(SITE / "assets/people" / f, f"assets/people/{f}")
-        first, last = name.rsplit(" ", 1)
-        ppl.append(f'<div class="pp"><img src="{src}" alt=""><span>{first}<br>{last}</span></div>')
+        ppl.append(f'<div class="pp"><img src="{src}" alt=""><span>{name}</span><small>{aff}</small></div>')
     S["outro"] = (f'''<div class="safe">{P("ou-t", "Rethinking *Human Creativity* ✦ in the Generative AI Era", "title")}{P("ou-m", "CHI 2027 Meet-Up · Pittsburgh · May 10–14", "meta")}
 <div class="people" id="ou-p">{"".join(ppl)}</div><p class="l url" id="ou-u">rethinking-creativity.github.io</p></div>''',
                   [(0, "in", "#ou-t .wi"), (2, "in", "#ou-m .wi"), (3, "people", "#ou-p .pp"), (5, "pop", "#ou-u")])
@@ -175,10 +174,11 @@ class Look:
     .tf > img {{ width: 100%; height: 100%; object-fit: contain; }}
     .tb {{ transform: rotateY(180deg); }} .tb b {{ font-family: "Instrument Serif", serif; font-weight: 400; font-size: {64 if ctx.v else 76}px; }}
     .is-ai {{ color: #2563eb; }} .is-human {{ color: #6d3be8; }}
-    .people {{ display: flex; flex-wrap: wrap; justify-content: center; width: {800 if ctx.v else 1440}px; row-gap: 16px; }}
-    .pp {{ width: 160px; display: flex; flex-direction: column; align-items: center; gap: 8px; }}
-    .pp img {{ width: {96 if ctx.v else 104}px; height: {96 if ctx.v else 104}px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,.85); }}
-    .pp span {{ font-size: 28px; font-weight: 500; line-height: 1.1; opacity: .9; }}
+    .people {{ display: flex; flex-wrap: wrap; justify-content: center; width: {870 if ctx.v else 1400}px; row-gap: {18 if ctx.v else 16}px; }}
+    .pp {{ width: {290 if ctx.v else 280}px; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 6px; }}
+    .pp img {{ width: 120px; height: 120px; margin-bottom: 4px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,.85); }}
+    .pp span {{ font-size: 28px; font-weight: 700; line-height: 1.1; }}
+    .pp small {{ font-size: 23px; font-weight: 500; line-height: 1.2; opacity: .75; }}
     .url {{ padding: 20px 40px; border-radius: 999px; background: {self.accent}; color: #111; font-size: 40px; font-weight: 700; }}
     .fine {{ font-size: {32 if ctx.v else 28}px; font-weight: 500; line-height: 1.35; opacity: .78; max-width: {860 if ctx.v else 1100}px; letter-spacing: 0; }}"""
 
