@@ -163,7 +163,6 @@
   const card = byId('card');
   const flip = (back) => card.classList.toggle('is-flipped', back);
   card.addEventListener('click', () => flip(!card.classList.contains('is-flipped')));
-  card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(!card.classList.contains('is-flipped')); } });
   const steps = form.querySelectorAll('.sform__step');
   steps.forEach((step, i) => step.addEventListener('focusin', (e) => {
     // The longer fields appear only on the QR page, so the card stays as it is
@@ -247,6 +246,7 @@
   // Example cards, as on the main page: hover flips on a mouse (CSS); a tap flips, then turns back on its own
   document.querySelectorAll('.examples .flip').forEach((f) => {
     let t = 0;
+    f.querySelector('.flip__turn').addEventListener('click', (e) => { if (e.detail === 0) f.classList.toggle('is-flipped'); });
     f.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && window.flipSound) window.flipSound(); });
     f.addEventListener('pointerup', (e) => {
       if (e.pointerType === 'mouse' || e.target.closest('a')) return;

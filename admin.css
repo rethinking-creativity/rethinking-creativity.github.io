@@ -21,7 +21,7 @@
 .ad-tabs { display: flex; gap: 0.25rem; }
 .ad-tabs button { padding: 0.35rem 0.75rem; border: 0; border-radius: 999px; background: none; color: var(--soft); font: inherit; font-size: 0.9rem; cursor: pointer; }
 .ad-tabs button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 0 #e3dcf3; font-weight: 600; }
-.ad-tabs b { font-weight: 400; color: #9a91ad; margin-left: 0.2rem; }
+.ad-tabs b { font-weight: 400; color: var(--soft); margin-left: 0.2rem; }
 .ad-top #zip { margin-left: auto; }
 .ad-top #zip[hidden] + .ad-link { margin-left: auto; }
 
@@ -50,7 +50,7 @@
 .ad-fields { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 0.35rem 1rem; margin: 0; font-size: 0.88rem; }
 .ad-fields dt { color: var(--soft); }
 .ad-fields dd { margin: 0; overflow-wrap: anywhere; white-space: pre-line; }
-.ad-keys { margin: 0; font-size: 0.75rem; color: #9a91ad; }
+.ad-keys { margin: 0; font-size: 0.75rem; color: var(--soft); }
 
 /* Print sheet preview: the true-size sheet, scaled to the panel */
 .ad-sheetbox { position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 4px; box-shadow: 0 0 0 1px #ece7f5; }

@@ -42,7 +42,7 @@
     return `<article class="card card--${w.medium}">
       <span class="card__medium">${svg(w.medium)}<span>${label(w.medium)}</span></span>
       ${content}
-      <div class="card__bottom"><span><h3 class="card__title">${esc(w.title)}</h3><p class="card__artist">${esc(artist)}</p><p class="card__materials">${esc(w.materials)}</p></span>
+      <div class="card__bottom"><span><p class="card__title">${esc(w.title)}</p><p class="card__artist">${esc(artist)}</p><p class="card__materials">${esc(w.materials)}</p></span>
       <span class="card__qr"><img src="${qr(workURL(w))}" alt=""></span></div>
     </article>`;
   }

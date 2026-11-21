@@ -649,3 +649,7 @@ img.work__ghost, video.work__ghost { height: auto; }
 @keyframes shine-drift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
 @keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); } 45% { opacity: 1; transform: scale(1.15) rotate(20deg); } 60% { opacity: 0.9; transform: scale(1) rotate(30deg); } }
 @media (prefers-reduced-motion: reduce) { .shine, .sparkle i { animation: none; } .sparkle i { opacity: 0.85; } }
+
+/* Skip link: hidden until focused with the keyboard */
+.skip { position: absolute; left: 1rem; top: -3rem; z-index: 100; padding: 0.5rem 0.9rem; border-radius: 999px; background: var(--ink); color: #fff; text-decoration: none; }
+.skip:focus { top: 0.75rem; color: #fff; }
