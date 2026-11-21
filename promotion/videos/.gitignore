@@ -1,0 +1,15 @@
+renders/
+.hyperframes/
+_review/
+_out/
+_tools/.cache/
+node_modules/
+# Generated HyperFrames projects: rebuild with _tools/build.py, story.py or kinetic.py
+vertical/
+landscape/
+story/
+kinetic/
+# Downloaded recordings for story.py (Wikimedia Commons, CC0 / public domain)
+_tools/music/
+__pycache__/
+*.log
