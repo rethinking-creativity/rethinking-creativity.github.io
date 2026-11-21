@@ -1,7 +1,0 @@
-/* About page: what CHI is, what a meet-up is, and what ours is for. Same type as the submit page. */
-.about { max-width: 40rem; padding-block: 3rem 4rem; }
-.about h1 { margin: 0 0 2rem; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
-.about section + section { margin-top: 2rem; }
-.about h2 { margin: 0 0 0.5rem; font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; }
-.about p { margin: 0; color: var(--soft); line-height: 1.6; }
-.about__links { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; margin-top: 1.25rem !important; }
