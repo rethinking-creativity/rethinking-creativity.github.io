@@ -168,7 +168,7 @@
     // Jittered grid: pick the smallest cell size whose free cells (not under the title) do not
     // outnumber the cards, so the wall is always full whatever the screen size
     let cells = [];
-    for (let cell = small ? 90 : 130; cell < 400; cell += 6) {
+    for (let cell = small ? 78 : 130; cell < 400; cell += 6) {
       const cols = Math.max(2, Math.round(W / cell)), rows = Math.max(2, Math.round(H / cell));
       const cw0 = W / cols, ch0 = H / rows;
       cells = [];
