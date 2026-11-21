@@ -110,7 +110,7 @@ def content(ctx, look):
 {P("chi-what", "The leading conference on human–computer interaction", "small")}{P("chi-when", "May 10–14 · Pittsburgh", "meta")}</div>''',
                 [(0, "in", "#chi-at .wi"), (0.5, "in", "#chi-n .wi"), (2, "in", "#chi-what .wi"), (4, "in", "#chi-when .wi")])
     # 6 the meet-up
-    S["meetup"] = (f'''<div class="safe">{P("mu-a", "A *90-minute* meet-up.", "big")}{P("mu-b", "Informal. Open to anyone at CHI.", "mid")}{P("mu-c", "No sign-up.", "mid")}</div>''',
+    S["meetup"] = (f'''<div class="safe">{P("mu-a", "A *90-minute* meet-up.", "big")}{P("mu-b", "Open to everyone registered for CHI.", "mid")}{P("mu-c", "No extra sign-up.", "mid")}</div>''',
                    [(0, "in", "#mu-a .wi"), (2, "in", "#mu-b .wi"), (4, "in", "#mu-c .wi")])
     # 7 who
     S["who"] = (f'<div class="safe">{P("who-a", "For people who *build* creative tools,", "big")}{P("who-b", "and people who *use* them.", "big")}</div>',
