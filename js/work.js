@@ -1,4 +1,5 @@
-// QR page: one work in full. work.html?id=<id> loads it from WorksAPI (js/works-mock.js);
+// QR page: one work in full. work.html?k=<qr_key> loads a submitted work (js/works-api.js),
+// work.html?id=<id> one of the sample works (js/works-mock.js);
 // work.html?preview=1 shows the submit form's current data, handed over in localStorage by submit.js.
 (function () {
   const root = document.getElementById('work');
@@ -70,6 +71,12 @@
     root.innerHTML = '<div class="wk-none"><h1>Work not found</h1><p><a href="./">Go to the meet-up page</a></p></div>';
   }
 
+  // After the meet-up, works without web consent are no longer shown
+  function closed() {
+    document.title = 'Rethinking Human Creativity';
+    root.innerHTML = '<div class="wk-none"><p>This work was shown at the CHI 2027 Meet-Up and is no longer online.</p><p><a href="./">Go to the meet-up page</a></p></div>';
+  }
+
   // Full-resolution view: fits the screen first; a tap shows the image at its own size, scrollable
   const dlg = document.getElementById('zoom');
   const dimg = dlg.querySelector('img');
@@ -90,6 +97,8 @@
     // Stays in step with the form while both tabs are open
     window.addEventListener('storage', (e) => { if (e.key === PREVIEW_KEY) draw(); });
   } else {
-    window.WorksAPI.get(q.get('id')).then((w) => (w ? show(w) : notFound()), notFound);
+    const k = q.get('k');
+    (k ? window.WorksAPI.byKey(k) : window.WorksAPI.get(q.get('id')))
+      .then((w) => (w && w.closed ? closed() : w ? show(w) : notFound()), notFound);
   }
 })();

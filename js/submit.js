@@ -346,7 +346,9 @@
     }
     const btn = form.querySelector('button[type="submit"]');
     btn.disabled = true; status.textContent = 'Sending…';
-    const res = await window.SubmitAPI.submit(d, source === 'file' ? file : null);
+    const res = await window.SubmitAPI.submit(d, source === 'file' ? file : null, {
+      onProgress: (f) => { status.textContent = `Uploading… ${Math.round(f * 100)}%`; },
+    });
     btn.disabled = false;
     if (!res.ok) { status.textContent = 'Something went wrong. Please try again, or email us.'; return; }
     status.textContent = '';

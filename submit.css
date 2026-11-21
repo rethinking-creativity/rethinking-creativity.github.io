@@ -71,6 +71,7 @@
 .sform__submit { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
 .sform__submit button { border: 0; cursor: pointer; font-family: inherit; }
 .sform__submit button:disabled { opacity: 0.6; cursor: wait; }
+.sform__turnstile { display: contents; }
 .sform__status { margin: 0; min-height: 1.4em; font-size: 0.9rem; color: var(--soft); }
 
 /* Two columns: the form on the left, the printed card on the right */
