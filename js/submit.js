@@ -151,6 +151,7 @@
       consent_show: byId('c-show').checked,
       consent_web: byId('c-web').checked,
       consent_future: byId('c-future').checked,
+      keep_posted: byId('c-posted').checked,
     };
   }
 

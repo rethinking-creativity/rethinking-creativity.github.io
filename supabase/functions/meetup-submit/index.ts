@@ -65,6 +65,7 @@ function check(p: Record<string, unknown>, file: Record<string, unknown> | null)
     rights_owned: true, consent_show: true,
     consent_web: bool(p.consent_web, "consent_web"),
     consent_future: bool(p.consent_future, "consent_future"),
+    keep_posted: p.keep_posted === true, // optional; absent on pages cached from before the box
     link: null as string | null, text: null as string | null,
     file_type: null as string | null, file_size: null as number | null,
   };

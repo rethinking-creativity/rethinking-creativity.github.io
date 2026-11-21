@@ -112,6 +112,7 @@
       <dl class="ad-fields">
         <dt>Name</dt><dd>${esc(w.name)}</dd>
         <dt>Credit</dt><dd>${w.credit === 'anon' ? 'Anonymous' : 'Name'}</dd>
+        <dt>Keep posted</dt><dd>${w.keep_posted ? 'Yes' : 'No'}</dd>
         <dt>At CHI in person</dt><dd>${({ yes: 'Yes', unsure: 'Not sure yet', no: 'No' })[w.attending] || '—'}</dd>
         <dt>Email</dt><dd><a href="mailto:${esc(w.email)}">${esc(w.email)}</a></dd>
         <dt>Submitted</dt><dd>${when(w.created_at)}</dd>
@@ -217,6 +218,14 @@
       works = await window.AdminAPI.list();
       draw();
     }
+  });
+
+  // Mailing list: emails of everyone who asked to be kept posted
+  byId('mailing').addEventListener('click', async () => {
+    const emails = [...new Set(works.filter((w) => w.keep_posted).map((w) => w.email))];
+    if (!emails.length) { toast('No one has asked to be kept posted yet'); return; }
+    await navigator.clipboard.writeText(emails.join(', '));
+    toast(`${emails.length} email${emails.length > 1 ? 's' : ''} copied`);
   });
 
   byId('tabs').addEventListener('click', (e) => { const b = e.target.closest('[data-tab]'); if (b) { tab = b.dataset.tab; current = null; draw(); } });
