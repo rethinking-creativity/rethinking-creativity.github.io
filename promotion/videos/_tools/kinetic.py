@@ -25,10 +25,10 @@ OUT = VOUT / "kinetic"
 CACHE = VOUT / "_tools" / ".cache"
 
 # ------------------------------------------------------------------ the script, in beats
-# (scene, beats, music section). Sections: intro 8, build 4, drop 16, break 4, groove 16, drop 16, outro 10.
-TIMELINE = [("hook", 8, "intro"), ("four", 4, "build"), ("questions", 16, "drop"), ("together", 4, "break"),
-            ("chi", 6, "groove"), ("meetup", 6, "groove"), ("who", 4, "groove"),
-            ("share", 6, "drop"), ("game", 6, "drop"), ("cant", 12, "drop"), ("outro", 10, "outro")]
+# (scene, beats, music section). Order: the questions -> where (CHI) -> what we collect -> why -> the ask.
+TIMELINE = [("hook", 8, "intro"), ("four", 4, "build"), ("questions", 16, "drop"), ("chi", 6, "break"),
+            ("meetup", 6, "groove"), ("collect", 8, "groove"), ("why", 6, "groove"),
+            ("share", 12, "drop"), ("outro", 10, "outro")]
 SECTIONS = [("intro", 8), ("build", 4), ("drop", 16), ("break", 4), ("groove", 16), ("drop", 24), ("outro", 10)]
 
 
@@ -108,40 +108,32 @@ def content(ctx, look):
         if i:
             ev.append((qs * i, "dim" if look.q_mode == "stack" else "out", f"#q{i - 1}"))
     S["questions"] = (f'<div class="safe qs {look.q_mode}">{"".join(rows)}</div>', ev)
-    # 4 bridge
-    S["together"] = (f'<div class="safe">{P("tg", "Let’s figure it out *together*", "big")}</div>', [(0, "in", "#tg .wi")])
-    # 5 CHI
-    S["chi"] = (f'''<div class="safe">{P("chi-at", "at", "mid")}<p class="l huge acc-text" id="chi-n">{split_words("CHI 2027", False)}</p>
-{P("chi-what", "The leading conference on human–computer interaction", "small")}{P("chi-when", "May 10–14 · Pittsburgh", "meta")}</div>''',
-                [(0, "in", "#chi-at .wi"), (0.5, "in", "#chi-n .wi"), (2, "in", "#chi-what .wi"), (4, "in", "#chi-when .wi")])
-    # 6 the meet-up
-    S["meetup"] = (f'''<div class="safe">{P("mu-a", "A *90-minute* meet-up.", "big")}{P("mu-b", "Open to everyone registered for CHI.", "mid")}{P("mu-c", "No extra sign-up.", "mid")}</div>''',
+    # 4 where: the questions are discussed at a CHI 2027 meet-up
+    S["chi"] = (f'''<div class="safe">{P("chi-at", "We’ll talk them through at a", "mid")}<p class="l huge acc-text" id="chi-n">{split_words("CHI 2027", False)}</p>
+{P("chi-mu", "Meet-Up.", "big")}{P("chi-what", "The leading conference on human–computer interaction · May 10–14 · Pittsburgh", "small")}</div>''',
+                [(0, "in", "#chi-at .wi"), (0.75, "in", "#chi-n .wi"), (1.75, "in", "#chi-mu .wi"), (3, "in", "#chi-what .wi")])
+    # 5 the meet-up (vertical only: the web cut asks for work, not for registration)
+    S["meetup"] = (f'''<div class="safe">{P("mu-a", "A *90-minute* meet-up,", "big")}{P("mu-b", "open to everyone registered for CHI.", "mid")}{P("mu-c", "No extra sign-up.", "mid")}</div>''',
                    [(0, "in", "#mu-a .wi"), (2, "in", "#mu-b .wi"), (4, "in", "#mu-c .wi")])
-    # 7 who
-    who = (("For people who *build* creative tools,", "and people who *use* them.") if v else
-           ("Researchers who build creative tools", "will *discuss your work.*"))
-    S["who"] = (f'<div class="safe">{P("who-a", who[0], "big")}{P("who-b", who[1], "big")}</div>',
-                [(0, "in", "#who-a .wi"), (2, "in", "#who-b .wi")])
-    # 8 share
-    media = "".join(f'<span class="md" id="md{i}">{m}</span>' for i, m in enumerate(["Text", "Image", "Video", "Sound"]))
-    S["share"] = (f'''<div class="safe">{P("sh-a", "Make art?", "big")}{P("sh-b", "*Share a piece.*", "big")}{P("sh-c", "By hand or with AI.", "mid")}<p class="l mediarow">{media}</p></div>''',
-                  [(0, "in", "#sh-a .wi"), (1, "in", "#sh-b .wi"), (3, "in", "#sh-c .wi")] + [(4 + i * 0.25, "pop", f"#md{i}") for i in range(4)])
-    # 9 the game
+    # 6 context: what we collect (works turn over to Human / AI behind the line)
     tiles = []
     for i, k in enumerate(TILES):
         w = WORKS[k]
         face, _ = work_face(ctx, w)
         lab, cls = who_label(w)
         tiles.append(f'<div class="tt" id="tt{i}"><div class="ti" id="tt{i}-in"><div class="tf">{face}</div><div class="tf tb"><b class="{cls}">{lab}</b></div></div></div>')
-    S["game"] = (f'''<div class="safe"><div class="tiles">{"".join(tiles)}</div>{P("gm-a", "We want to learn about *your practice,*", "mid")}{P("gm-b", "and talk about how researchers can better support your creativity.", "small")}</div>''',
-                 [(0, "tiles", "#sc-game .tt"), (1, "in", "#gm-a .wi")] + [(2 + i * 0.5, "flip", f"#tt{i}-in") for i in range(4)] + [(4, "in", "#gm-b .wi")])
-    # 10 can't come
-    # 10 can't come: why it still matters, and what happens to the work (consent terms on submit.html)
-    S["cant"] = (f'''<div class="safe">{P("ct-a", "Can’t make it to CHI?", "big")}{P("ct-b", "*Send it anyway.*", "big")}
-{P("ct-c", "Help the people who build creative tools *see through your eyes.*", "mid")}
-<p class="l fine" id="ct-d">This is a meet-up for creativity support tool researchers on how technology can better support human creativity. Your work is used only for non-commercial research and education, never to train AI.</p></div>''',
-                 [(0, "in", "#ct-a .wi"), (2, "in", "#ct-b .wi"), (4, "in", "#ct-c .wi"), (6.5, "pop", "#ct-d")])
-    # 11 outro
+    media = "".join(f'<span class="md" id="md{i}">{m}</span>' for i, m in enumerate(["Text", "Image", "Video", "Sound"]))
+    S["collect"] = (f'''<div class="safe"><div class="tiles">{"".join(tiles)}</div>{P("co-a", "We’re collecting artwork", "big")}{P("co-b", "made *with or without* generative AI.", "mid")}<p class="l mediarow">{media}</p></div>''',
+                    [(0, "tiles", "#sc-collect .tt"), (0.5, "in", "#co-a .wi"), (2, "in", "#co-b .wi")]
+                    + [(3 + i * 0.5, "flip", f"#tt{i}-in") for i in range(4)] + [(5.5 + i * 0.25, "pop", f"#md{i}") for i in range(4)])
+    # 7 why
+    S["why"] = (f'''<div class="safe">{P("why-a", "Researchers who build creative tools", "big")}{P("why-b", "want to learn about *your practice*", "mid")}{P("why-c", "and see creativity *through your eyes.*", "mid")}</div>''',
+                [(0, "in", "#why-a .wi"), (2, "in", "#why-b .wi"), (3.5, "in", "#why-c .wi")])
+    # 8 the ask, and what happens to the work (consent terms on submit.html)
+    S["share"] = (f'''<div class="safe">{P("sh-a", "*Share a piece.*", "qbig")}{P("sh-b", "Can’t make it to CHI? Send it anyway.", "mid")}
+<p class="l fine" id="sh-c">Your work is used only to spark discussion and for non-commercial research, with your approval. It is never used to train AI models.</p></div>''',
+                  [(0, "in", "#sh-a .wi"), (3, "in", "#sh-b .wi"), (6, "pop", "#sh-c")])
+    # 9 outro
     ppl = []
     for i, (name, aff, f) in enumerate(PEOPLE):
         src = ctx.asset(SITE / "assets/people" / f, f"assets/people/{f}")
@@ -255,8 +247,8 @@ class Look:
 class Punch(Look):
     num, slug, genre, bpm = "01", "punch", "house", 124
     desc = "Colour fields that switch every scene, words slammed in, a camera that punches on every kick and whip-pans between scenes. Original house track, 124 BPM."
-    FIELDS = {"hook": "#160b2e", "four": "#ff3d8b", "questions": "#1c1446", "together": "#3a1c7a", "chi": "#0f2a6b", "meetup": "#1c1446",
-              "who": "#5a1fb8", "share": "#160b2e", "game": "#24124a", "cant": "#ff3d8b", "outro": "#1c1446"}
+    FIELDS = {"hook": "#160b2e", "four": "#ff3d8b", "questions": "#1c1446", "chi": "#0f2a6b", "meetup": "#1c1446",
+              "collect": "#24124a", "why": "#5a1fb8", "share": "#ff3d8b", "outro": "#1c1446"}
     accent = "#ffd23f"
 
     def css(self, ctx):
@@ -264,8 +256,8 @@ class Punch(Look):
     #bgc {{ position: absolute; inset: 0; background: #160b2e; }}
     .acc .wi, .acc-solid {{ background: {self.accent}; color: #160b2e; padding: 0 .1em; border-radius: .06em; }}
     .acc-text {{ color: {self.accent}; }}
-    #sc-four .acc-text, #sc-cant .acc .wi {{ color: #160b2e; }} #sc-four .acc-text {{ color: #fff; }}
-    #sc-cant .acc .wi {{ background: #160b2e; color: #fff; }}"""
+    #sc-four .acc-text {{ color: #fff; }}
+    #sc-share .acc .wi {{ background: #160b2e; color: #fff; }}"""
 
     def background(self, ctx):
         return '<div id="bgc"></div>'
@@ -439,13 +431,20 @@ class Scroll(Look):
         keys = self.COLLAGE
         out = []
         # decoration only in the gaps between blocks: halfway down, at the frame's side edges
+        last = len(timeline(self, ctx.v)) - 1  # the outro block is tall: no collage next to it
         for k in range(20):
             i, side = k // 2, (-1, 1)[k % 2]
+            if i + 1 >= last:
+                break
             key = keys[k % len(keys)]
             src = ctx.asset(SITE / "assets/works" / f"{key}.jpg", f"assets/works/{key}.jpg")
             xa, ya, _ = self.pos(ctx, min(i, 10)); xb, yb, _ = self.pos(ctx, min(i + 1, 10))
-            x = xb + ctx.W / 2 + side * ctx.W * (0.38 if ctx.v else 0.47) - 130  # sides of the next block, clear of its text
-            y = (ya + yb) / 2 + ctx.H / 2 - 160
+            if ctx.v:  # between two blocks, at the frame's side edges
+                x = xb + ctx.W / 2 + side * ctx.W * 0.38 - 130
+                y = (ya + yb) / 2 + ctx.H / 2 - 160
+            else:  # beside the block itself, at the far left and right edges (wide text leaves no room above or below)
+                x = xb + ctx.W / 2 + side * ctx.W * 0.47 - 130
+                y = yb + ctx.H / 2 - 160 + side * ctx.H * 0.18
             out.append(f'<div class="deco" data-layout-ignore style="left:{x:.0f}px;top:{y:.0f}px;width:260px;height:320px;transform:rotate({((k * 29) % 17) - 8}deg)"><img src="{src}" alt=""></div>')
         return "".join(out)
 
@@ -480,7 +479,7 @@ class Glitch(Look):
     accent = "#2b5bff"
     ink = "#fff"
     # 128 BPM with steps-eased reveals read too fast in places: longer holds on the text-heavy scenes
-    hold = {"questions": 24, "chi": 8, "meetup": 8, "who": 6, "share": 8, "game": 8}
+    hold = {"questions": 24, "chi": 8, "meetup": 8, "collect": 10, "why": 8, "share": 14}
 
     def css(self, ctx):
         return f"""
@@ -610,7 +609,7 @@ def film(ctx, look, beat):
 
 def music(look, total, v=True):
     CACHE.mkdir(parents=True, exist_ok=True)
-    out = CACHE / f"k_{look.genre}_{look.bpm}_{sum(b for _, b in sections(look, v))}.wav"
+    out = CACHE / f"k_{look.genre}_{look.bpm}_{'-'.join(f'{n}{b}' for n, b in sections(look, v))}.wav"
     if not out.exists():
         kmusic.build(look.genre, look.bpm, sections(look, v), str(out))
     return out
