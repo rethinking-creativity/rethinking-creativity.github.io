@@ -46,3 +46,23 @@ LinkedIn에서는 공동 주최자를 @로 직접 골라 태그(`~/Projects/scra
 | 05 glitch | https://youtu.be/z0pPgAZr_R8 | https://youtube.com/shorts/Nb2t-0Xsjic |
 
 영상 ID와 스타일의 짝은 각 영상 제목("… ( 01 punch landscape )")으로 확인함.
+
+## LinkedIn 영상 게시물 캡션 (2026-11-21)
+
+LinkedIn은 이미 올린 게시물을 수정할 때 영상을 붙일 수 없고, YouTube 링크는 재생되지 않는 링크 카드로만 보임.
+그래서 세로 영상(`04-scroll-vertical.mp4`, 썸네일 `04-scroll-shorts-reels-cover.jpg`)을 직접 올린 새 게시물로 냄.
+기존 게시물에는 "Watch the video: [새 게시물 링크]" 댓글을 달아 둘을 이음.
+
+> Which part of creating is still yours?
+>
+> For our #CHI2027 meet-up, "Rethinking Human Creativity in the Generative AI Era," we're collecting artwork made with or without generative AI, in any medium. Researchers who build creative tools want to learn about your practice and see creativity through your eyes.
+>
+> Can't make it to Pittsburgh? Send your work anyway: https://rethinking-creativity.github.io
+>
+> Your work is used only to spark discussion and for non-commercial research, with your approval. It is never used to train AI models.
+>
+> With [co-organizers, tagged with @ in the editor]
+>
+> #HCI #Creativity #GenerativeAI
+
+태그는 편집기에서 @를 치고 목록에서 골라야 걸림: Chenxinran Elise Shen, Erzhen Hu, Nicolai Marquardt, Jun Kato, Juho Kim, Ryo Suzuki. David Ledo와 Takeo Igarashi는 계정이 비활성이라 이름만.
